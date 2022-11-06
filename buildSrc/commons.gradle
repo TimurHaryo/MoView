@@ -1,0 +1,29 @@
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-parcelize"
+apply plugin: "kotlin-kapt"
+
+android {
+    namespace AppConfig.namespace
+    compileSdk AppConfig.compileSdk
+
+    defaultConfig {
+        applicationId AppConfig.namespace
+        minSdk AppConfig.minSdk
+        targetSdk AppConfig.targetSdk
+        versionCode AppConfig.versionCode
+        versionName AppConfig.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = AppConfig.jvmTarget
+    }
+}
+
+dependencies {
+    api release.CoreDependencies.coreKtx
+}
