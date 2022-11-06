@@ -5,6 +5,8 @@ object CoreDependencies {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val fragment = "androidx.fragment:fragment:${Versions.fragment}"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
-    const val material = "com.google.android.material:material:${Versions.material}"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 }

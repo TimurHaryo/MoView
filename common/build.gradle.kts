@@ -1,4 +1,5 @@
 import release.CoreDependencies
+import release.NetworkDependencies
 import release.UiDependencies
 
 apply(from = "../buildSrc/commons.gradle")
@@ -30,6 +31,10 @@ android {
         }
     }
 
+    buildFeatures {
+        dataBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,5 +48,9 @@ android {
 dependencies {
     implementation(CoreDependencies.fragment)
     implementation(CoreDependencies.fragmentKtx)
+    implementation(CoreDependencies.appCompat)
+    implementation(CoreDependencies.coroutinesCore)
+    implementation(CoreDependencies.coroutinesAndroid)
     implementation(UiDependencies.okLayoutInflater)
+    implementation(NetworkDependencies.retrofit)
 }
