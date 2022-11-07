@@ -18,7 +18,7 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
         _binding = null
         super.onDestroy()
     }
-    fun setBinding(binding: T) {
+    fun setBinding(binding: T?) {
         _binding = binding
         _binding?.executePendingBindings()
     }
