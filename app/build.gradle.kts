@@ -12,6 +12,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -53,6 +54,7 @@ dependencies {
     implementation(CoreDependencies.fragment)
     implementation(CoreDependencies.fragmentKtx)
     implementation(CoreDependencies.hiltAndroid)
+    implementation(CoreDependencies.navigationUiKtx)
     kapt(CoreDependencies.hiltCompiler)
     implementation(UiDependencies.material)
     implementation(UiDependencies.constraintLayout)
