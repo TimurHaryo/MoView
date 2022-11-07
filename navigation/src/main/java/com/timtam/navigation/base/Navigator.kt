@@ -1,7 +1,6 @@
 package com.timtam.navigation.base
 
 import androidx.navigation.NavController
-import com.timtam.navigation.base.NavigableComponent
 import com.timtam.navigation.model.NavigationFlow
 
 class Navigator : NavigableComponent {
