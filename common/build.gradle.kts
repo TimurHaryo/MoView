@@ -9,13 +9,7 @@ plugins {
 }
 
 android {
-    namespace = AppConfig.namespace
-    compileSdk = AppConfig.compileSdk
-
     defaultConfig {
-        minSdk = AppConfig.minSdk
-        targetSdk = AppConfig.targetSdk
-
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
         consumerProguardFile(AppConfig.proguardConsumerRules)
     }
@@ -32,15 +26,6 @@ android {
 
     buildFeatures {
         dataBinding = true
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
     }
 }
 

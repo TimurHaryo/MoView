@@ -1,8 +1,9 @@
-package com.timtam.moview
+package com.timtam.moview.ui.main
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.timtam.common.abstraction.BindingActivity
+import com.timtam.moview.R
 import com.timtam.moview.databinding.ActivityMainBinding
 
 class MainActivity : BindingActivity<ActivityMainBinding>() {
