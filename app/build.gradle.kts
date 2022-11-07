@@ -5,14 +5,18 @@ import release.UiDependencies
 import test.TestDependencies
 
 apply(from = "../buildSrc/commons.gradle")
+apply(plugin = "dagger.hilt.android.plugin")
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
     defaultConfig {
+        applicationId = AppConfig.namespace
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
     }
 
@@ -48,8 +52,14 @@ dependencies {
     implementation(CoreDependencies.appCompat)
     implementation(CoreDependencies.fragment)
     implementation(CoreDependencies.fragmentKtx)
+    implementation(CoreDependencies.hiltAndroid)
+    kapt(CoreDependencies.hiltCompiler)
     implementation(UiDependencies.material)
     implementation(UiDependencies.constraintLayout)
     testImplementation(TestDependencies.testLibraries)
     androidTestImplementation(TestDependencies.androidTestLibraries)
+}
+
+kapt {
+    correctErrorTypes = true
 }
