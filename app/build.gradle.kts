@@ -56,6 +56,7 @@ dependencies {
     implementation(CoreDependencies.hiltAndroid)
     implementation(CoreDependencies.navigationUiKtx)
     kapt(CoreDependencies.hiltCompiler)
+    implementation(UiDependencies.splashScreen)
     implementation(UiDependencies.material)
     implementation(UiDependencies.constraintLayout)
     testImplementation(TestDependencies.testLibraries)
