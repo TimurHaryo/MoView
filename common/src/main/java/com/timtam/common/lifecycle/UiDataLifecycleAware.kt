@@ -36,7 +36,7 @@ internal class UiDataLifecycleAware(private val lifecycle: Lifecycle) : Lifecycl
     }
 
     private fun initView() {
-        if (lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
+        if (lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED)) {
             onInitView?.invoke()
         }
     }

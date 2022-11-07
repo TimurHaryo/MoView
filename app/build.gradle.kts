@@ -50,7 +50,6 @@ dependencies {
     implementation(CoreDependencies.fragmentKtx)
     implementation(UiDependencies.material)
     implementation(UiDependencies.constraintLayout)
-    implementation(UiDependencies.okLayoutInflater)
     testImplementation(TestDependencies.testLibraries)
     androidTestImplementation(TestDependencies.androidTestLibraries)
 }

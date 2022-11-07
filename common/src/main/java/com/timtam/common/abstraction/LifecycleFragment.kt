@@ -1,10 +1,10 @@
 package com.timtam.common.abstraction
 
 import android.os.Bundle
-import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import com.timtam.common.lifecycle.UiDataLifecycleAware
 
-abstract class LifecycleFragment<T : ViewDataBinding> : BindingFragment<T>() {
+abstract class LifecycleFragment : Fragment() {
     private val uiDataLifecycle: UiDataLifecycleAware by lazy {
         UiDataLifecycleAware(viewLifecycleOwner.lifecycle)
     }

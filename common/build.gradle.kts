@@ -1,6 +1,5 @@
 import release.CoreDependencies
 import release.NetworkDependencies
-import release.UiDependencies
 
 apply(from = "../buildSrc/commons.gradle")
 
@@ -51,6 +50,5 @@ dependencies {
     implementation(CoreDependencies.appCompat)
     implementation(CoreDependencies.coroutinesCore)
     implementation(CoreDependencies.coroutinesAndroid)
-    implementation(UiDependencies.okLayoutInflater)
     implementation(NetworkDependencies.retrofit)
 }
