@@ -2,7 +2,6 @@ apply plugin: "kotlin-android"
 apply plugin: "kotlin-parcelize"
 
 android {
-    namespace AppConfig.namespace
     compileSdk AppConfig.compileSdk
 
     defaultConfig {
@@ -10,6 +9,7 @@ android {
         targetSdk AppConfig.targetSdk
         versionCode AppConfig.versionCode
         versionName AppConfig.versionName
+        multiDexEnabled true
     }
 
     compileOptions {
