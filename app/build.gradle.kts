@@ -1,8 +1,4 @@
-import extension.androidTestImplementation
-import extension.testImplementation
 import release.CoreDependencies
-import release.UiDependencies
-import test.TestDependencies
 
 apply(from = "../buildSrc/commons.gradle")
 apply(plugin = "dagger.hilt.android.plugin")
@@ -12,12 +8,12 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
-    id("androidx.navigation.safeargs")
 }
 
 android {
+    namespace = NameSpace.app
     defaultConfig {
-        applicationId = AppConfig.namespace
+        applicationId = NameSpace.app
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
     }
 
@@ -49,18 +45,9 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.common))
-    implementation(CoreDependencies.appCompat)
-    implementation(CoreDependencies.fragment)
-    implementation(CoreDependencies.fragmentKtx)
+    implementation(project(Modules.featureInitial))
     implementation(CoreDependencies.hiltAndroid)
-    implementation(CoreDependencies.navigationUiKtx)
     kapt(CoreDependencies.hiltCompiler)
-    implementation(UiDependencies.splashScreen)
-    implementation(UiDependencies.material)
-    implementation(UiDependencies.constraintLayout)
-    testImplementation(TestDependencies.testLibraries)
-    androidTestImplementation(TestDependencies.androidTestLibraries)
 }
 
 kapt {

@@ -20,4 +20,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "MoView"
 
-include(":app", ":common", ":navigation")
+include(
+    ":app",
+    ":common",
+    ":navigation",
+    ":feature:initial"
+)
