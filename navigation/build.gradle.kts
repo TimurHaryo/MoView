@@ -9,6 +9,7 @@ plugins {
 }
 
 android {
+    namespace = NameSpace.navigation
     defaultConfig {
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
         consumerProguardFile(AppConfig.proguardConsumerRules)
