@@ -46,6 +46,7 @@ android {
 
 dependencies {
     implementation(project(Modules.featureInitial))
+    implementation(project(Modules.uikit))
     implementation(CoreDependencies.hiltAndroid)
     kapt(CoreDependencies.hiltCompiler)
 }
