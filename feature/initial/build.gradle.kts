@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation(project(Modules.common))
+    implementation(project(Modules.uikit))
     implementation(CoreDependencies.appCompat)
     implementation(CoreDependencies.fragment)
     implementation(CoreDependencies.fragmentKtx)

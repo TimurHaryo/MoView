@@ -1,3 +1,5 @@
+import release.UiDependencies
+
 apply(from = "../buildSrc/commons.gradle")
 
 plugins {
@@ -21,4 +23,9 @@ android {
             )
         }
     }
+}
+
+dependencies {
+    implementation(UiDependencies.material)
+    implementation(UiDependencies.splashScreen)
 }
