@@ -6,8 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavOptions
 import com.timtam.navigation.base.NavigableComponent
-import com.timtam.navigation.model.DeeplinkDestination
-import com.timtam.navigation.model.NavigationFlow
+import com.timtam.navigation.base.NavigationFlow
+import com.timtam.navigation.model.deeplink.DeeplinkDestination
 
 fun buildDeeplink(destination: DeeplinkDestination) =
     NavDeepLinkRequest.Builder
