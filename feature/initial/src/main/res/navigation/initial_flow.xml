@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/onBoardingFragment"
+    android:id="@id/initial_flow">
+
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.timtam.initial.ui.onboarding.OnBoardingFragment">
+        <action
+            android:id="@+id/action_onBoardingFragment_to_mainFragment"
+            app:popUpTo="@id/onBoardingFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.timtam.initial.ui.main.MainFragment"/>
+</navigation>

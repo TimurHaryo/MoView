@@ -4,6 +4,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.timtam.navigation.base.NavigableComponent
@@ -36,6 +37,13 @@ fun Fragment.startNavigation(flow: NavigationFlow): Boolean {
     if (controller == null || this !is NavigableComponent) return false
 
     (this as NavigableComponent).navigateToFlow(flow, controller)
+    return true
+}
+
+fun Fragment.startNavigation(direction: NavDirections, options: NavOptions? = null): Boolean {
+    val controller = navController() ?: return false
+
+    controller.navigate(direction, options)
     return true
 }
 
