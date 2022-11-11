@@ -32,7 +32,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
         val graph =
-            navHostFragment.navController.navInflater.inflate(navR.navigation.initial_nav_graph)
+            navHostFragment.navController.navInflater.inflate(navR.navigation.initial_flow)
 
         navHostFragment.navController.graph = graph
     }

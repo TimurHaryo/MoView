@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavDirections
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.timtam.navigation.base.NavigableComponent
@@ -23,7 +24,7 @@ fun NavController.deeplinkNavigateTo(
     val builder = NavOptions.Builder()
 
     if (isPopUpTo) {
-        builder.setPopUpTo(graph.startDestination, true)
+        builder.setPopUpTo(graph.startDestinationId, true)
     }
 
     navigate(
