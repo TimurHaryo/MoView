@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.timtam.navigation.base.NavigableComponent
 import com.timtam.navigation.base.NavigationFlow
 import com.timtam.navigation.model.deeplink.DeeplinkDestination
@@ -31,8 +32,12 @@ fun NavController.deeplinkNavigateTo(
 }
 
 fun Fragment.startNavigation(flow: NavigationFlow): Boolean {
-    if (activity == null && activity !is NavigableComponent) return false
+    val controller = navController()
+    if (controller == null || this !is NavigableComponent) return false
 
-    (activity as NavigableComponent).navigateToFlow(flow)
+    (this as NavigableComponent).navigateToFlow(flow, controller)
     return true
 }
+
+fun Fragment.navController(): NavController? =
+    try { findNavController() } catch (_: Throwable) { null }
