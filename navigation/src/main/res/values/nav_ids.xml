@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="initial_flow" type="id"/>
+    <item name="home_flow" type="id"/>
+    <item name="review_flow" type="id"/>
+    <item name="collection_flow" type="id"/>
 </resources>
