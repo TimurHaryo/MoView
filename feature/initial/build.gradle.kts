@@ -1,5 +1,8 @@
+import extension.androidTestImplementation
+import extension.testImplementation
 import release.CoreDependencies
 import release.UiDependencies
+import test.TestDependencies
 
 apply(from = "../../buildSrc/commons.gradle")
 
@@ -43,4 +46,6 @@ dependencies {
     implementation(UiDependencies.material)
     implementation(UiDependencies.constraintLayout)
     implementation(UiDependencies.splashScreen)
+    testImplementation(TestDependencies.testLibraries)
+    androidTestImplementation(TestDependencies.androidTestLibraries)
 }

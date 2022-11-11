@@ -15,5 +15,11 @@
         <item name="android:navigationBarColor">@color/gray_coal</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">?colorOnPrimary</item>
+        <item name="bottomNavigationStyle">@style/Theme.MoView.BottomNav</item>
+    </style>
+
+    <style name="Theme.MoView.BottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">?attr/colorOnPrimary</item>
+        <item name="android:theme">@style/Theme.MoView</item>
     </style>
 </resources>
