@@ -6,7 +6,8 @@
         <activity
             android:name="com.timtam.initial.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.MoView.Splash">
+            android:theme="@style/Theme.MoView.Splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
