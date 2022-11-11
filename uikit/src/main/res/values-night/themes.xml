@@ -5,13 +5,15 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/yellow_golden</item>
         <item name="colorPrimaryVariant">@color/yellow_maize</item>
-        <item name="colorOnPrimary">@color/gray_coal</item>
+        <item name="colorOnPrimary">@color/gray_eerie</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue_crayola</item>
         <item name="colorSecondaryVariant">@color/blue_crayola</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <!-- Status and navigation bar color. -->
+        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
+        <item name="android:navigationBarColor">@color/gray_coal</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">?colorOnPrimary</item>
     </style>
 </resources>

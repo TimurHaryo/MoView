@@ -2,12 +2,14 @@
 <resources>
     <color name="yellow_golden">#EFAE28</color>
     <color name="yellow_maize">#F0C74B</color>
-    <color name="gray_coal">#0A0B0F</color>
+    <color name="gray_coal">#161619</color>
+    <color name="gray_eerie">#18181B</color>
     <color name="blue_crayola">#286BEF</color>
     <color name="blue_corn_flower">#153586</color>
-    <color name="white_light_house">#F4F4F4</color>
     <color name="red_lava">#D40F21</color>
     <color name="green_lime">#34D448</color>
     <color name="black">#FF000000</color>
+    <color name="white_silver">#EFEFEF</color>
+    <color name="white_light_house">#F4F4F4</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
