@@ -2,7 +2,7 @@ package com.timtam.initial.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
-import com.timtam.common.abstraction.LifecycleFragment
+import androidx.fragment.app.Fragment
 import com.timtam.common.util.viewLifecycleLazy
 import com.timtam.initial.R
 import com.timtam.initial.databinding.FragmentOnBoardingBinding
@@ -10,7 +10,7 @@ import com.timtam.navigation.base.NavigableComponent
 import com.timtam.navigation.extension.startNavigation
 import com.timtam.navigation.navigator.MainNavigator
 
-class OnBoardingFragment : LifecycleFragment(R.layout.fragment_on_boarding), NavigableComponent by MainNavigator() {
+class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding), NavigableComponent by MainNavigator() {
     private val binding: FragmentOnBoardingBinding by viewLifecycleLazy(FragmentOnBoardingBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

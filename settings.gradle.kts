@@ -26,5 +26,6 @@ include(
     ":navigation",
     ":uikit",
     ":feature:initial",
-    ":feature:home"
+    ":feature:home",
+    ":feature:review"
 )

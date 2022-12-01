@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/review_flow" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/review_flow"
+    app:startDestination="@id/reviewFragment">
+
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.timtam.review.ui.review.ReviewFragment"/>
+</navigation>

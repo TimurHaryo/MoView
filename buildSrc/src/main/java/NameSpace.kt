@@ -5,4 +5,5 @@ object NameSpace {
     const val uikit = "com.timtam.uikit"
     const val featureInitial = "com.timtam.initial"
     const val featureHome = "com.timtam.home"
+    const val featureReview = "com.timtam.review"
 }
