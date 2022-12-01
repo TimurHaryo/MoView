@@ -1,5 +1,5 @@
-import extension.androidTestImplementation
-import extension.testImplementation
+import extension.androidTestsImplementation
+import extension.testsImplementation
 import release.CoreDependencies
 import release.UiDependencies
 import test.TestDependencies
@@ -46,6 +46,6 @@ dependencies {
     implementation(UiDependencies.material)
     implementation(UiDependencies.constraintLayout)
     implementation(UiDependencies.splashScreen)
-    testImplementation(TestDependencies.testLibraries)
-    androidTestImplementation(TestDependencies.androidTestLibraries)
+    testsImplementation(TestDependencies.testLibraries)
+    androidTestsImplementation(TestDependencies.androidTestLibraries)
 }

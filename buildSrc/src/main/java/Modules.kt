@@ -3,6 +3,14 @@ object Modules {
     const val common = ":common"
     const val navigation = ":navigation"
     const val uikit = ":uikit"
-    const val featureInitial = ":feature:initial"
-    const val featureHome = ":feature:home"
+}
+
+object FeaturesModules {
+    private const val featureInitial = ":feature:initial"
+    private const val featureHome = ":feature:home"
+
+    val projectFeatures = listOf(
+        featureInitial,
+        featureHome
+    )
 }

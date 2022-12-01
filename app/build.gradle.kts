@@ -1,3 +1,4 @@
+import extension.projectsImplementation
 import release.CoreDependencies
 import release.UiDependencies
 
@@ -47,8 +48,7 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.featureInitial))
-    implementation(project(Modules.featureHome))
+    projectsImplementation(FeaturesModules.projectFeatures)
     implementation(project(Modules.common))
     implementation(project(Modules.uikit))
     implementation(project(Modules.navigation))
