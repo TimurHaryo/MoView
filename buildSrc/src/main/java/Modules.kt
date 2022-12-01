@@ -9,10 +9,12 @@ object FeaturesModules {
     private const val featureInitial = ":feature:initial"
     private const val featureHome = ":feature:home"
     private const val featureReview = ":feature:review"
+    private const val featureCollection = ":feature:collection"
 
     val projectFeatures = listOf(
         featureInitial,
         featureHome,
-        featureReview
+        featureReview,
+        featureCollection
     )
 }

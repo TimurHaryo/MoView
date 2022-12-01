@@ -27,5 +27,6 @@ include(
     ":uikit",
     ":feature:initial",
     ":feature:home",
-    ":feature:review"
+    ":feature:review",
+    ":feature:collection"
 )

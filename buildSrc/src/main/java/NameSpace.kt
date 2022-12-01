@@ -6,4 +6,5 @@ object NameSpace {
     const val featureInitial = "com.timtam.initial"
     const val featureHome = "com.timtam.home"
     const val featureReview = "com.timtam.review"
+    const val featureCollection = "com.timtam.collection"
 }
