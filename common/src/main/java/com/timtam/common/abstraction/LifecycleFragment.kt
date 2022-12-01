@@ -2,11 +2,22 @@ package com.timtam.common.abstraction
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.LayoutRes
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.timtam.common.extension.isNull
 import com.timtam.common.lifecycle.UiDataLifecycleAware
 
-abstract class LifecycleFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
+abstract class LifecycleFragment<T : ViewDataBinding> : Fragment() {
+    protected var _binding: T? = null
+
+    protected val binding: T
+        get() {
+            if (_binding.isNull()) {
+                throw IllegalArgumentException("${this.javaClass.simpleName} does not initialize data binding")
+            }
+            return _binding!!
+        }
+
     private val uiDataLifecycle: UiDataLifecycleAware by lazy {
         UiDataLifecycleAware(viewLifecycleOwner.lifecycle)
     }
@@ -22,6 +33,11 @@ abstract class LifecycleFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) 
     override fun onDestroyView() {
         super.onDestroyView()
         uiDataLifecycle.unregisterLifecycleAware()
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     protected open fun onHandleData() = Unit

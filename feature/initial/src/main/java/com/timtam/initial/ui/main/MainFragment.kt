@@ -1,12 +1,15 @@
 package com.timtam.initial.ui.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.timtam.common.abstraction.LifecycleFragment
+import com.timtam.common.delegation.fragment.FragmentRetainerDelegate
+import com.timtam.common.delegation.fragment.FragmentRetainerDelegateImpl
 import com.timtam.common.extension.isNotNull
 import com.timtam.common.extension.observeValue
-import com.timtam.common.util.viewLifecycleLazy
 import com.timtam.initial.R
 import com.timtam.initial.databinding.FragmentMainBinding
 import com.timtam.initial.model.type.MainTabType
@@ -14,9 +17,10 @@ import com.timtam.navigation.base.NavigableComponent
 import com.timtam.navigation.navigator.MainNavigator
 import com.timtam.navigation.util.SafeNavHostFragment
 
-class MainFragment : LifecycleFragment(R.layout.fragment_main), NavigableComponent by MainNavigator() {
-
-    private val binding: FragmentMainBinding by viewLifecycleLazy(FragmentMainBinding::bind)
+class MainFragment :
+    LifecycleFragment<FragmentMainBinding>(),
+    FragmentRetainerDelegate by FragmentRetainerDelegateImpl(),
+    NavigableComponent by MainNavigator() {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -24,10 +28,24 @@ class MainFragment : LifecycleFragment(R.layout.fragment_main), NavigableCompone
 
     private val MainTabType.fragment get() = childFragmentManager.findFragmentByTag(name)
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return oneTimeRenderer {
+            _binding = FragmentMainBinding.inflate(inflater, container, false)
+            _binding?.lifecycleOwner = viewLifecycleOwner
+            binding.root
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupGraph()
-        setupObserver()
+        initView {
+            setupGraph()
+            setupObserver()
+        }
     }
 
     private fun setupGraph() {
