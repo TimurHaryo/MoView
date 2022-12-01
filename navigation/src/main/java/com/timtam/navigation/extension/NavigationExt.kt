@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavDirections
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.timtam.navigation.base.NavigableComponent
 import com.timtam.navigation.base.NavigationFlow
-import com.timtam.navigation.model.deeplink.DeeplinkDestination
+import com.timtam.navigation.direction.deeplink.DeeplinkDestination
 
 fun buildDeeplink(destination: DeeplinkDestination) =
     NavDeepLinkRequest.Builder

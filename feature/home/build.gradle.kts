@@ -1,22 +1,22 @@
+import extension.androidTestImplementation
+import extension.testImplementation
 import release.CoreDependencies
 import release.UiDependencies
+import test.TestDependencies
 
-apply(from = "../buildSrc/commons.gradle")
-apply(plugin = "dagger.hilt.android.plugin")
+apply(from = "../../buildSrc/commons.gradle")
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs")
 }
 
 android {
-    namespace = NameSpace.app
+    namespace = NameSpace.featureHome
     defaultConfig {
-        applicationId = NameSpace.app
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        consumerProguardFile(AppConfig.proguardConsumerRules)
     }
 
     buildTypes {
@@ -32,34 +32,19 @@ android {
     buildFeatures {
         dataBinding = true
     }
-
-    flavorDimensions.add(AppConfig.dimension)
-    productFlavors {
-        create("staging") {
-            applicationIdSuffix = ".staging"
-            dimension = AppConfig.dimension
-        }
-
-        create("production") {
-            dimension = AppConfig.dimension
-        }
-    }
 }
 
 dependencies {
-    implementation(project(Modules.featureInitial))
-    implementation(project(Modules.featureHome))
     implementation(project(Modules.common))
     implementation(project(Modules.uikit))
     implementation(project(Modules.navigation))
     implementation(CoreDependencies.appCompat)
+    implementation(CoreDependencies.fragment)
+    implementation(CoreDependencies.fragmentKtx)
+    implementation(CoreDependencies.navigationUiKtx)
     implementation(CoreDependencies.navigationFragmentKtx)
-    implementation(CoreDependencies.hiltAndroid)
+    implementation(UiDependencies.material)
     implementation(UiDependencies.constraintLayout)
-    implementation(UiDependencies.splashScreen)
-    kapt(CoreDependencies.hiltCompiler)
-}
-
-kapt {
-    correctErrorTypes = true
+    testImplementation(TestDependencies.testLibraries)
+    androidTestImplementation(TestDependencies.androidTestLibraries)
 }

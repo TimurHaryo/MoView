@@ -4,4 +4,5 @@ object NameSpace {
     const val navigation = "com.timtam.navigation"
     const val uikit = "com.timtam.uikit"
     const val featureInitial = "com.timtam.initial"
+    const val featureHome = "com.timtam.home"
 }

@@ -1,11 +1,12 @@
-package com.timtam.initial
+package com.timtam.moview.ui.main
 
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import com.timtam.common.abstraction.BindingActivity
-import com.timtam.initial.databinding.ActivityMainBinding
+import com.timtam.moview.R
+import com.timtam.moview.databinding.ActivityMainBinding
 import java.util.Timer
 import kotlin.concurrent.schedule
 import com.timtam.navigation.R as navR
@@ -23,7 +24,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
             setKeepOnScreenCondition { true }
         }
 
-        Timer().schedule(2000L) {
+        Timer().schedule(SPLASH_DURATION) {
             splashScreen.setKeepOnScreenCondition { false }
         }
     }
@@ -32,8 +33,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
         val graph =
-            navHostFragment.navController.navInflater.inflate(navR.navigation.initial_flow)
+            navHostFragment.navController.navInflater.inflate(navR.navigation.main_nav_graph)
 
         navHostFragment.navController.graph = graph
+    }
+
+    companion object {
+        private const val SPLASH_DURATION = 2000L
     }
 }

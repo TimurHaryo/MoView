@@ -1,5 +1,14 @@
 package com.timtam.common.extension
 
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
+
 fun Any?.isNull() = this == null
 
-fun Any?.isNotNull() = !this.isNull()
+@OptIn(ExperimentalContracts::class)
+fun Any?.isNotNull(): Boolean {
+    contract {
+        returns(true) implies (this@isNotNull != null)
+    }
+    return this != null
+}
