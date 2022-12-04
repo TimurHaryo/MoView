@@ -28,7 +28,7 @@ fun View.setVisibleElseGone(clause: Boolean) {
     if (clause) visible() else gone()
 }
 
-inline fun <reified T: ViewDataBinding> bindingStubType(
+inline fun <reified T : ViewDataBinding> bindingStubType(
     proxy: ViewStubProxy?,
     crossinline onBind: T.() -> Unit
 ) {
