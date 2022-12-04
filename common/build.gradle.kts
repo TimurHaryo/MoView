@@ -1,5 +1,6 @@
 import release.CoreDependencies
 import release.NetworkDependencies
+import release.UiDependencies
 
 apply(from = "../buildSrc/commons.gradle")
 
@@ -31,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation(UiDependencies.material)
     implementation(CoreDependencies.fragment)
     implementation(CoreDependencies.fragmentKtx)
     implementation(CoreDependencies.appCompat)
