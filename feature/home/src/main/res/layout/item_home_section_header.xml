@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/v_home_greeting"
+            android:layout_width="@dimen/space_2"
+            android:layout_height="@dimen/space_0"
+            android:background="@color/yellow_golden"
+            android:layout_marginStart="@dimen/space_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_home_mantra"
+            app:layout_constraintTop_toTopOf="@+id/tv_home_greeting" />
+
+        <TextView
+            android:id="@+id/tv_home_greeting"
+            style="@style/Theme.MoView.Text.Secondary.BodyXXSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_16"
+            android:layout_marginStart="@dimen/space_10"
+            app:layout_constraintStart_toEndOf="@id/v_home_greeting"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Good Morning!" />
+
+        <TextView
+            android:id="@+id/tv_home_mantra"
+            style="@style/Theme.MoView.Text.Primary.BodySmall"
+            android:layout_width="@dimen/space_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_10"
+            android:layout_marginEnd="@dimen/space_28"
+            android:layout_marginTop="@dimen/space_4"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/layout_home_arrangement"
+            app:layout_constraintStart_toEndOf="@id/v_home_greeting"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_greeting"
+            tools:text="Progress, Not perfection." />
+
+        <include
+            android:id="@+id/layout_home_arrangement"
+            layout="@layout/comp_icon_arrangement"
+            android:layout_width="@dimen/space_28"
+            android:layout_height="@dimen/space_28"
+            android:layout_marginEnd="@dimen/space_16"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_home_mantra"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_home_greeting" />
+
+        <include
+            android:id="@+id/layout_home_search_bar"
+            layout="@layout/comp_static_search_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_16"
+            android:layout_marginTop="@dimen/space_24"
+            android:layout_marginBottom="@dimen/space_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_mantra" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

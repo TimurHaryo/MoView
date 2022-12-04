@@ -9,17 +9,48 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue_crayola</item>
         <item name="colorSecondaryVariant">@color/blue_crayola</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status and navigation bar color. -->
         <item name="android:statusBarColor">?attr/colorOnPrimary</item>
         <item name="android:navigationBarColor">@color/gray_coal</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">?colorOnPrimary</item>
         <item name="bottomNavigationStyle">@style/Theme.MoView.BottomNav</item>
+        <item name="themeColorTextPrimary">@color/white_silver</item>
+        <item name="themeColorTextSecondary">@color/gray_spanish</item>
+        <item name="themeColorIconSecondary">@color/gray_spanish</item>
+        <item name="themeColorBackgroundShadow">@color/gray_coal</item>
+        <item name="themeColorBackgroundVariant">@color/black_raisin</item>
     </style>
 
     <style name="Theme.MoView.BottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:background">?attr/colorOnPrimary</item>
         <item name="android:theme">@style/Theme.MoView</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Primary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?themeColorTextPrimary</item>
+        <item name="lineSpacing">1.1dp</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Secondary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?themeColorTextSecondary</item>
+        <item name="lineSpacing">1.1dp</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Primary.Body" parent="Theme.MoView.Text.Primary">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Primary.BodySmall" parent="Theme.MoView.Text.Primary">
+        <item name="android:textSize">@dimen/text_13</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Secondary.BodyXSmall" parent="Theme.MoView.Text.Secondary">
+        <item name="android:textSize">@dimen/text_12</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Secondary.BodyXXSmall" parent="Theme.MoView.Text.Secondary">
+        <item name="android:textSize">@dimen/text_11</item>
     </style>
 </resources>

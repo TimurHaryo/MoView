@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_home_arrangement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/space_4"
+        app:cardBackgroundColor="@color/yellow_golden"
+        tools:ignore="ContentDescription">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrangement"
+            android:layout_margin="@dimen/space_2"
+            android:layout_gravity="center"
+            app:tint="?themeColorBackgroundShadow"/>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
