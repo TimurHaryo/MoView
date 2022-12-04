@@ -18,7 +18,7 @@ class FragmentRetainerDelegateImpl : FragmentRetainerDelegate {
         return rootView ?: inflater()
     }
 
-    override fun initView(block: () -> Unit) {
+    override fun oneTimeInitView(block: () -> Unit) {
         if (isFirstTimeInitializeView) block()
     }
 }

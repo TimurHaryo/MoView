@@ -6,5 +6,5 @@ interface FragmentRetainerDelegate {
 
     fun oneTimeRenderer(inflater: () -> View): View
 
-    fun initView(block: () -> Unit)
+    fun oneTimeInitView(block: () -> Unit)
 }

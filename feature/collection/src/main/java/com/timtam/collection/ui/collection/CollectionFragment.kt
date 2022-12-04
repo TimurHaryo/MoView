@@ -28,7 +28,7 @@ class CollectionFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView {
+        oneTimeInitView {
             i { "HELLO COLLECTION!" }
         }
     }
