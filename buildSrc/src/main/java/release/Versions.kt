@@ -13,4 +13,7 @@ object Versions {
     const val retrofit = "2.9.0"
     const val hilt = "2.44"
     const val threeTenABP = "1.4.3"
+    const val dataStore = "1.0.0"
+    const val kotlinCollectionsImmutable = "0.3.5"
+    const val kotlinSerializationJson = "1.3.2"
 }

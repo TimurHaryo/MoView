@@ -11,6 +11,7 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -56,6 +57,9 @@ dependencies {
     implementation(CoreDependencies.navigationFragmentKtx)
     implementation(CoreDependencies.threeTenABP)
     implementation(CoreDependencies.hiltAndroid)
+    implementation(CoreDependencies.protoDataStore)
+    implementation(CoreDependencies.kotlinCollectionsImmutable)
+    implementation(CoreDependencies.kotlinSerializationJson)
     implementation(UiDependencies.constraintLayout)
     implementation(UiDependencies.splashScreen)
     kapt(CoreDependencies.hiltCompiler)

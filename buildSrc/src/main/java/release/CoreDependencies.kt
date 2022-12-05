@@ -12,4 +12,7 @@ object CoreDependencies {
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
+    const val protoDataStore = "androidx.datastore:datastore:${Versions.dataStore}"
+    const val kotlinCollectionsImmutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.kotlinCollectionsImmutable}"
+    const val kotlinSerializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerializationJson}"
 }
