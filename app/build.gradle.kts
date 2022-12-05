@@ -54,6 +54,7 @@ dependencies {
     implementation(project(Modules.navigation))
     implementation(CoreDependencies.appCompat)
     implementation(CoreDependencies.navigationFragmentKtx)
+    implementation(CoreDependencies.threeTenABP)
     implementation(CoreDependencies.hiltAndroid)
     implementation(UiDependencies.constraintLayout)
     implementation(UiDependencies.splashScreen)

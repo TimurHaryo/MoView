@@ -7,23 +7,22 @@
         android:id="@+id/mcv_home_static_search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="?themeColorBackgroundVariant"
         app:cardCornerRadius="@dimen/space_12"
         app:cardElevation="@dimen/space_0"
-        app:cardBackgroundColor="?themeColorBackgroundVariant"
         tools:ignore="ContentDescription">
 
         <TextView
             style="@style/Theme.MoView.Text.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_16"
+            android:layout_marginVertical="@dimen/space_16"
+            android:drawablePadding="@dimen/space_12"
             android:gravity="center"
             android:text="@string/title_search"
-            android:layout_marginVertical="@dimen/space_16"
-            android:layout_marginHorizontal="@dimen/space_16"
-            app:drawableStart="@drawable/ic_text_search"
             app:drawableTint="?attr/themeColorIconSecondary"
-            android:drawablePadding="@dimen/space_12"
-            tools:drawableStart="@drawable/ic_text_search" />
+            app:drawableStartCompat="@drawable/ic_text_search" />
 
     </com.google.android.material.card.MaterialCardView>
 </layout>

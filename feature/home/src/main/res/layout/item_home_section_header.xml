@@ -26,7 +26,7 @@
             android:layout_marginStart="@dimen/space_10"
             app:layout_constraintStart_toEndOf="@id/v_home_greeting"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Good Morning!" />
+            tools:text="@string/text_greeting_evening" />
 
         <TextView
             android:id="@+id/tv_home_mantra"
