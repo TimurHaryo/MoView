@@ -1,4 +1,4 @@
-package com.timtam.common.model.type
+package com.timtam.common_kotlin.model.type
 
 enum class ErrorRequestType {
     NO_CONNECTION,

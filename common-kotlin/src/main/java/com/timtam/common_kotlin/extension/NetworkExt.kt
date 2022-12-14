@@ -1,4 +1,4 @@
-package com.timtam.common.extension
+package com.timtam.common_kotlin.extension
 
 import retrofit2.Response
 

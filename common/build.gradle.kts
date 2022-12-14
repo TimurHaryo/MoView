@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    api(project(Modules.commonKotlin))
     implementation(UiDependencies.material)
     implementation(CoreDependencies.fragment)
     implementation(CoreDependencies.fragmentKtx)

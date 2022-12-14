@@ -2,7 +2,7 @@ package com.timtam.common.abstraction
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import com.timtam.common.extension.isNull
+import com.timtam.common_kotlin.extension.isNull
 
 abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
     private var _binding: T? = null

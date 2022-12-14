@@ -1,16 +1,16 @@
-package com.timtam.common.delegation.api
+package com.timtam.common_kotlin.delegation.api
 
-import com.timtam.common.extension.hasEmptyBody
-import com.timtam.common.extension.isTotallySuccess
-import com.timtam.common.model.type.ErrorRequestType
-import com.timtam.common.model.valueobject.Either
-import com.timtam.common.model.valueobject.Failure
+import com.timtam.common_kotlin.extension.hasEmptyBody
+import com.timtam.common_kotlin.extension.isTotallySuccess
+import com.timtam.common_kotlin.model.type.ErrorRequestType
+import com.timtam.common_kotlin.model.valueobject.Either
+import com.timtam.common_kotlin.model.valueobject.Failure
 import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class ApiRequestImpl : ApiRequest {
+class ApiRequestExecutor : ApiRequestExecution {
     override suspend fun <T> request(apiCall: suspend () -> Response<T>): Either<Failure, T> {
         return try {
             val response = apiCall.invoke()

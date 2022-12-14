@@ -1,6 +1,6 @@
-package com.timtam.common.extension
+package com.timtam.common_kotlin.extension
 
-import com.timtam.common.model.valueobject.Either
+import com.timtam.common_kotlin.model.valueobject.Either
 
 inline fun <L, R> Either<L, R>.onError(error: (L) -> Unit): Either<L, R> {
     if (this is Either.Error) {

@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.timtam.common.extension.isNotNull
+import com.timtam.common_kotlin.extension.isNotNull
 import java.lang.ref.WeakReference
 
 internal class ViewLifecycleLazy<out T : Any>(

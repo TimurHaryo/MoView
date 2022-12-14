@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import com.timtam.common.abstraction.LifecycleFragment
 import com.timtam.common.delegation.fragment.FragmentRetainerDelegate
 import com.timtam.common.delegation.fragment.FragmentRetainerDelegateImpl
-import com.timtam.common.extension.isNotNull
 import com.timtam.common.extension.observeValue
+import com.timtam.common_kotlin.extension.isNotNull
 import com.timtam.initial.R
 import com.timtam.initial.databinding.FragmentMainBinding
 import com.timtam.initial.model.type.MainTabType

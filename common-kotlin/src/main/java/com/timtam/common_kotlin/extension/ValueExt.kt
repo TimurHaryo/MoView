@@ -1,4 +1,4 @@
-package com.timtam.common.extension
+package com.timtam.common_kotlin.extension
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract

@@ -1,7 +1,7 @@
 package com.timtam.common.delegation.fragment
 
 import android.view.View
-import com.timtam.common.extension.isNull
+import com.timtam.common_kotlin.extension.isNull
 
 class FragmentRetainerDelegateImpl : FragmentRetainerDelegate {
 
