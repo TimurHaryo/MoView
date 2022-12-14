@@ -1,7 +1,7 @@
-package com.timtam.common.extension
+package com.timtam.common_android.extension
 
 import android.util.Log
-import com.timtam.common.BuildConfig
+import com.timtam.common_android.BuildConfig
 
 inline fun <reified T> T.i(crossinline log: () -> String) = onDebug {
     this?.let { Log.i(it::class.java.simpleName, log()) }

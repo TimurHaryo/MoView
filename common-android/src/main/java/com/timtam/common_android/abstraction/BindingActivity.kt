@@ -1,4 +1,4 @@
-package com.timtam.common.abstraction
+package com.timtam.common_android.abstraction
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding

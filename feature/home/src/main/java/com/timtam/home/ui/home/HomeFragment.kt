@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.timtam.common.abstraction.LifecycleFragment
-import com.timtam.common.delegation.fragment.FragmentRetainable
-import com.timtam.common.delegation.fragment.FragmentRetainer
-import com.timtam.common.extension.i
+import com.timtam.common_android.abstraction.LifecycleFragment
+import com.timtam.common_android.delegation.fragment.FragmentRetainable
+import com.timtam.common_android.delegation.fragment.FragmentRetainer
+import com.timtam.common_android.extension.i
 import com.timtam.home.databinding.FragmentHomeBinding
 
 class HomeFragment :

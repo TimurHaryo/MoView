@@ -1,4 +1,4 @@
-package com.timtam.common.extension
+package com.timtam.common_android.extension
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData

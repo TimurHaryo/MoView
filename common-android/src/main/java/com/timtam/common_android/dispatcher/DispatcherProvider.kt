@@ -1,4 +1,4 @@
-package com.timtam.common.dispatcher
+package com.timtam.common_android.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

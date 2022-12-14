@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
-import com.timtam.common.abstraction.BindingActivity
+import com.timtam.common_android.abstraction.BindingActivity
 import com.timtam.moview.R
 import com.timtam.moview.databinding.ActivityMainBinding
 import java.util.Timer

@@ -1,6 +1,6 @@
 object Modules {
     const val app = ":app"
-    const val common = ":common"
+    const val commonAndroid = ":common-android"
     const val commonKotlin = ":common-kotlin"
     const val navigation = ":navigation"
     const val uikit = ":uikit"

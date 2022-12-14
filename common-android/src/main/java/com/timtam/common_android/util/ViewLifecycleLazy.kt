@@ -1,4 +1,4 @@
-package com.timtam.common.util
+package com.timtam.common_android.util
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle

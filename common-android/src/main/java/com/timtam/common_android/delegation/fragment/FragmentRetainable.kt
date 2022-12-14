@@ -1,4 +1,4 @@
-package com.timtam.common.delegation.fragment
+package com.timtam.common_android.delegation.fragment
 
 import android.view.View
 

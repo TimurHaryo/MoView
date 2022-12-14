@@ -1,4 +1,4 @@
-package com.timtam.common.lifecycle
+package com.timtam.common_android.lifecycle
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver

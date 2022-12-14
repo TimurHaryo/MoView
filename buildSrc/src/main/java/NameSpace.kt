@@ -1,6 +1,6 @@
 object NameSpace {
     const val app = "com.timtam.moview"
-    const val common = "com.timtam.common"
+    const val commonAndroid = "com.timtam.common_android"
     const val commonKotlin = "com.timtam.common_kotlin"
     const val navigation = "com.timtam.navigation"
     const val uikit = "com.timtam.uikit"

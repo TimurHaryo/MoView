@@ -1,4 +1,4 @@
-package com.timtam.common.extension
+package com.timtam.common_android.extension
 
 import org.threeten.bp.Instant
 

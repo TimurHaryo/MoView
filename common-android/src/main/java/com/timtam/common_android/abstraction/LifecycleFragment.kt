@@ -1,10 +1,10 @@
-package com.timtam.common.abstraction
+package com.timtam.common_android.abstraction
 
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.timtam.common.lifecycle.UiDataLifecycleAware
+import com.timtam.common_android.lifecycle.UiDataLifecycleAware
 import com.timtam.common_kotlin.extension.isNull
 
 abstract class LifecycleFragment<T : ViewDataBinding> : Fragment() {

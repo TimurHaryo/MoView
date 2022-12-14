@@ -22,7 +22,7 @@ rootProject.name = "MoView"
 
 include(
     ":app",
-    ":common",
+    ":common-android",
     ":common-kotlin",
     ":navigation",
     ":uikit",
