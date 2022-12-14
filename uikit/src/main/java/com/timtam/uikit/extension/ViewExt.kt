@@ -1,4 +1,4 @@
-package com.timtam.common.extension
+package com.timtam.uikit.extension
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
