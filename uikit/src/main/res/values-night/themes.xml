@@ -21,5 +21,6 @@
         <item name="themeColorIconSecondary">@color/gray_spanish</item>
         <item name="themeColorBackgroundShadow">@color/gray_coal</item>
         <item name="themeColorBackgroundVariant">@color/black_raisin</item>
+        <item name="themeColorTextFaint">@color/black_raisin</item>
     </style>
 </resources>

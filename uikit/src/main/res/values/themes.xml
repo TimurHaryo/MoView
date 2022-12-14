@@ -21,5 +21,6 @@
         <item name="themeColorIconSecondary">@color/gray_dim</item>
         <item name="themeColorBackgroundShadow">@color/white_silver</item>
         <item name="themeColorBackgroundVariant">@color/white</item>
+        <item name="themeColorTextFaint">@color/white</item>
     </style>
 </resources>

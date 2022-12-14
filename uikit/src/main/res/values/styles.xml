@@ -11,11 +11,16 @@
     </style>
 
     <style name="Theme.MoView.Text.PrimaryVariant" parent="Theme.MoView.Text.Primary">
-        <item name="android:alpha">0.6</item>
+        <item name="android:alpha">0.7</item>
     </style>
 
     <style name="Theme.MoView.Text.Secondary" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?themeColorTextSecondary</item>
+        <item name="lineSpacing">1.1dp</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Faint" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?themeColorTextFaint</item>
         <item name="lineSpacing">1.1dp</item>
     </style>
 
@@ -42,5 +47,9 @@
 
     <style name="Theme.MoView.Text.Secondary.BodyXXSmall" parent="Theme.MoView.Text.Secondary">
         <item name="android:textSize">@dimen/text_11</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Faint.BodyXSmall" parent="Theme.MoView.Text.Faint">
+        <item name="android:textSize">@dimen/text_12</item>
     </style>
 </resources>

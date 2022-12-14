@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isAdultContent"
+            type="Boolean" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_16"
+        app:cardBackgroundColor="?themeColorBackgroundVariant"
+        app:cardCornerRadius="@dimen/space_12"
+        app:cardElevation="@dimen/space_0"
+        tools:ignore="ContentDescription">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/space_10">
+
+            <ImageView
+                android:id="@+id/iv_home_now_playing_backdrop"
+                android:layout_width="@dimen/space_0"
+                android:layout_height="@dimen/space_0"
+                android:layout_marginHorizontal="@dimen/space_8"
+                android:layout_marginTop="@dimen/space_8"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@color/yellow_golden" />
+
+            <FrameLayout
+                android:id="@+id/fl_home_adult_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_8"
+                android:visibility="gone"
+                app:isVisibleOrGone="@{isAdultContent}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_bookmark_filled"
+                    app:tint="@color/red_lava" />
+
+                <TextView
+                    style="@style/Theme.MoView.Text.Primary.Heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/text_eight_teen_plus" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_home_now_playing_title"
+                style="@style/Theme.MoView.Text.Primary.Heading"
+                android:layout_width="@dimen/space_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/space_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_home_now_playing_backdrop"
+                tools:text="Avatar: The Way of Water" />
+
+            <TextView
+                android:id="@+id/tv_home_now_playing_genres"
+                style="@style/Theme.MoView.Text.Secondary.BodyXXSmall"
+                android:layout_width="@dimen/space_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:alpha="0.7"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/space_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_home_now_playing_title"
+                tools:text="Adventure | Romance | Thriller" />
+
+            <ImageView
+                android:id="@+id/iv_home_now_playing_release"
+                android:layout_width="@dimen/space_20"
+                android:layout_height="@dimen/space_20"
+                android:layout_marginStart="@dimen/space_8"
+                android:layout_marginTop="@dimen/space_10"
+                android:src="@drawable/ic_calendar_filled"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_home_now_playing_genres"
+                app:tint="@color/yellow_golden" />
+
+            <TextView
+                android:id="@+id/tv_home_now_playing_release"
+                style="@style/Theme.MoView.Text.PrimaryVariant.BodyXSmall"
+                android:layout_width="@dimen/space_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_4"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/space_8"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_home_now_playing_release"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_home_now_playing_release"
+                app:layout_constraintTop_toTopOf="@+id/iv_home_now_playing_release"
+                tools:text="19 August 2022" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_marginEnd="@dimen/space_8"
+                android:background="@drawable/bg_circle"
+                android:backgroundTint="@color/yellow_golden"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/space_6"
+                android:paddingVertical="@dimen/space_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_home_now_playing_release"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/iv_home_now_playing_rating"
+                    android:layout_width="@dimen/space_16"
+                    android:layout_height="@dimen/space_16"
+                    android:src="@drawable/ic_quality"
+                    app:tint="?themeColorBackgroundVariant" />
+
+                <TextView
+                    android:id="@+id/tv_home_now_playing_rating"
+                    style="@style/Theme.MoView.Text.Faint.BodyXSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_4"
+                    android:layout_marginEnd="@dimen/space_4"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_home_now_playing_rating"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_home_now_playing_rating"
+                    app:layout_constraintTop_toTopOf="@+id/iv_home_now_playing_rating"
+                    tools:text="8.2" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

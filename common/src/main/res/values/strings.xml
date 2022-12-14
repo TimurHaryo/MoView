@@ -5,10 +5,12 @@
     <string name="title_collection">Collection</string>
     <string name="title_search">Search</string>
     <string name="title_genre">Genre</string>
+    <string name="title_now_playing">Now Playing</string>
 
     <string name="text_greeting_morning">Good Morning! 👋</string>
     <string name="text_greeting_afternoon">Good Afternoon! ☕</string>
     <string name="text_greeting_evening">Good Evening! ✨</string>
     <string name="text_greeting_night">Good Night! 🛏️</string>
     <string name="text_see_all">See All</string>
+    <string name="text_eight_teen_plus">18+</string>
 </resources>

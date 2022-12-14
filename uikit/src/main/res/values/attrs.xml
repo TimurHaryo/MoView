@@ -2,6 +2,7 @@
 <resources>
     <attr name="themeColorTextPrimary" format="color"/>
     <attr name="themeColorTextSecondary" format="color"/>
+    <attr name="themeColorTextFaint" format="color"/>
     <attr name="themeColorBackgroundShadow" format="color"/>
     <attr name="themeColorBackgroundVariant" format="color"/>
     <attr name="themeColorIconSecondary" format="color"/>
