@@ -161,6 +161,7 @@ class AdaptiveSpacingItemDecoration private constructor(
                     bottom = if (isReversed) sizeBasedOnFirstRow else sizeBasedOnLastRow
                 }
             }
+            else -> Unit
         }
     }
 

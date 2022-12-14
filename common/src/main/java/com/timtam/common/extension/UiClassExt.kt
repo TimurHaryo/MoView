@@ -5,6 +5,8 @@ import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.timtam.common.R
+import com.timtam.common.util.ViewLifecycleLazy
+import java.lang.ref.WeakReference
 import java.util.Calendar
 
 fun Activity.toast(duration: Int = Toast.LENGTH_SHORT, msg: () -> String) {
@@ -18,6 +20,11 @@ fun Fragment.toast(duration: Int = Toast.LENGTH_SHORT, msg: () -> String) {
 fun Fragment.activeActivity(lambda: (Activity) -> Unit) {
     activity?.let(lambda) ?: e { "${javaClass.simpleName} not attached to activity" }
 }
+
+fun Fragment.weaken() = WeakReference(this)
+
+fun <T : Any> Fragment.viewLifecycleLazy(initializer: () -> T): Lazy<T> =
+    ViewLifecycleLazy(this.weaken(), initializer)
 
 fun Context?.greeting(): String {
     this ?: return ""
