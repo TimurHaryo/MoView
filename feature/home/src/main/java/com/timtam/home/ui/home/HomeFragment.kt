@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.timtam.common.abstraction.LifecycleFragment
-import com.timtam.common.delegation.fragment.FragmentRetainerDelegate
-import com.timtam.common.delegation.fragment.FragmentRetainerDelegateImpl
+import com.timtam.common.delegation.fragment.FragmentRetainable
+import com.timtam.common.delegation.fragment.FragmentRetainer
 import com.timtam.common.extension.i
 import com.timtam.home.databinding.FragmentHomeBinding
 
 class HomeFragment :
     LifecycleFragment<FragmentHomeBinding>(),
-    FragmentRetainerDelegate by FragmentRetainerDelegateImpl() {
+    FragmentRetainable by FragmentRetainer() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

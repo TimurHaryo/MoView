@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.timtam.common.abstraction.LifecycleFragment
-import com.timtam.common.delegation.fragment.FragmentRetainerDelegate
-import com.timtam.common.delegation.fragment.FragmentRetainerDelegateImpl
+import com.timtam.common.delegation.fragment.FragmentRetainable
+import com.timtam.common.delegation.fragment.FragmentRetainer
 import com.timtam.common.extension.observeValue
 import com.timtam.common_kotlin.extension.isNotNull
 import com.timtam.initial.R
@@ -19,7 +19,7 @@ import com.timtam.navigation.util.SafeNavHostFragment
 
 class MainFragment :
     LifecycleFragment<FragmentMainBinding>(),
-    FragmentRetainerDelegate by FragmentRetainerDelegateImpl(),
+    FragmentRetainable by FragmentRetainer(),
     NavigableComponent by MainNavigator() {
 
     private val viewModel: MainViewModel by viewModels()

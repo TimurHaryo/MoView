@@ -3,7 +3,7 @@ package com.timtam.common.delegation.fragment
 import android.view.View
 import com.timtam.common_kotlin.extension.isNull
 
-class FragmentRetainerDelegateImpl : FragmentRetainerDelegate {
+class FragmentRetainer : FragmentRetainable {
 
     private var isFirstTimeInitializeView = true
     private var rootView: View? = null

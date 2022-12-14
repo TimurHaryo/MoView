@@ -2,7 +2,7 @@ package com.timtam.common.delegation.fragment
 
 import android.view.View
 
-interface FragmentRetainerDelegate {
+interface FragmentRetainable {
 
     fun oneTimeRenderer(inflater: () -> View): View
 

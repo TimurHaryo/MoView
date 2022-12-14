@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.timtam.common.abstraction.LifecycleFragment
-import com.timtam.common.delegation.fragment.FragmentRetainerDelegate
-import com.timtam.common.delegation.fragment.FragmentRetainerDelegateImpl
+import com.timtam.common.delegation.fragment.FragmentRetainable
+import com.timtam.common.delegation.fragment.FragmentRetainer
 import com.timtam.initial.databinding.FragmentOnBoardingBinding
 import com.timtam.navigation.base.NavigableComponent
 import com.timtam.navigation.extension.startNavigation
@@ -14,7 +14,7 @@ import com.timtam.navigation.navigator.MainNavigator
 
 class OnBoardingFragment :
     LifecycleFragment<FragmentOnBoardingBinding>(),
-    FragmentRetainerDelegate by FragmentRetainerDelegateImpl(),
+    FragmentRetainable by FragmentRetainer(),
     NavigableComponent by MainNavigator() {
 
     override fun onCreateView(
