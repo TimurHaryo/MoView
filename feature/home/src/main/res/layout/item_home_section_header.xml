@@ -5,7 +5,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/space_16">
 
         <View
             android:id="@+id/v_home_greeting"
@@ -59,7 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_16"
             android:layout_marginTop="@dimen/space_24"
-            android:layout_marginBottom="@dimen/space_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

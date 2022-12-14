@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MoView.BottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">?attr/colorOnPrimary</item>
+        <item name="android:theme">@style/Theme.MoView</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Primary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?themeColorTextPrimary</item>
+        <item name="lineSpacing">1.1dp</item>
+    </style>
+
+    <style name="Theme.MoView.Text.PrimaryVariant" parent="Theme.MoView.Text.Primary">
+        <item name="android:alpha">0.6</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Secondary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?themeColorTextSecondary</item>
+        <item name="lineSpacing">1.1dp</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Primary.Heading" parent="Theme.MoView.Text.Primary">
+        <item name="android:textSize">@dimen/text_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Primary.Body" parent="Theme.MoView.Text.Primary">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Primary.BodySmall" parent="Theme.MoView.Text.Primary">
+        <item name="android:textSize">@dimen/text_13</item>
+    </style>
+
+    <style name="Theme.MoView.Text.PrimaryVariant.BodyXSmall" parent="Theme.MoView.Text.PrimaryVariant">
+        <item name="android:textSize">@dimen/text_12</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Secondary.BodyXSmall" parent="Theme.MoView.Text.Secondary">
+        <item name="android:textSize">@dimen/text_12</item>
+    </style>
+
+    <style name="Theme.MoView.Text.Secondary.BodyXXSmall" parent="Theme.MoView.Text.Secondary">
+        <item name="android:textSize">@dimen/text_11</item>
+    </style>
+</resources>

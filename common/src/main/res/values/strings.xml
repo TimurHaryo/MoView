@@ -4,9 +4,11 @@
     <string name="title_review">Review</string>
     <string name="title_collection">Collection</string>
     <string name="title_search">Search</string>
+    <string name="title_genre">Genre</string>
 
     <string name="text_greeting_morning">Good Morning! 👋</string>
     <string name="text_greeting_afternoon">Good Afternoon! ☕</string>
     <string name="text_greeting_evening">Good Evening! ✨</string>
     <string name="text_greeting_night">Good Night! 🛏️</string>
+    <string name="text_see_all">See All</string>
 </resources>
