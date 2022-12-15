@@ -9,6 +9,7 @@ import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
 import com.timtam.common_android.extension.i
 import com.timtam.home.databinding.FragmentHomeBinding
+import com.timtam.home.ui.model.HomeViewType
 
 class HomeFragment :
     LifecycleFragment<FragmentHomeBinding>(),
@@ -29,7 +30,7 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         oneTimeInitView {
-            i { "HELLO HOME!" }
+            i { "HELLO HOME! ${HomeViewType.defaultOrder}" }
         }
     }
 }
