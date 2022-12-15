@@ -42,5 +42,5 @@ fun ImageView.loadImageWithRadius(
 }
 
 private inline fun ImageView.onContextAlive(crossinline block: () -> Unit) {
-    if ((context as? AppCompatActivity)?.isDestroyed == true) block()
+    if ((context as? AppCompatActivity)?.isDestroyed == false) block()
 }

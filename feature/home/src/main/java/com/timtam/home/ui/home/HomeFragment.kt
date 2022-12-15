@@ -30,12 +30,6 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
         oneTimeInitView {
             i { "HELLO HOME!" }
-            binding.tvHomeTitle.setOnClickListener {
-                binding.tvHomeTitle.text = buildString {
-                    append(binding.tvHomeTitle.text)
-                    append("-")
-                }
-            }
         }
     }
 }
