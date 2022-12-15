@@ -8,12 +8,16 @@ import com.timtam.common_android.abstraction.LifecycleFragment
 import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
 import com.timtam.common_android.extension.i
+import com.timtam.common_android.extension.viewLifecycleLazy
 import com.timtam.home.databinding.FragmentHomeBinding
+import com.timtam.home.ui.home.adapter.HomeAdapter
 import com.timtam.home.ui.model.HomeViewType
 
 class HomeFragment :
     LifecycleFragment<FragmentHomeBinding>(),
     FragmentRetainable by FragmentRetainer() {
+
+    private val homeAdapter by viewLifecycleLazy { HomeAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,13 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
         oneTimeInitView {
             i { "HELLO HOME! ${HomeViewType.defaultOrder}" }
+            setupRecyclerView()
+        }
+    }
+
+    private fun setupRecyclerView() = with(binding.rvHomeContent) {
+        adapter = homeAdapter.apply {
+            submitList(HomeViewType.defaultOrder)
         }
     }
 }
