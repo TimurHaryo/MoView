@@ -6,6 +6,7 @@
     <string name="title_search">Search</string>
     <string name="title_genre">Genre</string>
     <string name="title_now_playing">Now Playing</string>
+    <string name="title_top_rated">Top Rated</string>
 
     <string name="text_greeting_morning">Good Morning! 👋</string>
     <string name="text_greeting_afternoon">Good Afternoon! ☕</string>

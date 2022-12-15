@@ -11,6 +11,7 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_home_parent_now_playing"
         android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/space_16"

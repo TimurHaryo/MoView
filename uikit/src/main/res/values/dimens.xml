@@ -15,6 +15,7 @@
     <dimen name="space_88">88dp</dimen>
 
     <!--TEXT SIZE-->
+    <dimen name="text_8">8sp</dimen>
     <dimen name="text_11">11sp</dimen>
     <dimen name="text_12">12sp</dimen>
     <dimen name="text_13">13sp</dimen>

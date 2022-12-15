@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_home_parent_top_rated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_12"
+        tools:ignore="ContentDescription">
+
+        <ImageView
+            android:id="@+id/iv_home_top_rated_poster"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/space_0"
+            android:layout_marginHorizontal="@dimen/space_8"
+            app:layout_constraintDimensionRatio="4:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/yellow_golden" />
+
+        <TextView
+            android:id="@+id/tv_home_top_rated_rating"
+            style="@style/Theme.MoView.Text.Primary.CaptionSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_4"
+            android:layout_marginEnd="@dimen/space_4"
+            android:alpha="0.7"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/space_4"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/iv_home_top_rated_poster"
+            app:layout_constraintTop_toTopOf="@+id/iv_home_top_rated_poster"
+            tools:text="8.7" />
+
+        <TextView
+            android:id="@+id/tv_home_top_rated_title"
+            style="@style/Theme.MoView.Text.Primary.Heading"
+            android:layout_width="@dimen/space_0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_home_top_rated_poster"
+            tools:text="Spider-man: No Way Home" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
