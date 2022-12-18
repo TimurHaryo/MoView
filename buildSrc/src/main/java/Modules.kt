@@ -4,6 +4,7 @@ object Modules {
     const val commonKotlin = ":common-kotlin"
     const val dto = ":data:dto"
     const val local = ":data:local"
+    const val remote = ":data:remote"
     const val navigation = ":navigation"
     const val uikit = ":uikit"
 }

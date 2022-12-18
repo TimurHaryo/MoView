@@ -26,6 +26,7 @@ include(
     ":common-kotlin",
     ":data:dto",
     ":data:local",
+    ":data:remote",
     ":navigation",
     ":uikit",
     ":feature:initial",
