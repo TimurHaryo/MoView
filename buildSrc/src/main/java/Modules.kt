@@ -5,6 +5,7 @@ object Modules {
     const val dto = ":data:dto"
     const val local = ":data:local"
     const val localInteractor = ":data:local-interactor"
+    const val remoteInteractor = ":data:remote-interactor"
     const val remote = ":data:remote"
     const val repository = ":data:repository"
     const val navigation = ":navigation"

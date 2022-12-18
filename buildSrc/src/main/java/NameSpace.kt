@@ -3,6 +3,7 @@ object NameSpace {
     const val commonAndroid = "com.timtam.common_android"
     const val commonKotlin = "com.timtam.common_kotlin"
     const val localInteractor = "com.timtam.local_interactor"
+    const val remoteInteractor = "com.timtam.remote_interactor"
     const val navigation = "com.timtam.navigation"
     const val uikit = "com.timtam.uikit"
     const val featureInitial = "com.timtam.initial"

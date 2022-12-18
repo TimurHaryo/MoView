@@ -28,6 +28,7 @@ include(
     ":data:local",
     ":data:local-interactor",
     ":data:remote",
+    ":data:remote-interactor",
     ":data:repository",
     ":navigation",
     ":uikit",
