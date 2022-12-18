@@ -27,6 +27,7 @@ include(
     ":data:dto",
     ":data:local",
     ":data:remote",
+    ":data:repository",
     ":navigation",
     ":uikit",
     ":feature:initial",
