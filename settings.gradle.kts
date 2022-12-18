@@ -30,6 +30,7 @@ include(
     ":data:remote",
     ":data:remote-interactor",
     ":data:repository",
+    ":data:repository-interactor",
     ":navigation",
     ":uikit",
     ":feature:initial",
