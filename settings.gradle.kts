@@ -24,6 +24,7 @@ include(
     ":app",
     ":common-android",
     ":common-kotlin",
+    ":data:dto",
     ":navigation",
     ":uikit",
     ":feature:initial",
