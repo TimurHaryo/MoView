@@ -26,6 +26,7 @@ include(
     ":common-kotlin",
     ":data:dto",
     ":data:local",
+    ":data:local-interactor",
     ":data:remote",
     ":data:repository",
     ":navigation",
