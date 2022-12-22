@@ -1,4 +1,4 @@
-package com.timtam.common_kotlin.model.valueobject
+package com.timtam.dto.wrapper
 
 data class Failure(
     val errorCode: Int,

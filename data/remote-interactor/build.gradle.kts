@@ -1,3 +1,5 @@
+import release.NetworkDependencies
+
 apply(from = "../../buildSrc/commons.gradle")
 
 plugins {
@@ -25,4 +27,6 @@ android {
 
 dependencies {
     implementation(project(Modules.remote))
+    implementation(project(Modules.dto))
+    implementation(NetworkDependencies.retrofit)
 }
