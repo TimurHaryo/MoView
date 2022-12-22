@@ -1,4 +1,4 @@
-package com.timtam.remote_interactor
+package com.timtam.remote_interactor.util
 
 import com.timtam.dto.wrapper.Either
 import com.timtam.dto.wrapper.Failure
