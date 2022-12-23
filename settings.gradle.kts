@@ -31,6 +31,8 @@ include(
     ":data:remote-interactor",
     ":data:repository",
     ":data:repository-interactor",
+    ":domain:wrapper",
+    ":domain:usecase",
     ":navigation",
     ":uikit",
     ":feature:initial",

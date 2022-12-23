@@ -16,25 +16,25 @@ object DataSourceExecutor {
             when {
                 response.isSuccessful -> Either.Success(response.body())
                 response.code() in 300..499 -> parseError(
-                    Failure(ErrorRequestType.CLIENT_ERROR.errorCode, Throwable(response.message()))
+                    Failure(response.code(), ErrorRequestType.CLIENT_ERROR, response.message())
                 )
                 response.code() in 500..599 -> parseError(
-                    Failure(ErrorRequestType.SERVER_ERROR.errorCode, Throwable(response.message()))
+                    Failure(response.code(), ErrorRequestType.SERVER_ERROR, response.message())
                 )
                 else -> parseError(
-                    Failure(response.code(), Throwable(response.message()))
+                    Failure(response.code(), ErrorRequestType.UNKNOWN_ERROR, response.message())
                 )
             }
         } catch (throwable: Throwable) {
             when (throwable) {
                 is UnknownHostException, is ConnectException -> parseError(
-                    Failure(ErrorRequestType.NO_CONNECTION.errorCode, throwable)
+                    Failure(null, ErrorRequestType.NO_CONNECTION, throwable.localizedMessage)
                 )
                 is SocketTimeoutException -> parseError(
-                    Failure(ErrorRequestType.TIMEOUT.errorCode, throwable)
+                    Failure(null, ErrorRequestType.TIMEOUT, throwable.localizedMessage)
                 )
                 else -> parseError(
-                    Failure(ErrorRequestType.UNKNOWN_ERROR.errorCode, throwable)
+                    Failure(null, ErrorRequestType.UNKNOWN_ERROR, throwable.localizedMessage)
                 )
             }
         }

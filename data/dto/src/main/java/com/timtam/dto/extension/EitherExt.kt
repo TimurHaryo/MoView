@@ -18,9 +18,7 @@ inline fun <L, R> Either<L, R>.onSuccess(success: (R) -> Unit): Either<L, R> {
     return this
 }
 
-inline fun <L, R> Either<L, R>.onEmpty(success: (R) -> Unit): Either<L, R> {
-    if (this is Either.Success && this.result.isNull()) {
-        success(this.result)
-    }
+inline fun <L, R> Either<L, R>.onNoData(noData: () -> Unit): Either<L, R> {
+    if (this is Either.Success && this.result.isNull()) noData()
     return this
 }

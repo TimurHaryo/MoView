@@ -9,6 +9,8 @@ object Modules {
     const val remoteInteractor = ":data:remote-interactor"
     const val repository = ":data:repository"
     const val repositoryInteractor = ":data:repository-interactor"
+    const val domainWrapper = ":domain:wrapper"
+    const val domainUseCase = ":domain:usecase"
     const val navigation = ":navigation"
     const val uikit = ":uikit"
 }
