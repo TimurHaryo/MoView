@@ -13,7 +13,6 @@ import com.timtam.wrapper.DomainRemoteResource
 import com.timtam.wrapper.exception.DomainException
 import com.timtam.wrapper.type.ErrorDomainType
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -21,10 +20,10 @@ import java.net.HttpURLConnection
 
 object RepositoryExecutor {
 
-    fun <DTO : Any, DomainModel : Any> requestFromDataSource(
-        mapper: DomainMapper<DTO, DomainModel>,
+    fun <DTO : Any, DomainModel : Any> requestDataFromCache(
         remoteRequest: suspend () -> Either<Failure, DTO?>,
-        localRequest: Flow<DTO>? = null,
+        mapper: DomainMapper<DTO, DomainModel>,
+        localRequest: Flow<DTO>,
         saveToLocal: (suspend (result: DTO) -> Unit)? = null
     ): Flow<DomainLocalResource<DomainModel>> = merge(
         flow {
@@ -52,15 +51,30 @@ object RepositoryExecutor {
                 )
             }
         },
-        localRequest?.map {
-            DomainLocalResource.Success(mapper.mapToDomainModel(it))
-        } ?: emptyFlow()
+        localRequest.map { DomainLocalResource.Success(mapper.mapToDomainModel(it)) }
     )
+
+    suspend fun <DTO : Any, DomainModel : Any> requestDataFromRemote(
+        remoteRequest: suspend () -> Either<Failure, DTO?>,
+        mapper: DomainMapper<DTO, DomainModel>? = null,
+        saveToLocal: (suspend (result: DTO) -> Unit)? = null
+    ): DomainRemoteResource<DomainModel> {
+        val callResult = remoteRequest.invoke()
+        saveToLocal?.let { saver ->
+            callResult.onSuccess {
+                saver.invoke(it!!)
+            }
+        }
+
+        return mapToUiResource(callResult, mapper)
+    }
 
     private fun <DTO, DomainModel> mapToUiResource(
         dataWrapper: Either<Failure, DTO?>,
-        mapper: DomainMapper<DTO, DomainModel>
+        mapper: DomainMapper<DTO, DomainModel>?
     ): DomainRemoteResource<DomainModel> {
+        mapper ?: return DomainRemoteResource.NoData
+
         dataWrapper
             .onSuccess {
                 return DomainRemoteResource.Success(mapper.mapToDomainModel(it!!))
