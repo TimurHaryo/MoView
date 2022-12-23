@@ -1,20 +1,24 @@
 package com.timtam.dto.model.movie
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "movie_list")
 data class MovieDTO(
 
+    @PrimaryKey
     @SerializedName("id")
-    val id: Int? = null,
+    val id: Int = 0,
 
     @SerializedName("adult")
-    val adult: Boolean? = null,
+    val isAdult: Boolean? = null,
 
     @SerializedName("backdrop_path")
     val backdropPath: String? = null,
 
     @SerializedName("genre_ids")
-    val genreIds: List<Int?>? = null,
+    val genreIds: List<Int>? = null,
 
     @SerializedName("original_language")
     val originalLanguage: String? = null,
@@ -38,7 +42,7 @@ data class MovieDTO(
     val title: String? = null,
 
     @SerializedName("video")
-    val video: Boolean? = null,
+    val isVideo: Boolean? = null,
 
     @SerializedName("vote_average")
     val voteAverage: Double? = null,

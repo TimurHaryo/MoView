@@ -1,6 +1,6 @@
 object AppConfig {
     const val projectName = "MoView"
-    const val compileSdk = 31
+    const val compileSdk = 33
     const val minSdk = 23
     const val targetSdk = 31
     const val jvmTarget = "1.8"
