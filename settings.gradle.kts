@@ -36,6 +36,7 @@ include(
     ":navigation",
     ":uikit",
     ":feature:feature-item",
+    ":feature:feature-helper",
     ":feature:initial",
     ":feature:home",
     ":feature:review",

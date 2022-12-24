@@ -6,6 +6,7 @@ object NameSpace {
     const val remoteInteractor = "com.timtam.remote_interactor"
     const val navigation = "com.timtam.navigation"
     const val uikit = "com.timtam.uikit"
+    const val featureHelper = "com.timtam.feature_helper"
     const val featureInitial = "com.timtam.initial"
     const val featureHome = "com.timtam.home"
     const val featureReview = "com.timtam.review"

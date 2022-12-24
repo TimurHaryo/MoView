@@ -4,7 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.timtam.feature_helper.delegation.DisplayableErrorDelegate
+import com.timtam.feature_helper.delegation.DisplayableErrorDelegateImpl
+import com.timtam.feature_helper.type.ErrorDisplayType
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
+import com.timtam.home.ui.model.HomeViewType
 import com.timtam.usecase.movie.GetMovieSnipsNowPlayingUseCase
 import com.timtam.usecase.movie.state.MovieSnipsNowPlayingState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getMovieSnipsNowPlaying: GetMovieSnipsNowPlayingUseCase
-) : ViewModel() {
+) :
+    ViewModel(),
+    DisplayableErrorDelegate<HomeViewType> by DisplayableErrorDelegateImpl() {
 
     private val _snipsNowPlayingLoading = MutableLiveData<Boolean>()
     val snipsNowPlayingLoading: LiveData<Boolean> get() = _snipsNowPlayingLoading
@@ -27,9 +33,17 @@ class HomeViewModel @Inject constructor(
             when (state) {
                 is MovieSnipsNowPlayingState.Empty -> {
                     _snipsNowPlayingLoading.value = false
+                    displayError(ErrorDisplayType.EmptyUi(HomeViewType.NOW_PLAYING))
                 }
                 is MovieSnipsNowPlayingState.Error -> {
                     _snipsNowPlayingLoading.value = false
+                    displayError(
+                        if (_movieSnipsNowPlaying.value.isNullOrEmpty()) {
+                            ErrorDisplayType.ErrorUi(HomeViewType.NOW_PLAYING)
+                        } else {
+                            ErrorDisplayType.KeepData(state.error.message)
+                        }
+                    )
                 }
                 is MovieSnipsNowPlayingState.Loading -> {
                     _snipsNowPlayingLoading.value = true

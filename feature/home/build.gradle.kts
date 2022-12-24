@@ -40,7 +40,9 @@ android {
 dependencies {
     implementation(project(Modules.commonAndroid))
     implementation(project(Modules.featureItem))
+    implementation(project(Modules.featureHelper))
     implementation(project(Modules.domainUseCase))
+    implementation(project(Modules.domainWrapper))
     implementation(project(Modules.uikit))
     implementation(project(Modules.navigation))
     implementation(CoreDependencies.appCompat)

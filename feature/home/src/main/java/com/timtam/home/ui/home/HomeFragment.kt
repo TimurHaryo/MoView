@@ -8,9 +8,12 @@ import androidx.fragment.app.viewModels
 import com.timtam.common_android.abstraction.LifecycleFragment
 import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
+import com.timtam.common_android.extension.e
 import com.timtam.common_android.extension.i
 import com.timtam.common_android.extension.observeValue
+import com.timtam.common_android.extension.toast
 import com.timtam.common_android.extension.viewLifecycleLazy
+import com.timtam.feature_helper.extension.inspect
 import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.ui.home.adapter.HomeAdapter
 import com.timtam.home.ui.model.HomeViewType
@@ -59,6 +62,29 @@ class HomeFragment :
 
         observeValue(viewModel.movieSnipsNowPlaying) { movies ->
             i { "TIMUR now playing movies: ${movies.map { it.title }}" }
+        }
+
+        observeValue(viewModel.errorType) { type ->
+            type.inspect(
+                keepData = {
+                    toast { it.message.orEmpty() }
+                },
+                errorUi = {
+                    when (it.key) {
+                        HomeViewType.GENRE -> e { "SHOW GENRE ERROR UI" }
+                        HomeViewType.NOW_PLAYING -> e { "SHOW NOW_PLAYING ERROR UI" }
+                        HomeViewType.TOP_RATED -> e { "SHOW TOP_RATED ERROR UI" }
+                        else -> Unit
+                    }
+                },
+                emptyUi = {
+                    when (it.key) {
+                        HomeViewType.NOW_PLAYING -> e { "SHOW NOW_PLAYING EMPTY UI" }
+                        HomeViewType.TOP_RATED -> e { "SHOW TOP_RATED EMPTY UI" }
+                        else -> Unit
+                    }
+                }
+            )
         }
     }
 

@@ -12,6 +12,7 @@ object Modules {
     const val domainWrapper = ":domain:wrapper"
     const val domainUseCase = ":domain:usecase"
     const val featureItem = ":feature:feature-item"
+    const val featureHelper = ":feature:feature-helper"
     const val navigation = ":navigation"
     const val uikit = ":uikit"
 }
