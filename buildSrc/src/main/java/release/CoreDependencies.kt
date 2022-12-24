@@ -10,6 +10,8 @@ object CoreDependencies {
     const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt}"
+    const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+    const val hilt = "com.google.dagger:hilt-core:${Versions.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"

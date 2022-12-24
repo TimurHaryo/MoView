@@ -36,7 +36,7 @@ dependencies {
     implementation(NetworkDependencies.gsonConverter)
     implementation(NetworkDependencies.okhttp3)
     implementation(CoreDependencies.hiltAndroid)
-    kapt(CoreDependencies.hiltCompiler)
+    kapt(CoreDependencies.hiltAndroidCompiler)
 }
 
 kapt {

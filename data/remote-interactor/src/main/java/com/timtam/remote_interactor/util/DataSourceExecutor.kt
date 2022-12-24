@@ -1,8 +1,8 @@
 package com.timtam.remote_interactor.util
 
+import com.timtam.dto.type.ErrorRequestType
 import com.timtam.dto.wrapper.Either
 import com.timtam.dto.wrapper.Failure
-import com.timtam.dto.wrapper.type.ErrorRequestType
 import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketTimeoutException

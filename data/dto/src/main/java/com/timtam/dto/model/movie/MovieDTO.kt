@@ -3,6 +3,7 @@ package com.timtam.dto.model.movie
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.timtam.dto.type.MovieStatusType
 
 @Entity(tableName = "movie_list")
 data class MovieDTO(
@@ -48,5 +49,7 @@ data class MovieDTO(
     val voteAverage: Double? = null,
 
     @SerializedName("vote_count")
-    val voteCount: Int? = null
+    val voteCount: Int? = null,
+
+    var type: MovieStatusType = MovieStatusType.UNKNOWN
 )

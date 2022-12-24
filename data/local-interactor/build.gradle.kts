@@ -37,7 +37,7 @@ dependencies {
     implementation(CoreDependencies.roomKtx)
     implementation(NetworkDependencies.gson)
     implementation(CoreDependencies.hiltAndroid)
-    kapt(CoreDependencies.hiltCompiler)
+    kapt(CoreDependencies.hiltAndroidCompiler)
     ksp(CoreDependencies.roomCompiler)
 }
 

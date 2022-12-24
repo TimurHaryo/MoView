@@ -66,7 +66,7 @@ dependencies {
     implementation(CoreDependencies.kotlinSerializationJson)
     implementation(UiDependencies.constraintLayout)
     implementation(UiDependencies.splashScreen)
-    kapt(CoreDependencies.hiltCompiler)
+    kapt(CoreDependencies.hiltAndroidCompiler)
 }
 
 kapt {

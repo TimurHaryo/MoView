@@ -1,4 +1,4 @@
-package com.timtam.dto.wrapper.type
+package com.timtam.dto.type
 
 enum class ErrorRequestType {
     NO_CONNECTION,

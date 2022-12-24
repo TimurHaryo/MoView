@@ -2,6 +2,7 @@ package com.timtam.local_interactor.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.timtam.dto.type.MovieStatusType
 import com.timtam.local_interactor.util.ConverterUtil
 
 class MovieConverter {
@@ -23,4 +24,10 @@ class MovieConverter {
             ArrayList(0)
         }
     }
+
+    @TypeConverter
+    fun fromMovieStatusEnum(type: MovieStatusType): String = type.name
+
+    @TypeConverter
+    fun toMovieStatusEnum(stringType: String): MovieStatusType = enumValueOf(stringType)
 }

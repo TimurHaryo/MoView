@@ -4,9 +4,9 @@ import com.timtam.common_kotlin.extension.isNotNull
 import com.timtam.dto.extension.onError
 import com.timtam.dto.extension.onNoData
 import com.timtam.dto.extension.onSuccess
+import com.timtam.dto.type.ErrorRequestType
 import com.timtam.dto.wrapper.Either
 import com.timtam.dto.wrapper.Failure
-import com.timtam.dto.wrapper.type.ErrorRequestType
 import com.timtam.repository.mapper.DomainMapper
 import com.timtam.wrapper.DomainLocalResource
 import com.timtam.wrapper.DomainRemoteResource
