@@ -7,5 +7,6 @@ enum class ErrorDomainType {
     MAINTENANCE,
     NOT_FOUND,
     UNAUTHORIZED,
+    NO_DATA,
     UNKNOWN
 }

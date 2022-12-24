@@ -7,10 +7,12 @@ import androidx.navigation.fragment.NavHostFragment
 import com.timtam.common_android.abstraction.BindingActivity
 import com.timtam.moview.R
 import com.timtam.moview.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Timer
 import kotlin.concurrent.schedule
 import com.timtam.navigation.R as navR
 
+@AndroidEntryPoint
 class MainActivity : BindingActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

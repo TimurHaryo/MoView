@@ -41,13 +41,13 @@ object RepositoryExecutor {
                 is DomainRemoteResource.NoData -> emit(
                     DomainLocalResource.Error(
                         DomainException(
-                            errorType = ErrorDomainType.UNKNOWN,
+                            errorType = ErrorDomainType.NO_DATA,
                             message = null
                         )
                     )
                 )
                 is DomainRemoteResource.Success -> emit(
-                    DomainLocalResource.SuccessFromRemote
+                    DomainLocalResource.SuccessUpdateData(resource.data)
                 )
             }
         },

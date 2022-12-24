@@ -23,9 +23,19 @@ class MovieRepositoryImpl @Inject constructor(
         requestDataFromCache(
             remoteRequest = { remoteMovieDataSource.getNowPlaying(page) },
             mapper = movieMapper,
-            localRequest = cachedMovieDataSource.getMovieSnips(limit, MovieStatusType.NOW_PLAYING).map {
-                MovieListDTO(movies = it)
-            },
-            saveToLocal = { cachedMovieDataSource.insertAll(it.movies.orEmpty().filterNotNull()) }
+            localRequest = cachedMovieDataSource.getMovieSnips(limit, MovieStatusType.NOW_PLAYING)
+                .map {
+                    MovieListDTO(movies = it)
+                },
+            saveToLocal = {
+                cachedMovieDataSource.insertAll(
+                    it.movies
+                        .orEmpty()
+                        .filterNotNull()
+                        .onEach { movie ->
+                            movie.type = MovieStatusType.NOW_PLAYING
+                        }
+                )
+            }
         )
 }

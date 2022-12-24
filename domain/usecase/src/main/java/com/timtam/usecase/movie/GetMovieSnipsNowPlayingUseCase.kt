@@ -18,15 +18,21 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) {
 
-    operator fun invoke(page: Int, limit: Int): Flow<MovieSnipsNowPlayingState> = merge(
+    operator fun invoke(limit: Int): Flow<MovieSnipsNowPlayingState> = merge(
         flow { emit(MovieSnipsNowPlayingState.Loading) },
-        movieRepository.getNowPlaying(page, limit).mapNotNull { resource ->
+        movieRepository.getNowPlaying(1, limit).mapNotNull { resource ->
             when (resource) {
                 is DomainLocalResource.Error -> MovieSnipsNowPlayingState.Error(resource.error)
-                is DomainLocalResource.Success -> MovieSnipsNowPlayingState.Success(
-                    resource.data.map { it.mapToPresentationItem() }
-                )
-                is DomainLocalResource.SuccessFromRemote -> null
+                is DomainLocalResource.Success -> {
+                    if (resource.data.isEmpty()) return@mapNotNull null
+
+                    MovieSnipsNowPlayingState.Success(customizedItem(resource.data, limit))
+                }
+                is DomainLocalResource.SuccessUpdateData -> {
+                    if (resource.data.isEmpty()) return@mapNotNull MovieSnipsNowPlayingState.Empty
+
+                    MovieSnipsNowPlayingState.Success(customizedItem(resource.data, limit))
+                }
             }
         }
     ).flowOn(dispatcher.io)
@@ -41,4 +47,9 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
             title = title,
             vote = voteAverage
         )
+
+    private fun customizedItem(data: List<MovieModel>, limit: Int) =
+        data.map { it.mapToPresentationItem() }
+            .sortedBy { it.id }
+            .take(limit)
 }

@@ -24,4 +24,5 @@ android {
 
 dependencies {
     api release.CoreDependencies.coreKtx
+    debugApi debug.DebugDependencies.timber
 }

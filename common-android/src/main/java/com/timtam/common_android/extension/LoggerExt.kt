@@ -1,16 +1,16 @@
 package com.timtam.common_android.extension
 
-import android.util.Log
 import com.timtam.common_android.BuildConfig
+import timber.log.Timber
 
-inline fun <reified T> T.i(crossinline log: () -> String) = onDebug {
-    this?.let { Log.i(it::class.java.simpleName, log()) }
+inline fun i(crossinline log: () -> String) {
+    Timber.i(log())
 }
 
-inline fun <reified T> T.e(crossinline log: () -> String) = onDebug {
-    this?.let { Log.e(it::class.java.simpleName, log()) }
+inline fun e(crossinline log: () -> String) {
+    Timber.e(log())
 }
 
-fun onDebug(block: () -> Unit) {
+inline fun onDebug(crossinline block: () -> Unit) {
     if (BuildConfig.DEBUG) block()
 }
