@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import com.timtam.common_android.abstraction.LifecycleFragment
 import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
+import com.timtam.common_android.extension.i
+import com.timtam.common_android.extension.observeValue
 import com.timtam.common_android.extension.viewLifecycleLazy
 import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.ui.home.adapter.HomeAdapter
@@ -41,6 +43,22 @@ class HomeFragment :
                 viewModel.getSnipsNowPlaying(MOVIE_NOW_PLAYING_LIMIT)
             }
             setupRecyclerView()
+        }
+        setupObserver()
+    }
+
+    override fun onHandleData() {
+        super.onHandleData()
+        viewModel.getSnipsNowPlaying(MOVIE_NOW_PLAYING_LIMIT)
+    }
+
+    private fun setupObserver() {
+        observeValue(viewModel.snipsNowPlayingLoading) { isLoading ->
+            i { "TIMUR now playing loading: $isLoading" }
+        }
+
+        observeValue(viewModel.movieSnipsNowPlaying) { movies ->
+            i { "TIMUR now playing movies: ${movies.map { it.title }}" }
         }
     }
 

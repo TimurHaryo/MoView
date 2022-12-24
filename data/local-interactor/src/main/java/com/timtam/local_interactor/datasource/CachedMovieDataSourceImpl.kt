@@ -15,9 +15,7 @@ class CachedMovieDataSourceImpl @Inject constructor(
     override fun getMovieSnips(
         limit: Int,
         type: MovieStatusType
-    ): Flow<List<MovieDTO>> = flow {
-        emit(movieDAO.getSnips(limit, type))
-    }
+    ): Flow<List<MovieDTO>> = flow { emit(movieDAO.getSnips(limit, type)) }
 
     override suspend fun insertAll(movies: List<MovieDTO>) = movieDAO.insertAll(movies)
 }
