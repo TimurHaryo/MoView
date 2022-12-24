@@ -40,7 +40,3 @@ dependencies {
     kapt(CoreDependencies.hiltAndroidCompiler)
     ksp(CoreDependencies.roomCompiler)
 }
-
-kapt {
-    correctErrorTypes = true
-}

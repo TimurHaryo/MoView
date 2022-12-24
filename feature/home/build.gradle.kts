@@ -55,7 +55,3 @@ dependencies {
     testsImplementation(TestDependencies.testLibraries)
     androidTestsImplementation(TestDependencies.androidTestLibraries)
 }
-
-kapt {
-    correctErrorTypes = true
-}

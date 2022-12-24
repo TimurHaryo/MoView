@@ -19,7 +19,3 @@ dependencies {
     implementation(CoreDependencies.hilt)
     kapt(CoreDependencies.hiltCompiler)
 }
-
-kapt {
-    correctErrorTypes = true
-}
