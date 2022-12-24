@@ -11,6 +11,7 @@ object Modules {
     const val repositoryInteractor = ":data:repository-interactor"
     const val domainWrapper = ":domain:wrapper"
     const val domainUseCase = ":domain:usecase"
+    const val featureItem = ":feature:feature-item"
     const val navigation = ":navigation"
     const val uikit = ":uikit"
 }

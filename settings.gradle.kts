@@ -35,6 +35,7 @@ include(
     ":domain:usecase",
     ":navigation",
     ":uikit",
+    ":feature:feature-item",
     ":feature:initial",
     ":feature:home",
     ":feature:review",

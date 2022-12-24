@@ -19,7 +19,6 @@ dependencies {
     implementation(project(Modules.dto))
     implementation(project(Modules.domainWrapper))
     implementation(CoreDependencies.coroutinesCore)
-    implementation(CoreDependencies.coroutinesAndroid)
     implementation(CoreDependencies.hilt)
     kapt(CoreDependencies.hiltCompiler)
 }

@@ -5,8 +5,9 @@ import com.timtam.common_kotlin.extension.orZero
 import com.timtam.dto.model.movie.MovieListDTO
 import com.timtam.repository.mapper.DomainMapper
 import com.timtam.wrapper.model.MovieModel
+import javax.inject.Inject
 
-class MovieDomainMapper : DomainMapper<MovieListDTO, List<MovieModel>> {
+class MovieDomainMapper @Inject constructor() : DomainMapper<MovieListDTO, List<MovieModel>> {
 
     override fun mapToDomainModel(dto: MovieListDTO): List<MovieModel> =
         dto.movies?.mapNotNull {
