@@ -16,7 +16,9 @@ import com.timtam.common_android.extension.viewLifecycleLazy
 import com.timtam.feature_helper.extension.inspect
 import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.ui.home.adapter.HomeAdapter
-import com.timtam.home.ui.model.HomeViewType
+import com.timtam.home.ui.type.HomeViewType
+import com.timtam.uikit.extension.gone
+import com.timtam.uikit.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +45,7 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
         oneTimeInitView {
             binding.btnTestPeekNetwork.setOnClickListener {
-                viewModel.getSnipsNowPlaying(MOVIE_NOW_PLAYING_LIMIT)
+                viewModel.getSnipsNowPlaying(MOVIE_HOME_NOW_PLAYING_LIMIT)
             }
             setupRecyclerView()
         }
@@ -52,7 +54,7 @@ class HomeFragment :
 
     override fun onHandleData() {
         super.onHandleData()
-        viewModel.getSnipsNowPlaying(MOVIE_NOW_PLAYING_LIMIT)
+        viewModel.getSnipsNowPlaying(MOVIE_HOME_NOW_PLAYING_LIMIT)
     }
 
     private fun setupObserver() {
@@ -94,7 +96,21 @@ class HomeFragment :
         }
     }
 
+    private fun startMainLoading() = with(binding) {
+        sflHomeMain.visible()
+        sflHomeMain.startShimmer()
+
+        rvHomeContent.gone()
+    }
+
+    private fun stopMainLoading() = with(binding) {
+        sflHomeMain.stopShimmer()
+        sflHomeMain.gone()
+
+        rvHomeContent.visible()
+    }
+
     companion object {
-        private const val MOVIE_NOW_PLAYING_LIMIT = 5
+        private const val MOVIE_HOME_NOW_PLAYING_LIMIT = 5
     }
 }

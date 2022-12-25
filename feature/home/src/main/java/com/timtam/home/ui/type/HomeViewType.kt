@@ -1,4 +1,4 @@
-package com.timtam.home.ui.model
+package com.timtam.home.ui.type
 
 enum class HomeViewType {
     HEADER,

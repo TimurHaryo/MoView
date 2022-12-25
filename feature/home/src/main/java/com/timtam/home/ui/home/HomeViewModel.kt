@@ -8,7 +8,7 @@ import com.timtam.feature_helper.delegation.DisplayableErrorDelegate
 import com.timtam.feature_helper.delegation.DisplayableErrorDelegateImpl
 import com.timtam.feature_helper.type.ErrorDisplayType
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
-import com.timtam.home.ui.model.HomeViewType
+import com.timtam.home.ui.type.HomeViewType
 import com.timtam.usecase.movie.GetMovieSnipsNowPlayingUseCase
 import com.timtam.usecase.movie.state.MovieSnipsNowPlayingState
 import dagger.hilt.android.lifecycle.HiltViewModel
