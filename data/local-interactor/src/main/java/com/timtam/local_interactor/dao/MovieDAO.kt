@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.timtam.dto.model.movie.MovieDTO
-import com.timtam.dto.type.MovieStatusType
+import com.timtam.dto.type.movie.MovieStatusType
 
 @Dao
 interface MovieDAO {

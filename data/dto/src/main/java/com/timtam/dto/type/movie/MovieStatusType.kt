@@ -1,4 +1,4 @@
-package com.timtam.dto.type
+package com.timtam.dto.type.movie
 
 enum class MovieStatusType {
     NOW_PLAYING,

@@ -1,7 +1,7 @@
 package com.timtam.repository_interactor.repository
 
 import com.timtam.dto.model.movie.MovieListDTO
-import com.timtam.dto.type.MovieStatusType
+import com.timtam.dto.type.movie.MovieStatusType
 import com.timtam.local.CachedMovieDataSource
 import com.timtam.remote.MovieDataSource
 import com.timtam.repository.MovieRepository

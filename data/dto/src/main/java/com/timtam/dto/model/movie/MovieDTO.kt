@@ -3,7 +3,7 @@ package com.timtam.dto.model.movie
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.timtam.dto.type.MovieStatusType
+import com.timtam.dto.type.movie.MovieStatusType
 
 @Entity(tableName = "movie_list")
 data class MovieDTO(

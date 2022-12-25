@@ -1,7 +1,7 @@
 package com.timtam.local
 
 import com.timtam.dto.model.movie.MovieDTO
-import com.timtam.dto.type.MovieStatusType
+import com.timtam.dto.type.movie.MovieStatusType
 import kotlinx.coroutines.flow.Flow
 
 interface CachedMovieDataSource {

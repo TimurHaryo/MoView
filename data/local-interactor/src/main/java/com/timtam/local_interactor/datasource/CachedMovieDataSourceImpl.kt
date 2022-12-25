@@ -1,7 +1,7 @@
 package com.timtam.local_interactor.datasource
 
 import com.timtam.dto.model.movie.MovieDTO
-import com.timtam.dto.type.MovieStatusType
+import com.timtam.dto.type.movie.MovieStatusType
 import com.timtam.local.CachedMovieDataSource
 import com.timtam.local_interactor.dao.MovieDAO
 import kotlinx.coroutines.flow.Flow
