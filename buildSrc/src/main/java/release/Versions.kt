@@ -7,6 +7,7 @@ object Versions {
     const val fragment = "1.5.2"
     const val material = "1.4.0"
     const val glide = "4.14.2"
+    const val shimmerView = "0.5.0"
     const val constraintLayout = "2.1.0"
     const val navigation = "2.5.3"
     const val coroutines = "1.6.3"
