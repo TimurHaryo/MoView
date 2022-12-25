@@ -1,5 +1,6 @@
 package com.timtam.feature_item.genre
 
 data class GenreItem(
-    val id: Int
+    val id: Int,
+    val type: String
 )
