@@ -44,9 +44,6 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         oneTimeInitView {
-            binding.btnTestPeekNetwork.setOnClickListener {
-                viewModel.getSnipsNowPlaying(MOVIE_HOME_NOW_PLAYING_LIMIT)
-            }
             setupRecyclerView()
         }
         setupObserver()
@@ -54,16 +51,30 @@ class HomeFragment :
 
     override fun onHandleData() {
         super.onHandleData()
-        viewModel.getSnipsNowPlaying(MOVIE_HOME_NOW_PLAYING_LIMIT)
+        viewModel.fetchMovieGenres(HOME_MOVIE_GENRE_LIMIT) {
+            viewModel.fetchSnipsNowPlaying(it, HOME_MOVIE_NOW_PLAYING_LIMIT)
+        }
     }
 
     private fun setupObserver() {
+        observeValue(viewModel.mainLoading) { isLoading ->
+            if (isLoading) {
+                startMainLoading()
+            } else {
+                stopMainLoading()
+            }
+        }
+
         observeValue(viewModel.snipsNowPlayingLoading) { isLoading ->
             i { "TIMUR now playing loading: $isLoading" }
         }
 
         observeValue(viewModel.movieSnipsNowPlaying) { movies ->
             i { "TIMUR now playing movies: ${movies.map { it.title }}" }
+        }
+
+        observeValue(viewModel.movieGenres) { genres ->
+            i { "TIMUR now playing movies: ${genres.map { it.type }}" }
         }
 
         observeValue(viewModel.errorType) { type ->
@@ -111,6 +122,7 @@ class HomeFragment :
     }
 
     companion object {
-        private const val MOVIE_HOME_NOW_PLAYING_LIMIT = 5
+        private const val HOME_MOVIE_NOW_PLAYING_LIMIT = 5
+        private const val HOME_MOVIE_GENRE_LIMIT = 6
     }
 }

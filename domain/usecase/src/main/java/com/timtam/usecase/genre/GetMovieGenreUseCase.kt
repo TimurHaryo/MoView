@@ -26,10 +26,18 @@ class GetMovieGenreUseCase @Inject constructor(
                 is DomainLocalResource.Success -> {
                     if (resource.data.isEmpty()) return@mapNotNull null
 
-                    GenreState.Success(resource.data.map { it.mapToPresentationItem() })
+                    GenreState.Success(
+                        resource.data
+                            .map { it.mapToPresentationItem() }
+                            .sortedBy { it.id }
+                    )
                 }
                 is DomainLocalResource.SuccessUpdateData -> {
-                    GenreState.Success(resource.data.map { it.mapToPresentationItem() })
+                    GenreState.Success(
+                        resource.data
+                            .map { it.mapToPresentationItem() }
+                            .sortedBy { it.id }
+                    )
                 }
             }
         }
