@@ -1,6 +1,8 @@
 package com.timtam.local_interactor.di
 
+import com.timtam.local.CachedGenreDataSource
 import com.timtam.local.CachedMovieDataSource
+import com.timtam.local_interactor.datasource.CachedGenreDataSourceImpl
 import com.timtam.local_interactor.datasource.CachedMovieDataSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -13,4 +15,7 @@ interface LocalSourceModule {
 
     @Binds
     fun bindCachedMovieDataSource(dataSource: CachedMovieDataSourceImpl): CachedMovieDataSource
+
+    @Binds
+    fun bindCachedGenreDataSource(dataSource: CachedGenreDataSourceImpl): CachedGenreDataSource
 }

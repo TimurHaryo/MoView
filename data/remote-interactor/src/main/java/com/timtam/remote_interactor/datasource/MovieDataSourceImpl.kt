@@ -1,5 +1,6 @@
 package com.timtam.remote_interactor.datasource
 
+import com.timtam.dto.model.genre.GenreListDTO
 import com.timtam.dto.model.movie.MovieListDTO
 import com.timtam.dto.wrapper.Either
 import com.timtam.dto.wrapper.Failure
@@ -14,5 +15,9 @@ class MovieDataSourceImpl @Inject constructor(
 
     override suspend fun getNowPlaying(page: Int): Either<Failure, MovieListDTO?> = request {
         movieApi.getNowPlaying(page)
+    }
+
+    override suspend fun getMovieGenres(): Either<Failure, GenreListDTO?> = request {
+        movieApi.getMovieGenres()
     }
 }

@@ -3,8 +3,9 @@ package com.timtam.dto.model.genre
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.timtam.dto.type.show.ShowType
 
-@Entity(tableName = "movie_genre")
+@Entity(tableName = "genre")
 data class GenreDTO(
 
     @PrimaryKey
@@ -12,5 +13,7 @@ data class GenreDTO(
     val id: Int? = null,
 
     @SerializedName("name")
-    val name: String? = null
+    val name: String? = null,
+
+    var showType: ShowType
 )
