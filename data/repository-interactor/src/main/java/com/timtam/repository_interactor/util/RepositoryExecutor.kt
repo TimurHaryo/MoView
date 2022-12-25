@@ -24,7 +24,8 @@ object RepositoryExecutor {
         remoteRequest: suspend () -> Either<Failure, DTO?>,
         mapper: DomainMapper<DTO, DomainModel>,
         localRequest: Flow<DTO>,
-        saveToLocal: (suspend (result: DTO) -> Unit)? = null
+        saveToLocal: (suspend (result: DTO) -> Unit)? = null,
+        includeUpdatedData: Boolean = true
     ): Flow<DomainLocalResource<DomainModel>> = merge(
         flow {
             val callResult = remoteRequest.invoke()
@@ -46,9 +47,9 @@ object RepositoryExecutor {
                         )
                     )
                 )
-                is DomainRemoteResource.Success -> emit(
-                    DomainLocalResource.SuccessUpdateData(resource.data)
-                )
+                is DomainRemoteResource.Success -> if (includeUpdatedData) {
+                    emit(DomainLocalResource.SuccessUpdateData(resource.data))
+                }
             }
         },
         localRequest.map { DomainLocalResource.Success(mapper.mapToDomainModel(it)) }
