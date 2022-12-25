@@ -18,8 +18,6 @@ class GetMovieGenreUseCase @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) {
 
-    private var hasBeenFetched = false
-
     operator fun invoke(): Flow<GenreState> = merge(
         flow { emit(GenreState.Loading) },
         movieRepository.getGenres().mapNotNull { resource ->
@@ -28,7 +26,6 @@ class GetMovieGenreUseCase @Inject constructor(
                 is DomainLocalResource.Success -> {
                     if (resource.data.isEmpty()) return@mapNotNull null
 
-                    hasBeenFetched = true
                     GenreState.Success(
                         resource.data
                             .map { it.mapToPresentationItem() }
@@ -36,8 +33,6 @@ class GetMovieGenreUseCase @Inject constructor(
                     )
                 }
                 is DomainLocalResource.SuccessUpdateData -> {
-                    if (hasBeenFetched) return@mapNotNull null
-
                     GenreState.Success(
                         resource.data
                             .map { it.mapToPresentationItem() }

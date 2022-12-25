@@ -63,6 +63,7 @@ class MovieRepositoryImpl @Inject constructor(
                             genre.showType = ShowType.MOVIE
                         }
                 )
-            }
+            },
+            includeUpdatedData = false
         )
 }

@@ -4,6 +4,7 @@ import com.timtam.common_kotlin.extension.isNotNull
 import com.timtam.dto.extension.onError
 import com.timtam.dto.extension.onNoData
 import com.timtam.dto.extension.onSuccess
+import com.timtam.dto.model.base.PeekableDTO
 import com.timtam.dto.type.ErrorRequestType
 import com.timtam.dto.wrapper.Either
 import com.timtam.dto.wrapper.Failure
@@ -14,46 +15,57 @@ import com.timtam.wrapper.exception.DomainException
 import com.timtam.wrapper.type.ErrorDomainType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.merge
 import java.net.HttpURLConnection
 
 object RepositoryExecutor {
 
-    fun <DTO : Any, DomainModel : Any> requestDataFromCache(
+    fun <DTO : PeekableDTO, DomainModel : Any> requestDataFromCache(
         remoteRequest: suspend () -> Either<Failure, DTO?>,
         mapper: DomainMapper<DTO, DomainModel>,
         localRequest: Flow<DTO>,
         saveToLocal: (suspend (result: DTO) -> Unit)? = null,
         includeUpdatedData: Boolean = true
-    ): Flow<DomainLocalResource<DomainModel>> = merge(
-        flow {
-            val callResult = remoteRequest.invoke()
-            saveToLocal?.let { saver ->
-                callResult.onSuccess {
-                    saver.invoke(it!!)
+    ): Flow<DomainLocalResource<DomainModel>> {
+        var hasCache = false
+        return merge(
+            flow {
+                val callResult = remoteRequest.invoke()
+                saveToLocal?.let { saver ->
+                    callResult.onSuccess {
+                        saver.invoke(it!!)
+                    }
                 }
-            }
 
-            when (val resource = mapToUiResource(callResult, mapper)) {
-                is DomainRemoteResource.Error -> emit(
-                    DomainLocalResource.Error(resource.error)
-                )
-                is DomainRemoteResource.NoData -> emit(
-                    DomainLocalResource.Error(
-                        DomainException(
-                            errorType = ErrorDomainType.NO_DATA,
-                            message = null
+                when (val resource = mapToUiResource(callResult, mapper)) {
+                    is DomainRemoteResource.Error -> emit(
+                        DomainLocalResource.Error(resource.error)
+                    )
+                    is DomainRemoteResource.NoData -> emit(
+                        DomainLocalResource.Error(
+                            DomainException(
+                                errorType = ErrorDomainType.NO_DATA,
+                                message = null
+                            )
                         )
                     )
-                )
-                is DomainRemoteResource.Success -> if (includeUpdatedData) {
-                    emit(DomainLocalResource.SuccessUpdateData(resource.data))
+                    is DomainRemoteResource.Success -> {
+                        if (!hasCache) emit(DomainLocalResource.SuccessUpdateData(resource.data))
+                        if (hasCache && includeUpdatedData) {
+                            emit(DomainLocalResource.SuccessUpdateData(resource.data))
+                        }
+                    }
                 }
+            },
+            localRequest.mapNotNull {
+                if (it.isEmpty()) return@mapNotNull null
+
+                hasCache = true
+                DomainLocalResource.Success(mapper.mapToDomainModel(it))
             }
-        },
-        localRequest.map { DomainLocalResource.Success(mapper.mapToDomainModel(it)) }
-    )
+        )
+    }
 
     suspend fun <DTO : Any, DomainModel : Any> requestDataFromRemote(
         remoteRequest: suspend () -> Either<Failure, DTO?>,

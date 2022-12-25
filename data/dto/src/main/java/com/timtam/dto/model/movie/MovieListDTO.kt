@@ -1,6 +1,7 @@
 package com.timtam.dto.model.movie
 
 import com.google.gson.annotations.SerializedName
+import com.timtam.dto.model.base.PeekableDTO
 
 data class MovieListDTO(
 
@@ -15,4 +16,7 @@ data class MovieListDTO(
 
     @SerializedName("total_results")
     val totalResults: Int? = null
-)
+) : PeekableDTO {
+
+    override fun isEmpty(): Boolean = movies.orEmpty().filterNotNull().isEmpty()
+}
