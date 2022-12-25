@@ -70,11 +70,12 @@ class HomeFragment :
         }
 
         observeValue(viewModel.movieSnipsNowPlaying) { movies ->
-            i { "TIMUR now playing movies: ${movies.map { it.title }}" }
+            i { "TIMUR now playing movies title: ${movies.map { it.title }}" }
+            i { "TIMUR now playing movies genres: ${movies.map { it.genres }}" }
         }
 
         observeValue(viewModel.movieGenres) { genres ->
-            i { "TIMUR now playing movies: ${genres.map { it.type }}" }
+            i { "TIMUR movie genres: ${genres.map { it.type }}" }
         }
 
         observeValue(viewModel.errorType) { type ->
