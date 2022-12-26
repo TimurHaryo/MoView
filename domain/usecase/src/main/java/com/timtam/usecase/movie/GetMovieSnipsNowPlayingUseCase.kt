@@ -25,17 +25,13 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
             movieRepository.getNowPlaying(1, limit).mapNotNull { resource ->
                 when (resource) {
                     is DomainLocalResource.Error -> MovieSnipsNowPlayingState.Error(resource.error)
-                    is DomainLocalResource.Success -> {
-                        if (resource.data.isEmpty()) return@mapNotNull null
-
-                        MovieSnipsNowPlayingState.Success(
-                            customizedItem(
-                                resource.data,
-                                genres,
-                                limit
-                            )
+                    is DomainLocalResource.Success -> MovieSnipsNowPlayingState.Success(
+                        customizedItem(
+                            resource.data,
+                            genres,
+                            limit
                         )
-                    }
+                    )
                     is DomainLocalResource.SuccessUpdateData -> {
                         if (resource.data.isEmpty()) return@mapNotNull MovieSnipsNowPlayingState.Empty
 

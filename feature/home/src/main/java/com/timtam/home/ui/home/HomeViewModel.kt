@@ -46,13 +46,13 @@ class HomeViewModel @Inject constructor(
             when (state) {
                 is GenreState.Error -> {
                     _mainLoading.value = false
-                    displayError(
+                    displayError(viewModelScope) {
                         if (_movieGenres.value.isNullOrEmpty()) {
                             ErrorDisplayType.ErrorUi(HomeViewType.GENRE)
                         } else {
                             ErrorDisplayType.KeepData(state.error.message)
                         }
-                    )
+                    }
                 }
                 is GenreState.Loading -> {
                     _mainLoading.value = true
@@ -71,17 +71,19 @@ class HomeViewModel @Inject constructor(
             when (state) {
                 is MovieSnipsNowPlayingState.Empty -> {
                     _snipsNowPlayingLoading.value = false
-                    displayError(ErrorDisplayType.EmptyUi(HomeViewType.NOW_PLAYING))
+                    displayError(viewModelScope) {
+                        ErrorDisplayType.EmptyUi(HomeViewType.NOW_PLAYING)
+                    }
                 }
                 is MovieSnipsNowPlayingState.Error -> {
                     _snipsNowPlayingLoading.value = false
-                    displayError(
+                    displayError(viewModelScope) {
                         if (_movieSnipsNowPlaying.value.isNullOrEmpty()) {
                             ErrorDisplayType.ErrorUi(HomeViewType.NOW_PLAYING)
                         } else {
                             ErrorDisplayType.KeepData(state.error.message)
                         }
-                    )
+                    }
                 }
                 is MovieSnipsNowPlayingState.Loading -> {
                     _snipsNowPlayingLoading.value = true

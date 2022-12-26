@@ -37,7 +37,9 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_home_section_playing" />
+            tools:listitem="@layout/item_home_section_playing"
+            tools:visibility="visible" />
     </LinearLayout>
 </layout>

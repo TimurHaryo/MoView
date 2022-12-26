@@ -1,12 +1,12 @@
 package com.timtam.feature_helper.delegation
 
-import androidx.lifecycle.LiveData
-import com.timtam.feature_helper.extension.ViewModelSegment
+import com.timtam.feature_helper.extension.LiveEvent
 import com.timtam.feature_helper.type.ErrorDisplayType
+import kotlinx.coroutines.CoroutineScope
 
-interface DisplayableErrorDelegate<Arg> : ViewModelSegment {
+interface DisplayableErrorDelegate<Arg> {
 
-    val errorType: LiveData<ErrorDisplayType<Arg>>
+    val errorType: LiveEvent<ErrorDisplayType<Arg>>
 
-    fun displayError(type: ErrorDisplayType<Arg>)
+    fun displayError(viewModelScope: CoroutineScope, type: () -> ErrorDisplayType<Arg>)
 }

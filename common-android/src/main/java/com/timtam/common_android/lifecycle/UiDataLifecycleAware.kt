@@ -30,9 +30,9 @@ internal class UiDataLifecycleAware(private val lifecycle: Lifecycle) : Lifecycl
     }
 
     private fun fetchData() {
-        if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED) && !hasBeenFetched) {
-            onFetchData?.invoke()
+        if (!hasBeenFetched) {
             hasBeenFetched = true
+            onFetchData?.invoke()
         }
     }
 }

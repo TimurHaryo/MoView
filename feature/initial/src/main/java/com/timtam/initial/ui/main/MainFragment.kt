@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import com.timtam.common_android.abstraction.LifecycleFragment
 import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
-import com.timtam.common_android.extension.observeValue
 import com.timtam.common_kotlin.extension.isNotNull
+import com.timtam.feature_helper.extension.observeLiveData
 import com.timtam.initial.R
 import com.timtam.initial.databinding.FragmentMainBinding
 import com.timtam.initial.model.type.MainTabType
@@ -57,7 +57,7 @@ class MainFragment :
     }
 
     private fun setupObserver() {
-        observeValue(viewModel.tabContentType, ::openTab)
+        observeLiveData(viewModel.tabContentType, ::openTab)
     }
 
     private fun openTab(selectedTab: MainTabType) {

@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(Modules.commonAndroid))
+    implementation(project(Modules.featureHelper))
     implementation(project(Modules.uikit))
     implementation(project(Modules.navigation))
     implementation(CoreDependencies.appCompat)

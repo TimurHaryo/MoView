@@ -10,10 +10,11 @@ import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
 import com.timtam.common_android.extension.e
 import com.timtam.common_android.extension.i
-import com.timtam.common_android.extension.observeValue
 import com.timtam.common_android.extension.toast
 import com.timtam.common_android.extension.viewLifecycleLazy
 import com.timtam.feature_helper.extension.inspect
+import com.timtam.feature_helper.extension.observeLiveData
+import com.timtam.feature_helper.extension.observeLiveEvent
 import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.ui.home.adapter.HomeAdapter
 import com.timtam.home.ui.type.HomeViewType
@@ -46,7 +47,8 @@ class HomeFragment :
         oneTimeInitView {
             setupRecyclerView()
         }
-        setupObserver()
+        setupEventObserver()
+        setupDataObserver()
     }
 
     override fun onHandleData() {
@@ -56,8 +58,8 @@ class HomeFragment :
         }
     }
 
-    private fun setupObserver() {
-        observeValue(viewModel.mainLoading) { isLoading ->
+    private fun setupDataObserver() {
+        observeLiveData(viewModel.mainLoading) { isLoading ->
             if (isLoading) {
                 startMainLoading()
             } else {
@@ -65,20 +67,22 @@ class HomeFragment :
             }
         }
 
-        observeValue(viewModel.snipsNowPlayingLoading) { isLoading ->
+        observeLiveData(viewModel.snipsNowPlayingLoading) { isLoading ->
             i { "TIMUR now playing loading: $isLoading" }
         }
 
-        observeValue(viewModel.movieSnipsNowPlaying) { movies ->
+        observeLiveData(viewModel.movieSnipsNowPlaying) { movies ->
             i { "TIMUR now playing movies title: ${movies.map { it.title }}" }
             i { "TIMUR now playing movies genres: ${movies.map { it.genres }}" }
         }
 
-        observeValue(viewModel.movieGenres) { genres ->
+        observeLiveData(viewModel.movieGenres) { genres ->
             i { "TIMUR movie genres: ${genres.map { it.type }}" }
         }
+    }
 
-        observeValue(viewModel.errorType) { type ->
+    private fun setupEventObserver() {
+        observeLiveEvent(viewModel.errorType) { type ->
             type.inspect(
                 keepData = {
                     toast { it.message.orEmpty() }
