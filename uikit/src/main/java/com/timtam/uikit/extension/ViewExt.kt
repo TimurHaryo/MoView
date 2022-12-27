@@ -3,6 +3,7 @@ package com.timtam.uikit.extension
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.ViewStubProxy
+import java.lang.ref.WeakReference
 
 fun View.visible() {
     this.visibility = View.VISIBLE
@@ -27,6 +28,8 @@ fun View.disable() {
 fun View.setVisibleElseGone(clause: Boolean) {
     if (clause) visible() else gone()
 }
+
+fun <V> V.weaken() where V : View = WeakReference(this)
 
 inline fun <reified T : ViewDataBinding> bindingStubType(
     proxy: ViewStubProxy?,

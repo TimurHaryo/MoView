@@ -13,3 +13,15 @@ fun RecyclerView.preAttach(attachBlock: RecyclerView.() -> Unit) {
 fun RecyclerView.detachFromAdapter() {
     adapter = null
 }
+
+inline fun <reified Payload> payloadByType(
+    payloads: MutableList<Any>,
+    emptyPayload: () -> Unit,
+    onPayload: (Payload) -> Unit
+) {
+    if (payloads.isEmpty()) {
+        emptyPayload()
+        return
+    }
+    payloads.filterIsInstance<Payload>().forEach { onPayload(it) }
+}
