@@ -1,4 +1,4 @@
-package com.timtam.uikit.recyclerview.initiator
+package com.timtam.uikit.recyclerview.base
 
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.uikit.extension.RecyclerViewAdapter

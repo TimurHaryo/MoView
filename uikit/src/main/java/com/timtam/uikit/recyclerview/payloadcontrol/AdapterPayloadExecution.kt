@@ -28,7 +28,7 @@ interface AdapterPayloadExecution<Payload> {
      *
      * Calls Recommendation: [RecyclerView.Adapter.onAttachedToRecyclerView] AFTER super
      * */
-    fun registerRecyclerHost(host: RecyclerView?) {
+    fun registerHost(host: RecyclerView?) {
         recyclerHost = host
     }
 
