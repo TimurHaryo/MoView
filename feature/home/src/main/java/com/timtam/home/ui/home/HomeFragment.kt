@@ -17,9 +17,13 @@ import com.timtam.feature_helper.extension.observeLiveData
 import com.timtam.feature_helper.extension.observeLiveEvent
 import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.ui.home.adapter.HomeAdapter
+import com.timtam.home.ui.home.adapter.genre.adapter.GenreListener
+import com.timtam.home.ui.home.adapter.genre.payload.HomeGenrePayload
 import com.timtam.home.ui.type.HomeViewType
+import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.gone
 import com.timtam.uikit.extension.visible
+import com.timtam.uikit.recyclerview.base.RecyclerViewInitiator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +32,33 @@ class HomeFragment :
     FragmentRetainable by FragmentRetainer() {
 
     private val viewModel: HomeViewModel by viewModels()
+
     private val homeAdapter by viewLifecycleLazy { HomeAdapter() }
+
+    private val genreListener by viewLifecycleLazy {
+        object : GenreListener {
+            override fun onMoreClick() {
+                toast { "GENRE MORE CLICKED" }
+            }
+
+            override fun onGenreClick(genreId: Int) {
+                toast { "GENRE ID => $genreId" }
+            }
+        }
+    }
+
+    private val recyclerViewInitiator by lazy {
+        RecyclerViewInitiator.Builder<HomeAdapter>()
+            .withRecyclerView(binding.rvHomeContent)
+            .withListener {
+                registerListener(genreListener)
+            }
+            .withAdapter { homeAdapter }
+            .onAttachedAdapter {
+                homeAdapter.submitList(HomeViewType.defaultOrder)
+            }
+            .build()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,11 +74,19 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        oneTimeInitView {
-            setupRecyclerView()
-        }
+        setupRecyclerView()
         setupEventObserver()
         setupDataObserver()
+    }
+
+    override fun onDestroyView() {
+        homeAdapter.releaseResource()
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        _binding?.rvHomeContent?.detachFromAdapter()
+        super.onDestroy()
     }
 
     override fun onHandleData() {
@@ -77,7 +115,10 @@ class HomeFragment :
         }
 
         observeLiveData(viewModel.movieGenres) { genres ->
-            i { "TIMUR movie genres: ${genres.map { it.type }}" }
+            homeAdapter.enqueueAdapterPayload(
+                HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
+                HomeGenrePayload.ShowData(genres)
+            )
         }
     }
 
@@ -89,7 +130,12 @@ class HomeFragment :
                 },
                 errorUi = {
                     when (it.key) {
-                        HomeViewType.GENRE -> e { "SHOW GENRE ERROR UI" }
+                        HomeViewType.GENRE -> {
+                            homeAdapter.enqueueAdapterPayload(
+                                HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
+                                HomeGenrePayload.ShowError
+                            )
+                        }
                         HomeViewType.NOW_PLAYING -> e { "SHOW NOW_PLAYING ERROR UI" }
                         HomeViewType.TOP_RATED -> e { "SHOW TOP_RATED ERROR UI" }
                         else -> Unit
@@ -106,11 +152,7 @@ class HomeFragment :
         }
     }
 
-    private fun setupRecyclerView() = with(binding.rvHomeContent) {
-        adapter = homeAdapter.apply {
-            submitList(HomeViewType.defaultOrder)
-        }
-    }
+    private fun setupRecyclerView() = recyclerViewInitiator.initialize()
 
     private fun startMainLoading() = with(binding) {
         sflHomeMain.visible()

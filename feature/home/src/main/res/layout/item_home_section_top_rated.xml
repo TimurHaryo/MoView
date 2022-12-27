@@ -28,8 +28,6 @@
             android:gravity="center"
             android:text="@string/text_see_all"
             android:textColor="@color/yellow_golden"
-            app:drawableEndCompat="@drawable/ic_chevron_right"
-            app:drawableTint="@color/yellow_golden"
             app:layout_constraintBottom_toBottomOf="@+id/tv_home_top_rated"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_home_top_rated" />
