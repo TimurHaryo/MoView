@@ -6,6 +6,7 @@ object Versions {
     const val splashScreen = "1.0.0"
     const val fragment = "1.5.2"
     const val material = "1.4.0"
+    const val recyclerView = "1.2.1"
     const val glide = "4.14.2"
     const val shimmerView = "0.5.0"
     const val constraintLayout = "2.1.0"
