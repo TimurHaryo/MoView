@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
  */
 class AdaptiveSpacingItemDecoration private constructor(
     private val size: Int,
+    private val spanSize: Int,
     private val edgeEnabled: Boolean
 ) : ItemDecoration() {
 
@@ -133,15 +134,17 @@ class AdaptiveSpacingItemDecoration private constructor(
         // Saved size
         val sizeBasedOnFirstColumn = if (isFirstColumn) sizeBasedOnEdge else NO_SPACING
         val sizeBasedOnLastColumn = if (!isLastColumn) sizeBasedOnLastPosition else sizeBasedOnEdge
+        val sizeBasedOnSpanColumn = if (!isLastColumn) spanSize else NO_SPACING
         val sizeBasedOnFirstRow = if (isFirstRow) sizeBasedOnEdge else NO_SPACING
         val sizeBasedOnLastRow = if (!isLastRow) size else sizeBasedOnEdge
+        val sizeBasedSpanRow = if (!isLastRow) spanSize else NO_SPACING
 
         when (orientation) {
             RecyclerView.HORIZONTAL -> { // Row fixed. Number of rows is spanCount
                 with(outRect) {
                     left = if (isReversed) sizeBasedOnLastColumn else sizeBasedOnFirstColumn
                     top = if (edgeEnabled) size * (spanCount - yAxis) / (spanCount) else size * yAxis / spanCount
-                    right = if (isReversed) sizeBasedOnFirstColumn else sizeBasedOnLastColumn
+                    right = if (isReversed) sizeBasedOnLastColumn else sizeBasedOnSpanColumn
                     bottom = if (edgeEnabled) {
                         size * (yAxis + 1) / spanCount
                     } else {
@@ -158,7 +161,7 @@ class AdaptiveSpacingItemDecoration private constructor(
                     } else {
                         size * (spanCount - (xAxis + 1)) / spanCount
                     }
-                    bottom = if (isReversed) sizeBasedOnFirstRow else sizeBasedOnLastRow
+                    bottom = if (isReversed) sizeBasedOnLastRow else sizeBasedSpanRow
                 }
             }
             else -> Unit
@@ -168,7 +171,7 @@ class AdaptiveSpacingItemDecoration private constructor(
     companion object {
         private const val NO_SPACING = 0
 
-        fun create(size: Int, edgeEnabled: Boolean = false) =
-            AdaptiveSpacingItemDecoration(size, edgeEnabled)
+        fun create(size: Int, spanSize: Int, edgeEnabled: Boolean = false) =
+            AdaptiveSpacingItemDecoration(size, spanSize, edgeEnabled)
     }
 }
