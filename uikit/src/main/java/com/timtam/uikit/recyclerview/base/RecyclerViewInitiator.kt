@@ -2,11 +2,12 @@ package com.timtam.uikit.recyclerview.base
 
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.uikit.extension.RecyclerViewAdapter
+import java.lang.ref.WeakReference
 
 class RecyclerViewInitiator<T : RecyclerViewAdapter> private constructor(
     builder: Builder<T>
 ) {
-    private val recyclerView: RecyclerView?
+    private val recyclerView: WeakReference<RecyclerView>?
     private val onRegisterListener: (T.() -> Unit)?
     private val activeAdapter: (() -> T)?
     private val setupWithAdapter: ((RecyclerView.() -> Unit))?
@@ -19,7 +20,7 @@ class RecyclerViewInitiator<T : RecyclerViewAdapter> private constructor(
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun initialize() = recyclerView?.run {
+    fun initialize() = recyclerView?.get()?.run {
         if (adapter == null) {
             adapter = activeAdapter?.invoke()
             setupWithAdapter?.invoke(this)
@@ -28,7 +29,7 @@ class RecyclerViewInitiator<T : RecyclerViewAdapter> private constructor(
     }
 
     class Builder<T : RecyclerViewAdapter> {
-        var recyclerView: RecyclerView? = null
+        var recyclerView: WeakReference<RecyclerView>? = null
             private set
 
         var activeAdapter: (() -> T)? = null
@@ -39,7 +40,7 @@ class RecyclerViewInitiator<T : RecyclerViewAdapter> private constructor(
         var setupWithAdapter: ((RecyclerView.() -> Unit))? = null
             private set
 
-        fun withRecyclerView(view: RecyclerView?) = apply { this.recyclerView = view }
+        fun withRecyclerView(view: WeakReference<RecyclerView>?) = apply { this.recyclerView = view }
 
         fun withListener(block: T.() -> Unit) = apply { this.onRegisterListener = block }
 

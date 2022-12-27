@@ -23,6 +23,7 @@ import com.timtam.home.ui.type.HomeViewType
 import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.gone
 import com.timtam.uikit.extension.visible
+import com.timtam.uikit.extension.weaken
 import com.timtam.uikit.recyclerview.base.RecyclerViewInitiator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,7 +50,7 @@ class HomeFragment :
 
     private val recyclerViewInitiator by lazy {
         RecyclerViewInitiator.Builder<HomeAdapter>()
-            .withRecyclerView(binding.rvHomeContent)
+            .withRecyclerView(binding.rvHomeContent.weaken())
             .withListener {
                 registerListener(genreListener)
             }
