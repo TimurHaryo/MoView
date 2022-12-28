@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.timtam.feature_helper.delegation.DisplayableErrorDelegate
 import com.timtam.feature_helper.delegation.DisplayableErrorDelegateImpl
 import com.timtam.feature_helper.type.ErrorDisplayType
-import com.timtam.feature_item.genre.GenreItem
+import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
 import com.timtam.home.type.HomeViewType
-import com.timtam.usecase.genre.GetMovieGenreUseCase
+import com.timtam.usecase.genre.GetMovieSnipsGenreUseCase
 import com.timtam.usecase.genre.state.GenreState
 import com.timtam.usecase.movie.GetMovieSnipsNowPlayingUseCase
 import com.timtam.usecase.movie.state.MovieSnipsNowPlayingState
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getMovieSnipsNowPlaying: GetMovieSnipsNowPlayingUseCase,
-    private val getMovieGenres: GetMovieGenreUseCase
+    private val getMovieSnipsGenre: GetMovieSnipsGenreUseCase
 ) :
     ViewModel(),
     DisplayableErrorDelegate<HomeViewType> by DisplayableErrorDelegateImpl() {
@@ -35,14 +35,14 @@ class HomeViewModel @Inject constructor(
     private val _movieSnipsNowPlaying = MutableLiveData<List<MovieSnipsNowPlayingItem>>()
     val movieSnipsNowPlaying: LiveData<List<MovieSnipsNowPlayingItem>> get() = _movieSnipsNowPlaying
 
-    private val _movieGenres = MutableLiveData<List<GenreItem>>()
-    val movieGenres: LiveData<List<GenreItem>> get() = _movieGenres
+    private val _movieGenres = MutableLiveData<List<GenreHomeItem>>()
+    val movieGenres: LiveData<List<GenreHomeItem>> get() = _movieGenres
 
     fun fetchMovieGenres(
         limit: Int,
-        doAfter: (List<GenreItem>) -> Unit
+        doAfter: (List<GenreHomeItem>) -> Unit
     ) = viewModelScope.launch {
-        getMovieGenres().collect { state ->
+        getMovieSnipsGenre().collect { state ->
             when (state) {
                 is GenreState.Error -> {
                     _mainLoading.value = false
@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun fetchSnipsNowPlaying(genres: List<GenreItem>, limit: Int) = viewModelScope.launch {
+    fun fetchSnipsNowPlaying(genres: List<GenreHomeItem>, limit: Int) = viewModelScope.launch {
         getMovieSnipsNowPlaying(genres, limit).collect { state ->
             when (state) {
                 is MovieSnipsNowPlayingState.Empty -> {

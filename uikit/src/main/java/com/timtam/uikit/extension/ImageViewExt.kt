@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -19,7 +19,7 @@ fun ImageView.loadImage(
     url: String?,
     usePlaceHolder: Boolean = true,
     priority: Priority = Priority.HIGH
-) = onContextAlive {
+) {
     Glide.with(context)
         .load(url)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -34,13 +34,24 @@ fun ImageView.loadImage(
         .into(this)
 }
 
+fun ImageView.loadImage(
+    @DrawableRes resId: Int?,
+    priority: Priority = Priority.HIGH
+) {
+    Glide.with(this)
+        .load(resId)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .priority(priority)
+        .into(this)
+}
+
 @SuppressLint("CheckResult")
 fun ImageView.loadImageWithRadius(
     url: String?,
     @IntRange(from = 1) radius: Int,
     usePlaceHolder: Boolean = true,
     priority: Priority = Priority.HIGH
-) = onContextAlive {
+) {
     Glide.with(context)
         .load(url)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -59,8 +70,4 @@ fun ImageView.loadImageWithRadius(
             }
         }
         .into(this)
-}
-
-private inline fun ImageView.onContextAlive(crossinline block: () -> Unit) {
-    if ((context as? AppCompatActivity)?.isDestroyed == false) block()
 }

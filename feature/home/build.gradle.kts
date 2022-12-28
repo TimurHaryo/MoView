@@ -52,6 +52,7 @@ dependencies {
     implementation(CoreDependencies.navigationFragmentKtx)
     implementation(CoreDependencies.hiltAndroid)
     implementation(UiDependencies.material)
+    implementation(UiDependencies.glide)
     implementation(UiDependencies.recyclerView)
     implementation(UiDependencies.shimmerView)
     implementation(UiDependencies.constraintLayout)

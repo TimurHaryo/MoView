@@ -24,6 +24,7 @@
                 android:layout_width="@dimen/space_28"
                 android:layout_height="@dimen/space_28"
                 android:layout_marginBottom="@dimen/space_8"
+                app:tint="?themeColorTextPrimary"
                 tools:src="@drawable/ic_home" />
 
             <TextView

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_android.extension.e
-import com.timtam.feature_item.genre.GenreItem
+import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.home.databinding.ItemHomeSectionGenreBinding
 import com.timtam.home.ui.genre.adapter.GenreAdapter
 import com.timtam.home.ui.genre.adapter.GenreListener
@@ -25,7 +25,7 @@ class HomeGenreViewHolder(
 
     private var listener: GenreListener? = null
 
-    private val genres: ArrayList<GenreItem> = arrayListOf()
+    private val genres: ArrayList<GenreHomeItem> = arrayListOf()
 
     private var genreAdapter: GenreAdapter? = null
 
@@ -59,7 +59,7 @@ class HomeGenreViewHolder(
         tvHomeGenreSeeAll.setOnClickListener { listener?.onMoreClick() }
     }
 
-    fun showGenre(data: List<GenreItem>) {
+    fun showGenre(data: List<GenreHomeItem>) {
         genres.clear()
         genres.addAll(data)
 

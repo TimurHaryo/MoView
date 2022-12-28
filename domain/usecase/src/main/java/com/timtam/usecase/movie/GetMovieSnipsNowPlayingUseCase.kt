@@ -1,6 +1,6 @@
 package com.timtam.usecase.movie
 
-import com.timtam.feature_item.genre.GenreItem
+import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
 import com.timtam.repository.MovieRepository
 import com.timtam.usecase.dispatcher.DispatcherProvider
@@ -19,7 +19,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) {
 
-    operator fun invoke(genres: List<GenreItem>, limit: Int): Flow<MovieSnipsNowPlayingState> =
+    operator fun invoke(genres: List<GenreHomeItem>, limit: Int): Flow<MovieSnipsNowPlayingState> =
         merge(
             flow { emit(MovieSnipsNowPlayingState.Loading) },
             movieRepository.getNowPlaying(1, limit).mapNotNull { resource ->
@@ -47,7 +47,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
             }
         ).flowOn(dispatcher.io)
 
-    private fun MovieModel.mapToPresentationItem(genres: List<GenreItem>) =
+    private fun MovieModel.mapToPresentationItem(genres: List<GenreHomeItem>) =
         MovieSnipsNowPlayingItem(
             id = id,
             isAdult = isAdult,
@@ -58,12 +58,12 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
             vote = voteAverage
         )
 
-    private fun List<Int>.findCorrespondingGenre(genres: List<GenreItem>): List<String> =
+    private fun List<Int>.findCorrespondingGenre(genres: List<GenreHomeItem>): List<String> =
         mapNotNull { id ->
             genres.firstOrNull { it.id == id }?.type
         }
 
-    private fun customizedItem(data: List<MovieModel>, genres: List<GenreItem>, limit: Int) =
+    private fun customizedItem(data: List<MovieModel>, genres: List<GenreHomeItem>, limit: Int) =
         data.map { it.mapToPresentationItem(genres) }
             .sortedBy { it.id }
             .take(limit)

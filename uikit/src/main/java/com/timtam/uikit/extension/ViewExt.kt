@@ -1,9 +1,12 @@
 package com.timtam.uikit.extension
 
+import android.content.Context
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.ViewStubProxy
 import java.lang.ref.WeakReference
+
+val ViewDataBinding.context get(): Context? = root.context
 
 fun View.visible() {
     this.visibility = View.VISIBLE

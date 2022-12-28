@@ -2,7 +2,7 @@ package com.timtam.home.ui.genre.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.timtam.feature_item.genre.GenreItem
+import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.uikit.recyclerview.base.BaseListAdapter
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCacheable
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCaching
@@ -10,7 +10,7 @@ import com.timtam.uikit.recyclerview.resourceful.AttachableResource
 import com.timtam.uikit.recyclerview.resourceful.DetachableResource
 
 class GenreAdapter :
-    BaseListAdapter<GenreItem, GenreItemViewHolder>(DIFFER),
+    BaseListAdapter<GenreHomeItem, GenreItemViewHolder>(DIFFER),
     AttachableResource<GenreListener>,
     DetachableResource,
     RecyclerHolderCacheable by RecyclerHolderCaching() {
@@ -39,11 +39,11 @@ class GenreAdapter :
     }
 
     companion object {
-        private val DIFFER = object : DiffUtil.ItemCallback<GenreItem>() {
-            override fun areItemsTheSame(oldItem: GenreItem, newItem: GenreItem): Boolean =
+        private val DIFFER = object : DiffUtil.ItemCallback<GenreHomeItem>() {
+            override fun areItemsTheSame(oldItem: GenreHomeItem, newItem: GenreHomeItem): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: GenreItem, newItem: GenreItem): Boolean =
+            override fun areContentsTheSame(oldItem: GenreHomeItem, newItem: GenreHomeItem): Boolean =
                 oldItem == newItem
         }
     }
