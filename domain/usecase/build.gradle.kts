@@ -12,6 +12,7 @@ java {
 }
 
 dependencies {
+    implementation(project(Modules.commonKotlin))
     implementation(project(Modules.repository))
     implementation(project(Modules.domainWrapper))
     implementation(project(Modules.featureItem))

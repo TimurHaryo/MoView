@@ -1,5 +1,6 @@
 package com.timtam.usecase.movie
 
+import com.timtam.common_kotlin.extension.reformatDate
 import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
 import com.timtam.repository.MovieRepository
@@ -53,7 +54,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
             isAdult = isAdult,
             backdropPath = backdropPath,
             genreGroup = genreIds.findCorrespondingGenre(genres).joinToString(GENRE_SEPARATOR),
-            releaseDate = releaseDate,
+            releaseDate = reformatDate(releaseDate),
             title = title,
             rating = voteAverage
         )

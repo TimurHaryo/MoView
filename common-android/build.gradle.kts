@@ -39,6 +39,5 @@ dependencies {
     implementation(CoreDependencies.appCompat)
     implementation(CoreDependencies.coroutinesCore)
     implementation(CoreDependencies.coroutinesAndroid)
-    implementation(CoreDependencies.threeTenABP)
     implementation(NetworkDependencies.retrofit)
 }
