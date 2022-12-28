@@ -36,7 +36,7 @@ class HomeFragment :
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private val homeAdapter by viewLifecycleLazy { HomeAdapter() }
+    private var homeAdapter: HomeAdapter? = null
 
     private val movieGenreListener by viewLifecycleLazy {
         object : MovieGenreListener {
@@ -71,9 +71,11 @@ class HomeFragment :
                     movieNowPlayingListener = movieNowPlayingListener
                 )
             }
-            .withAdapter { homeAdapter }
+            .withAdapter {
+                HomeAdapter().also { homeAdapter = it }
+            }
             .onAttachedAdapter {
-                homeAdapter.submitList(HomeViewType.defaultOrder)
+                homeAdapter?.submitList(HomeViewType.defaultOrder)
             }
             .build()
     }
@@ -98,7 +100,7 @@ class HomeFragment :
     }
 
     override fun onDestroyView() {
-        homeAdapter.releaseResource()
+        homeAdapter?.releaseResource()
         super.onDestroyView()
     }
 
@@ -130,14 +132,14 @@ class HomeFragment :
         observeLiveData(viewModel.movieSnipsNowPlaying) { movies ->
             i { "TIMUR now playing movies title: ${movies.map { it.title }}" }
             i { "TIMUR now playing movies genres: ${movies.map { it.genreGroup }}" }
-            homeAdapter.enqueueAdapterPayload(
+            homeAdapter?.enqueueAdapterPayload(
                 HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
                 HomeMovieNowPlayingPayload.ShowData(movies)
             )
         }
 
         observeLiveData(viewModel.movieGenres) { genres ->
-            homeAdapter.enqueueAdapterPayload(
+            homeAdapter?.enqueueAdapterPayload(
                 HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
                 HomeGenrePayload.ShowData(genres)
             )
@@ -153,13 +155,13 @@ class HomeFragment :
                 errorUi = {
                     when (it.key) {
                         HomeViewType.GENRE -> {
-                            homeAdapter.enqueueAdapterPayload(
+                            homeAdapter?.enqueueAdapterPayload(
                                 HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
                                 HomeGenrePayload.ShowError
                             )
                         }
                         HomeViewType.NOW_PLAYING -> {
-                            homeAdapter.enqueueAdapterPayload(
+                            homeAdapter?.enqueueAdapterPayload(
                                 HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
                                 HomeMovieNowPlayingPayload.ShowError
                             )
@@ -171,7 +173,7 @@ class HomeFragment :
                 emptyUi = {
                     when (it.key) {
                         HomeViewType.NOW_PLAYING -> {
-                            homeAdapter.enqueueAdapterPayload(
+                            homeAdapter?.enqueueAdapterPayload(
                                 HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
                                 HomeMovieNowPlayingPayload.ShowEmpty
                             )

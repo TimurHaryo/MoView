@@ -89,7 +89,7 @@ class HomeAdapter :
             payloads = payloads,
             emptyPayload = { onBindViewHolder(holder, position) },
             onPayload = { payload ->
-                when(payload) {
+                when (payload) {
                     is HomeMovieNowPlayingPayload.ShowData -> {
                         (holder as? HomeNowPlayingViewHolder)?.showMovie(payload.movies)
                     }
@@ -121,6 +121,7 @@ class HomeAdapter :
 
     override fun releaseResource() {
         movieGenreListener = null
+        movieNowPlayingListener = null
         executeToValidHolders(host) { holder ->
             if (holder is DetachableResource) holder.releaseResource()
         }
