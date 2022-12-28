@@ -1,4 +1,4 @@
-package com.timtam.home.ui.home.adapter.genre.adapter
+package com.timtam.home.ui.genre.adapter
 
 interface GenreListener {
     fun onMoreClick()

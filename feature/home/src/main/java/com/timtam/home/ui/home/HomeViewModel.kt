@@ -9,7 +9,7 @@ import com.timtam.feature_helper.delegation.DisplayableErrorDelegateImpl
 import com.timtam.feature_helper.type.ErrorDisplayType
 import com.timtam.feature_item.genre.GenreItem
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
-import com.timtam.home.ui.type.HomeViewType
+import com.timtam.home.type.HomeViewType
 import com.timtam.usecase.genre.GetMovieGenreUseCase
 import com.timtam.usecase.genre.state.GenreState
 import com.timtam.usecase.movie.GetMovieSnipsNowPlayingUseCase

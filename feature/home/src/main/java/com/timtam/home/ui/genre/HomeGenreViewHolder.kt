@@ -1,4 +1,4 @@
-package com.timtam.home.ui.home.adapter.genre
+package com.timtam.home.ui.genre
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_android.extension.e
 import com.timtam.feature_item.genre.GenreItem
 import com.timtam.home.databinding.ItemHomeSectionGenreBinding
-import com.timtam.home.ui.home.adapter.genre.adapter.GenreAdapter
-import com.timtam.home.ui.home.adapter.genre.adapter.GenreListener
+import com.timtam.home.ui.genre.adapter.GenreAdapter
+import com.timtam.home.ui.genre.adapter.GenreListener
 import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.decoration.AdaptiveSpacingItemDecoration

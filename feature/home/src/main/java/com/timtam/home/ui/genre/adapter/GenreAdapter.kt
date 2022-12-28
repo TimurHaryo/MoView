@@ -1,4 +1,4 @@
-package com.timtam.home.ui.home.adapter.genre.adapter
+package com.timtam.home.ui.genre.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

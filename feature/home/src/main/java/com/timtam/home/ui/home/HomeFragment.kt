@@ -17,9 +17,9 @@ import com.timtam.feature_helper.extension.observeLiveData
 import com.timtam.feature_helper.extension.observeLiveEvent
 import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.ui.home.adapter.HomeAdapter
-import com.timtam.home.ui.home.adapter.genre.adapter.GenreListener
-import com.timtam.home.ui.home.adapter.genre.payload.HomeGenrePayload
-import com.timtam.home.ui.type.HomeViewType
+import com.timtam.home.ui.genre.adapter.GenreListener
+import com.timtam.home.ui.genre.payload.HomeGenrePayload
+import com.timtam.home.type.HomeViewType
 import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.gone
 import com.timtam.uikit.extension.visible

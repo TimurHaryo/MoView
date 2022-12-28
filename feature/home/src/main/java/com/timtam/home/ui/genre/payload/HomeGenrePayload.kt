@@ -1,4 +1,4 @@
-package com.timtam.home.ui.home.adapter.genre.payload
+package com.timtam.home.ui.genre.payload
 
 import com.timtam.feature_item.genre.GenreItem
 import com.timtam.home.ui.home.adapter.payload.HomePayload

@@ -1,4 +1,4 @@
-package com.timtam.home.ui.home.adapter.nowplaying
+package com.timtam.home.ui.nowplaying
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.timtam.home.ui.home.adapter.genre.adapter
+package com.timtam.home.ui.genre.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
