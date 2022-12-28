@@ -52,10 +52,10 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
             id = id,
             isAdult = isAdult,
             backdropPath = backdropPath,
-            genres = genreIds.findCorrespondingGenre(genres),
+            genreGroup = genreIds.findCorrespondingGenre(genres).joinToString(GENRE_SEPARATOR),
             releaseDate = releaseDate,
             title = title,
-            vote = voteAverage
+            rating = voteAverage
         )
 
     private fun List<Int>.findCorrespondingGenre(genres: List<GenreHomeItem>): List<String> =
@@ -67,4 +67,8 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
         data.map { it.mapToPresentationItem(genres) }
             .sortedBy { it.id }
             .take(limit)
+
+    companion object {
+        private const val GENRE_SEPARATOR = " | "
+    }
 }

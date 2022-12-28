@@ -4,14 +4,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.home.R
+import com.timtam.home.type.HomeViewType
 import com.timtam.home.ui.genre.HomeGenreViewHolder
 import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.home.ui.genre.payload.HomeGenrePayload
 import com.timtam.home.ui.header.HomeHeaderViewHolder
-import com.timtam.home.ui.nowplaying.HomeNowPlayingViewHolder
 import com.timtam.home.ui.home.adapter.payload.HomePayload
+import com.timtam.home.ui.nowplaying.HomeNowPlayingViewHolder
+import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
+import com.timtam.home.ui.nowplaying.payload.HomeMovieNowPlayingPayload
 import com.timtam.home.ui.toprated.HomeTopRatedViewHolder
-import com.timtam.home.type.HomeViewType
 import com.timtam.uikit.extension.payloadByType
 import com.timtam.uikit.recyclerview.base.BaseListAdapter
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCacheable
@@ -27,6 +29,7 @@ class HomeAdapter :
     RecyclerHolderCacheable by RecyclerHolderCaching() {
 
     private var movieGenreListener: MovieGenreListener? = null
+    private var movieNowPlayingListener: MovieNowPlayingListener? = null
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -50,8 +53,12 @@ class HomeAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is HomeGenreViewHolder -> holder.run {
+            is HomeGenreViewHolder -> with(holder) {
                 setListener(movieGenreListener)
+                bind()
+            }
+            is HomeNowPlayingViewHolder -> with(holder) {
+                setListener(movieNowPlayingListener)
                 bind()
             }
             else -> Unit
@@ -73,6 +80,24 @@ class HomeAdapter :
                     }
                     is HomeGenrePayload.ShowError -> {
                         (holder as? HomeGenreViewHolder)?.showErrorGenre()
+                    }
+                }
+            }
+        )
+
+        payloadByType<HomeMovieNowPlayingPayload>(
+            payloads = payloads,
+            emptyPayload = { onBindViewHolder(holder, position) },
+            onPayload = { payload ->
+                when(payload) {
+                    is HomeMovieNowPlayingPayload.ShowData -> {
+                        (holder as? HomeNowPlayingViewHolder)?.showMovie(payload.movies)
+                    }
+                    is HomeMovieNowPlayingPayload.ShowEmpty -> {
+                        (holder as? HomeNowPlayingViewHolder)?.showEmptyMovie()
+                    }
+                    is HomeMovieNowPlayingPayload.ShowError -> {
+                        (holder as? HomeNowPlayingViewHolder)?.showErrorMovie()
                     }
                 }
             }
@@ -101,8 +126,12 @@ class HomeAdapter :
         }
     }
 
-    fun registerListener(movieGenreListener: MovieGenreListener?) {
+    fun registerListener(
+        movieGenreListener: MovieGenreListener?,
+        movieNowPlayingListener: MovieNowPlayingListener?
+    ) {
         this.movieGenreListener = movieGenreListener
+        this.movieNowPlayingListener = movieNowPlayingListener
     }
 
     companion object {

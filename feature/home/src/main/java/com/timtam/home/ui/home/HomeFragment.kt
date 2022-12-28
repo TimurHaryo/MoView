@@ -16,10 +16,12 @@ import com.timtam.feature_helper.extension.inspect
 import com.timtam.feature_helper.extension.observeLiveData
 import com.timtam.feature_helper.extension.observeLiveEvent
 import com.timtam.home.databinding.FragmentHomeBinding
-import com.timtam.home.ui.home.adapter.HomeAdapter
+import com.timtam.home.type.HomeViewType
 import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.home.ui.genre.payload.HomeGenrePayload
-import com.timtam.home.type.HomeViewType
+import com.timtam.home.ui.home.adapter.HomeAdapter
+import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
+import com.timtam.home.ui.nowplaying.payload.HomeMovieNowPlayingPayload
 import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.gone
 import com.timtam.uikit.extension.visible
@@ -48,11 +50,26 @@ class HomeFragment :
         }
     }
 
+    private val movieNowPlayingListener by viewLifecycleLazy {
+        object : MovieNowPlayingListener {
+            override fun onMoreClick() {
+                toast { "NOW PLAYING MORE CLICKED" }
+            }
+
+            override fun onMovieClick(movieId: Int) {
+                toast { "NOW PLAYING ID => $movieId" }
+            }
+        }
+    }
+
     private val recyclerViewInitiator by lazy {
         RecyclerViewInitiator.Builder<HomeAdapter>()
             .withRecyclerView(binding.rvHomeContent.weaken())
             .withListener {
-                registerListener(movieGenreListener)
+                registerListener(
+                    movieGenreListener = movieGenreListener,
+                    movieNowPlayingListener = movieNowPlayingListener
+                )
             }
             .withAdapter { homeAdapter }
             .onAttachedAdapter {
@@ -112,7 +129,11 @@ class HomeFragment :
 
         observeLiveData(viewModel.movieSnipsNowPlaying) { movies ->
             i { "TIMUR now playing movies title: ${movies.map { it.title }}" }
-            i { "TIMUR now playing movies genres: ${movies.map { it.genres }}" }
+            i { "TIMUR now playing movies genres: ${movies.map { it.genreGroup }}" }
+            homeAdapter.enqueueAdapterPayload(
+                HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                HomeMovieNowPlayingPayload.ShowData(movies)
+            )
         }
 
         observeLiveData(viewModel.movieGenres) { genres ->
@@ -137,14 +158,24 @@ class HomeFragment :
                                 HomeGenrePayload.ShowError
                             )
                         }
-                        HomeViewType.NOW_PLAYING -> e { "SHOW NOW_PLAYING ERROR UI" }
+                        HomeViewType.NOW_PLAYING -> {
+                            homeAdapter.enqueueAdapterPayload(
+                                HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                                HomeMovieNowPlayingPayload.ShowError
+                            )
+                        }
                         HomeViewType.TOP_RATED -> e { "SHOW TOP_RATED ERROR UI" }
                         else -> Unit
                     }
                 },
                 emptyUi = {
                     when (it.key) {
-                        HomeViewType.NOW_PLAYING -> e { "SHOW NOW_PLAYING EMPTY UI" }
+                        HomeViewType.NOW_PLAYING -> {
+                            homeAdapter.enqueueAdapterPayload(
+                                HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                                HomeMovieNowPlayingPayload.ShowEmpty
+                            )
+                        }
                         HomeViewType.TOP_RATED -> e { "SHOW TOP_RATED EMPTY UI" }
                         else -> Unit
                     }
