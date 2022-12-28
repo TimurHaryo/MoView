@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/space_16">
+        android:paddingBottom="@dimen/space_24">
 
         <TextView
             android:id="@+id/tv_home_genre"
@@ -21,11 +21,10 @@
         <TextView
             android:id="@+id/tv_home_genre_see_all"
             style="@style/Theme.MoView.Text.Secondary.BodyXXSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/space_64"
+            android:layout_height="@dimen/space_0"
             android:layout_marginEnd="@dimen/space_16"
-            android:drawablePadding="@dimen/space_4"
-            android:gravity="center"
+            android:gravity="end|center_vertical"
             android:text="@string/text_see_all"
             android:textColor="@color/yellow_golden"
             app:layout_constraintBottom_toBottomOf="@+id/tv_home_genre"
