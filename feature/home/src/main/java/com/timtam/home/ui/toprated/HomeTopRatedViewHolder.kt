@@ -9,6 +9,7 @@ import com.timtam.home.databinding.ItemHomeSectionTopRatedBinding
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedAdapter
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedListener
 import com.timtam.uikit.extension.detachFromAdapter
+import com.timtam.uikit.extension.hasActiveAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.resourceful.AttachableResource
 import com.timtam.uikit.recyclerview.resourceful.DetachableResource
@@ -37,19 +38,18 @@ class HomeTopRatedViewHolder(
     }
 
     fun bind() = with(binding) {
-        rvHomeTopRated.preAttach {
-            movieAdapter = MovieTopRatedAdapter().apply {
-                setListener(listener)
-            }
-            adapter = movieAdapter
-        }
+        setupRecyclerView()
 
         tvHomeTopRatedSeeAll.setOnClickListener { listener?.onMoreClick() }
     }
 
-    fun showMovie(data: List<MovieSnipsTopRatedItem>) {
+    fun showMovie(data: List<MovieSnipsTopRatedItem>) = with(binding.rvHomeTopRated) {
         movies.clear()
         movies.addAll(data)
+
+        if (!hasActiveAdapter) {
+            setupRecyclerView()
+        }
 
         movieAdapter?.submitList(movies)
     }
@@ -60,6 +60,15 @@ class HomeTopRatedViewHolder(
 
     fun showEmptyMovie() {
         e { "TOP RATED ITEM EMPTY" }
+    }
+
+    private fun setupRecyclerView() = with(binding.rvHomeTopRated) {
+        preAttach {
+            movieAdapter = MovieTopRatedAdapter().apply {
+                setListener(listener)
+            }
+            adapter = movieAdapter
+        }
     }
 
     companion object {

@@ -115,9 +115,8 @@ class HomeFragment :
     ): View {
         return oneTimeRenderer {
             _binding = FragmentHomeBinding.inflate(inflater, container, false)
-            _binding?.lifecycleOwner = viewLifecycleOwner
             binding.root
-        }
+        }.apply { _binding?.lifecycleOwner = viewLifecycleOwner }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

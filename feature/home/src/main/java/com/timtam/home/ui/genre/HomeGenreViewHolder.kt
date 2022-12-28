@@ -10,6 +10,7 @@ import com.timtam.home.databinding.ItemHomeSectionGenreBinding
 import com.timtam.home.ui.genre.adapter.GenreAdapter
 import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.uikit.extension.detachFromAdapter
+import com.timtam.uikit.extension.hasActiveAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.decoration.AdaptiveSpacingItemDecoration
 import com.timtam.uikit.recyclerview.resourceful.AttachableResource
@@ -41,7 +42,28 @@ class HomeGenreViewHolder(
     }
 
     fun bind() = with(binding) {
-        rvHomeGenre.preAttach {
+        setupRecyclerView()
+
+        tvHomeGenreSeeAll.setOnClickListener { listener?.onMoreClick() }
+    }
+
+    fun showGenre(data: List<GenreHomeItem>) = with(binding.rvHomeGenre) {
+        genres.clear()
+        genres.addAll(data)
+
+        if (!hasActiveAdapter) {
+            setupRecyclerView()
+        }
+
+        genreAdapter?.submitList(genres)
+    }
+
+    fun showErrorGenre() {
+        e { "GENRE ITEM ERROR" }
+    }
+
+    private fun setupRecyclerView() = with(binding.rvHomeGenre) {
+        preAttach {
             genreAdapter = GenreAdapter().apply {
                 setListener(listener)
             }
@@ -55,19 +77,6 @@ class HomeGenreViewHolder(
                 )
             )
         }
-
-        tvHomeGenreSeeAll.setOnClickListener { listener?.onMoreClick() }
-    }
-
-    fun showGenre(data: List<GenreHomeItem>) {
-        genres.clear()
-        genres.addAll(data)
-
-        genreAdapter?.submitList(genres)
-    }
-
-    fun showErrorGenre() {
-        e { "GENRE ITEM ERROR" }
     }
 
     companion object {

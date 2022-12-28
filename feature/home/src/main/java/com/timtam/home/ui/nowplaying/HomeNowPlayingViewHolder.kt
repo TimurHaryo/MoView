@@ -9,6 +9,7 @@ import com.timtam.home.databinding.ItemHomeSectionPlayingBinding
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingAdapter
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
 import com.timtam.uikit.extension.detachFromAdapter
+import com.timtam.uikit.extension.hasActiveAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.resourceful.AttachableResource
 import com.timtam.uikit.recyclerview.resourceful.DetachableResource
@@ -38,19 +39,18 @@ class HomeNowPlayingViewHolder(
     }
 
     fun bind() = with(binding) {
-        rvHomePlaying.preAttach {
-            movieAdapter = MovieNowPlayingAdapter().apply {
-                setListener(listener)
-            }
-            adapter = movieAdapter
-        }
+        setupRecyclerView()
 
         tvHomePlayingSeeAll.setOnClickListener { listener?.onMoreClick() }
     }
 
-    fun showMovie(data: List<MovieSnipsNowPlayingItem>) {
+    fun showMovie(data: List<MovieSnipsNowPlayingItem>) = with(binding.rvHomePlaying) {
         movies.clear()
         movies.addAll(data)
+
+        if (!hasActiveAdapter) {
+            setupRecyclerView()
+        }
 
         movieAdapter?.submitList(movies)
     }
@@ -61,6 +61,15 @@ class HomeNowPlayingViewHolder(
 
     fun showEmptyMovie() {
         e { "NOW PLAYING ITEM EMPTY" }
+    }
+
+    private fun setupRecyclerView() = with(binding.rvHomePlaying) {
+        preAttach {
+            movieAdapter = MovieNowPlayingAdapter().apply {
+                setListener(listener)
+            }
+            adapter = movieAdapter
+        }
     }
 
     companion object {
