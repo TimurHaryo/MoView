@@ -130,8 +130,6 @@ class HomeFragment :
         }
 
         observeLiveData(viewModel.movieSnipsNowPlaying) { movies ->
-            i { "TIMUR now playing movies title: ${movies.map { it.title }}" }
-            i { "TIMUR now playing movies genres: ${movies.map { it.genreGroup }}" }
             homeAdapter?.enqueueAdapterPayload(
                 HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
                 HomeMovieNowPlayingPayload.ShowData(movies)
