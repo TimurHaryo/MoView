@@ -11,11 +11,11 @@ import com.timtam.uikit.recyclerview.resourceful.DetachableResource
 
 class GenreAdapter :
     BaseListAdapter<GenreHomeItem, GenreItemViewHolder>(DIFFER),
-    AttachableResource<GenreListener>,
+    AttachableResource<MovieGenreListener>,
     DetachableResource,
     RecyclerHolderCacheable by RecyclerHolderCaching() {
 
-    private var listener: GenreListener? = null
+    private var listener: MovieGenreListener? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,7 +27,7 @@ class GenreAdapter :
         bind(getItem(position))
     }
 
-    override fun setListener(resource: GenreListener?) {
+    override fun setListener(resource: MovieGenreListener?) {
         this.listener = resource
     }
 

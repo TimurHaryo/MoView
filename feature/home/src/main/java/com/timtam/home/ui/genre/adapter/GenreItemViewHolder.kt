@@ -15,12 +15,12 @@ class GenreItemViewHolder(
     private val binding: ItemHomeGenreBinding
 ) :
     RecyclerView.ViewHolder(binding.root),
-    AttachableResource<GenreListener>,
+    AttachableResource<MovieGenreListener>,
     DetachableResource {
 
-    private var listener: GenreListener? = null
+    private var listener: MovieGenreListener? = null
 
-    override fun setListener(resource: GenreListener?) {
+    override fun setListener(resource: MovieGenreListener?) {
         this.listener = resource
     }
 

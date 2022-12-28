@@ -8,7 +8,7 @@ import com.timtam.common_android.extension.e
 import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.home.databinding.ItemHomeSectionGenreBinding
 import com.timtam.home.ui.genre.adapter.GenreAdapter
-import com.timtam.home.ui.genre.adapter.GenreListener
+import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.decoration.AdaptiveSpacingItemDecoration
@@ -20,16 +20,16 @@ class HomeGenreViewHolder(
     private val binding: ItemHomeSectionGenreBinding
 ) :
     RecyclerView.ViewHolder(binding.root),
-    AttachableResource<GenreListener>,
+    AttachableResource<MovieGenreListener>,
     DetachableResource {
 
-    private var listener: GenreListener? = null
+    private var listener: MovieGenreListener? = null
 
     private val genres: ArrayList<GenreHomeItem> = arrayListOf()
 
     private var genreAdapter: GenreAdapter? = null
 
-    override fun setListener(resource: GenreListener?) {
+    override fun setListener(resource: MovieGenreListener?) {
         this.listener = resource
     }
 

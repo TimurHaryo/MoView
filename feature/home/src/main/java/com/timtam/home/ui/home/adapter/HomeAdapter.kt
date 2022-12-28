@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.home.R
 import com.timtam.home.ui.genre.HomeGenreViewHolder
-import com.timtam.home.ui.genre.adapter.GenreListener
+import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.home.ui.genre.payload.HomeGenrePayload
 import com.timtam.home.ui.header.HomeHeaderViewHolder
 import com.timtam.home.ui.nowplaying.HomeNowPlayingViewHolder
@@ -26,7 +26,7 @@ class HomeAdapter :
     AdapterPayloadExecution<HomePayload> by AdapterPayloadExecutor(),
     RecyclerHolderCacheable by RecyclerHolderCaching() {
 
-    private var genreListener: GenreListener? = null
+    private var movieGenreListener: MovieGenreListener? = null
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -51,7 +51,7 @@ class HomeAdapter :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is HomeGenreViewHolder -> holder.run {
-                setListener(genreListener)
+                setListener(movieGenreListener)
                 bind()
             }
             else -> Unit
@@ -95,14 +95,14 @@ class HomeAdapter :
     }
 
     override fun releaseResource() {
-        genreListener = null
+        movieGenreListener = null
         executeToValidHolders(host) { holder ->
             if (holder is DetachableResource) holder.releaseResource()
         }
     }
 
-    fun registerListener(genreListener: GenreListener?) {
-        this.genreListener = genreListener
+    fun registerListener(movieGenreListener: MovieGenreListener?) {
+        this.movieGenreListener = movieGenreListener
     }
 
     companion object {
