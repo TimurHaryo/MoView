@@ -9,6 +9,8 @@ import com.timtam.home.ui.genre.HomeGenreViewHolder
 import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.home.ui.genre.payload.HomeGenrePayload
 import com.timtam.home.ui.header.HomeHeaderViewHolder
+import com.timtam.home.ui.header.listener.HomeHeaderListener
+import com.timtam.home.ui.header.payload.HomeHeaderPayload
 import com.timtam.home.ui.home.adapter.payload.HomePayload
 import com.timtam.home.ui.nowplaying.HomeNowPlayingViewHolder
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
@@ -30,6 +32,7 @@ class HomeAdapter :
     AdapterPayloadExecution<HomePayload> by AdapterPayloadExecutor(),
     RecyclerHolderCacheable by RecyclerHolderCaching() {
 
+    private var homeHeaderListener: HomeHeaderListener? = null
     private var movieGenreListener: MovieGenreListener? = null
     private var movieNowPlayingListener: MovieNowPlayingListener? = null
     private var movieTopRatedListener: MovieTopRatedListener? = null
@@ -56,6 +59,10 @@ class HomeAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
+            is HomeHeaderViewHolder -> with(holder) {
+                setListener(homeHeaderListener)
+                bind()
+            }
             is HomeGenreViewHolder -> with(holder) {
                 setListener(movieGenreListener)
                 bind()
@@ -77,6 +84,18 @@ class HomeAdapter :
         position: Int,
         payloads: MutableList<Any>
     ) {
+        payloadByType<HomeHeaderPayload>(
+            payloads = payloads,
+            emptyPayload = { onBindViewHolder(holder, position) },
+            onPayload = { payload ->
+                when (payload) {
+                    is HomeHeaderPayload.ShowMantra -> {
+                        (holder as? HomeHeaderViewHolder)?.showMantra(payload.mantra)
+                    }
+                }
+            }
+        )
+
         payloadByType<HomeGenrePayload>(
             payloads = payloads,
             emptyPayload = { onBindViewHolder(holder, position) },
@@ -145,6 +164,7 @@ class HomeAdapter :
     }
 
     override fun releaseResource() {
+        homeHeaderListener = null
         movieGenreListener = null
         movieNowPlayingListener = null
         movieTopRatedListener = null
@@ -154,10 +174,12 @@ class HomeAdapter :
     }
 
     fun registerListener(
+        homeHeaderListener: HomeHeaderListener?,
         movieGenreListener: MovieGenreListener?,
         movieNowPlayingListener: MovieNowPlayingListener?,
         movieTopRatedListener: MovieTopRatedListener?
     ) {
+        this.homeHeaderListener = homeHeaderListener
         this.movieGenreListener = movieGenreListener
         this.movieNowPlayingListener = movieNowPlayingListener
         this.movieTopRatedListener = movieTopRatedListener

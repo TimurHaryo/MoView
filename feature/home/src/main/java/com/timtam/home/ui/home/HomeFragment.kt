@@ -18,6 +18,7 @@ import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.type.HomeViewType
 import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.home.ui.genre.payload.HomeGenrePayload
+import com.timtam.home.ui.header.listener.HomeHeaderListener
 import com.timtam.home.ui.home.adapter.HomeAdapter
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
 import com.timtam.home.ui.nowplaying.payload.HomeMovieNowPlayingPayload
@@ -38,6 +39,18 @@ class HomeFragment :
     private val viewModel: HomeViewModel by viewModels()
 
     private var homeAdapter: HomeAdapter? = null
+
+    private val homeHeaderListener by viewLifecycleLazy {
+        object : HomeHeaderListener {
+            override fun onArrangeClick() {
+                toast { "OPEN ARRANGE" }
+            }
+
+            override fun onSearchBoxClick() {
+                toast { "OPEN SEARCH" }
+            }
+        }
+    }
 
     private val movieGenreListener by viewLifecycleLazy {
         object : MovieGenreListener {
@@ -80,6 +93,7 @@ class HomeFragment :
             .withRecyclerView(binding.rvHomeContent.weaken())
             .withListener {
                 registerListener(
+                    homeHeaderListener = homeHeaderListener,
                     movieGenreListener = movieGenreListener,
                     movieNowPlayingListener = movieNowPlayingListener,
                     movieTopRatedListener = movieTopRatedListener
