@@ -114,6 +114,7 @@ class HomeFragment :
         viewModel.fetchMovieGenres(HOME_MOVIE_GENRE_LIMIT) {
             viewModel.fetchSnipsNowPlaying(it, HOME_MOVIE_NOW_PLAYING_LIMIT)
         }
+        viewModel.fetchSnipsTopRated(HOME_MOVIE_TOP_RATED_LIMIT)
     }
 
     private fun setupDataObserver() {
@@ -129,11 +130,19 @@ class HomeFragment :
             i { "TIMUR now playing loading: $isLoading" }
         }
 
+        observeLiveData(viewModel.snipsTopRatedLoading) { isLoading ->
+            i { "TIMUR top rated loading: $isLoading" }
+        }
+
         observeLiveData(viewModel.movieSnipsNowPlaying) { movies ->
             homeAdapter?.enqueueAdapterPayload(
                 HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
                 HomeMovieNowPlayingPayload.ShowData(movies)
             )
+        }
+
+        observeLiveData(viewModel.movieSnipsTopRated) { movies ->
+            i { "TIMUR top rated data: $movies" }
         }
 
         observeLiveData(viewModel.movieGenres) { genres ->
@@ -202,6 +211,7 @@ class HomeFragment :
 
     companion object {
         private const val HOME_MOVIE_NOW_PLAYING_LIMIT = 5
+        private const val HOME_MOVIE_TOP_RATED_LIMIT = 5
         private const val HOME_MOVIE_GENRE_LIMIT = 6
     }
 }

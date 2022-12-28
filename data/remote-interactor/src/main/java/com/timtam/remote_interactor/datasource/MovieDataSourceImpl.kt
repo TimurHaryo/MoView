@@ -17,6 +17,10 @@ class MovieDataSourceImpl @Inject constructor(
         movieApi.getNowPlaying(page)
     }
 
+    override suspend fun getTopRated(page: Int): Either<Failure, MovieListDTO?> = request {
+        movieApi.getTopRated(page)
+    }
+
     override suspend fun getMovieGenres(): Either<Failure, GenreListDTO?> = request {
         movieApi.getMovieGenres()
     }

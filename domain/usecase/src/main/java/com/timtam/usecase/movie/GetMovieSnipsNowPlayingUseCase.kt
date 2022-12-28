@@ -11,7 +11,7 @@ import com.timtam.wrapper.model.MovieModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
     operator fun invoke(genres: List<GenreHomeItem>, limit: Int): Flow<MovieSnipsNowPlayingState> =
         merge(
             flow { emit(MovieSnipsNowPlayingState.Loading) },
-            movieRepository.getNowPlaying(1, limit).mapNotNull { resource ->
+            movieRepository.getNowPlaying(1, limit).map { resource ->
                 when (resource) {
                     is DomainLocalResource.Error -> MovieSnipsNowPlayingState.Error(resource.error)
                     is DomainLocalResource.Success -> MovieSnipsNowPlayingState.Success(
@@ -34,7 +34,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
                         )
                     )
                     is DomainLocalResource.SuccessUpdateData -> {
-                        if (resource.data.isEmpty()) return@mapNotNull MovieSnipsNowPlayingState.Empty
+                        if (resource.data.isEmpty()) return@map MovieSnipsNowPlayingState.Empty
 
                         MovieSnipsNowPlayingState.Success(
                             customizedItem(

@@ -11,6 +11,9 @@ interface MovieApi {
     @GET("movie/now_playing")
     suspend fun getNowPlaying(@Query("page") page: Int): Response<MovieListDTO>
 
+    @GET("movie/top_rated")
+    suspend fun getTopRated(@Query("page") page: Int): Response<MovieListDTO>
+
     @GET("genre/movie/list")
     suspend fun getMovieGenres(): Response<GenreListDTO>
 }

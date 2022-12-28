@@ -9,5 +9,7 @@ interface MovieDataSource {
 
     suspend fun getNowPlaying(page: Int): Either<Failure, MovieListDTO?>
 
+    suspend fun getTopRated(page: Int): Either<Failure, MovieListDTO?>
+
     suspend fun getMovieGenres(): Either<Failure, GenreListDTO?>
 }

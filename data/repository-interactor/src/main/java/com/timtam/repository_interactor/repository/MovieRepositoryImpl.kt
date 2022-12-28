@@ -46,6 +46,26 @@ class MovieRepositoryImpl @Inject constructor(
             }
         )
 
+    override fun getTopRated(page: Int, limit: Int): Flow<DomainLocalResource<List<MovieModel>>> =
+        requestDataFromCache(
+            remoteRequest = { remoteMovieDataSource.getTopRated(page) },
+            mapper = movieMapper,
+            localRequest = cachedMovieDataSource.getMovieSnips(limit, MovieStatusType.TOP_RATED)
+                .map {
+                    MovieListDTO(movies = it)
+                },
+            saveToLocal = {
+                cachedMovieDataSource.insertAll(
+                    it.movies
+                        .orEmpty()
+                        .filterNotNull()
+                        .onEach { movie ->
+                            movie.type = MovieStatusType.TOP_RATED
+                        }
+                )
+            }
+        )
+
     override fun getGenres(): Flow<DomainLocalResource<List<GenreModel>>> =
         requestDataFromCache(
             remoteRequest = { remoteMovieDataSource.getMovieGenres() },

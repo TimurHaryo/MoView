@@ -9,11 +9,14 @@ import com.timtam.feature_helper.delegation.DisplayableErrorDelegateImpl
 import com.timtam.feature_helper.type.ErrorDisplayType
 import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
+import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
 import com.timtam.home.type.HomeViewType
 import com.timtam.usecase.genre.GetMovieSnipsGenreUseCase
 import com.timtam.usecase.genre.state.GenreState
 import com.timtam.usecase.movie.GetMovieSnipsNowPlayingUseCase
+import com.timtam.usecase.movie.GetMovieSnipsTopRatedUseCase
 import com.timtam.usecase.movie.state.MovieSnipsNowPlayingState
+import com.timtam.usecase.movie.state.MovieSnipsTopRatedState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,6 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getMovieSnipsNowPlaying: GetMovieSnipsNowPlayingUseCase,
+    private val getMovieSnipsTopRated: GetMovieSnipsTopRatedUseCase,
     private val getMovieSnipsGenre: GetMovieSnipsGenreUseCase
 ) :
     ViewModel(),
@@ -32,8 +36,14 @@ class HomeViewModel @Inject constructor(
     private val _snipsNowPlayingLoading = MutableLiveData<Boolean>()
     val snipsNowPlayingLoading: LiveData<Boolean> get() = _snipsNowPlayingLoading
 
+    private val _snipsTopRatedLoading = MutableLiveData<Boolean>()
+    val snipsTopRatedLoading: LiveData<Boolean> get() = _snipsTopRatedLoading
+
     private val _movieSnipsNowPlaying = MutableLiveData<List<MovieSnipsNowPlayingItem>>()
     val movieSnipsNowPlaying: LiveData<List<MovieSnipsNowPlayingItem>> get() = _movieSnipsNowPlaying
+
+    private val _movieSnipsTopRated = MutableLiveData<List<MovieSnipsTopRatedItem>>()
+    val movieSnipsTopRated: LiveData<List<MovieSnipsTopRatedItem>> get() = _movieSnipsTopRated
 
     private val _movieGenres = MutableLiveData<List<GenreHomeItem>>()
     val movieGenres: LiveData<List<GenreHomeItem>> get() = _movieGenres
@@ -91,6 +101,36 @@ class HomeViewModel @Inject constructor(
                 is MovieSnipsNowPlayingState.Success -> {
                     _snipsNowPlayingLoading.value = false
                     _movieSnipsNowPlaying.value = state.data
+                }
+            }
+        }
+    }
+
+    fun fetchSnipsTopRated(limit: Int) = viewModelScope.launch {
+        getMovieSnipsTopRated(limit).collect { state ->
+            when (state) {
+                is MovieSnipsTopRatedState.Empty -> {
+                    _snipsTopRatedLoading.value = false
+                    displayError(viewModelScope) {
+                        ErrorDisplayType.EmptyUi(HomeViewType.TOP_RATED)
+                    }
+                }
+                is MovieSnipsTopRatedState.Error -> {
+                    _snipsTopRatedLoading.value = false
+                    displayError(viewModelScope) {
+                        if (_movieSnipsTopRated.value.isNullOrEmpty()) {
+                            ErrorDisplayType.ErrorUi(HomeViewType.TOP_RATED)
+                        } else {
+                            ErrorDisplayType.KeepData(state.error.message)
+                        }
+                    }
+                }
+                is MovieSnipsTopRatedState.Loading -> {
+                    _snipsTopRatedLoading.value = true
+                }
+                is MovieSnipsTopRatedState.Success -> {
+                    _snipsTopRatedLoading.value = false
+                    _movieSnipsTopRated.value = state.data
                 }
             }
         }

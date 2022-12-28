@@ -9,5 +9,7 @@ interface MovieRepository {
 
     fun getNowPlaying(page: Int, limit: Int): Flow<DomainLocalResource<List<MovieModel>>>
 
+    fun getTopRated(page: Int, limit: Int): Flow<DomainLocalResource<List<MovieModel>>>
+
     fun getGenres(): Flow<DomainLocalResource<List<GenreModel>>>
 }
