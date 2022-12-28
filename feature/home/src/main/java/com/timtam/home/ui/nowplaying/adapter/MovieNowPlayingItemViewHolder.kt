@@ -47,7 +47,7 @@ class MovieNowPlayingItemViewHolder(
     }
 
     companion object {
-        private const val BACKDROP_RADIUS = 12
+        private const val BACKDROP_RADIUS = 8
 
         fun create(parent: ViewGroup) = MovieNowPlayingItemViewHolder(
             ItemHomeNowPlayingBinding.inflate(

@@ -48,6 +48,6 @@ class GetMovieSnipsTopRatedUseCase @Inject constructor(
 
     private fun customizedItem(data: List<MovieModel>, limit: Int) =
         data.map { it.mapToPresentationItem() }
-            .sortedBy { it.id }
+            .sortedByDescending { it.rating }
             .take(limit)
 }

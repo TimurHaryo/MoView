@@ -14,6 +14,8 @@ import com.timtam.home.ui.nowplaying.HomeNowPlayingViewHolder
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
 import com.timtam.home.ui.nowplaying.payload.HomeMovieNowPlayingPayload
 import com.timtam.home.ui.toprated.HomeTopRatedViewHolder
+import com.timtam.home.ui.toprated.adapter.MovieTopRatedListener
+import com.timtam.home.ui.toprated.payload.HomeMovieTopRatedPayload
 import com.timtam.uikit.extension.payloadByType
 import com.timtam.uikit.recyclerview.base.BaseListAdapter
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCacheable
@@ -30,6 +32,7 @@ class HomeAdapter :
 
     private var movieGenreListener: MovieGenreListener? = null
     private var movieNowPlayingListener: MovieNowPlayingListener? = null
+    private var movieTopRatedListener: MovieTopRatedListener? = null
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -59,6 +62,10 @@ class HomeAdapter :
             }
             is HomeNowPlayingViewHolder -> with(holder) {
                 setListener(movieNowPlayingListener)
+                bind()
+            }
+            is HomeTopRatedViewHolder -> with(holder) {
+                setListener(movieTopRatedListener)
                 bind()
             }
             else -> Unit
@@ -102,6 +109,24 @@ class HomeAdapter :
                 }
             }
         )
+
+        payloadByType<HomeMovieTopRatedPayload>(
+            payloads = payloads,
+            emptyPayload = { onBindViewHolder(holder, position) },
+            onPayload = { payload ->
+                when (payload) {
+                    is HomeMovieTopRatedPayload.ShowData -> {
+                        (holder as? HomeTopRatedViewHolder)?.showMovie(payload.movies)
+                    }
+                    is HomeMovieTopRatedPayload.ShowEmpty -> {
+                        (holder as? HomeTopRatedViewHolder)?.showEmptyMovie()
+                    }
+                    is HomeMovieTopRatedPayload.ShowError -> {
+                        (holder as? HomeTopRatedViewHolder)?.showErrorMovie()
+                    }
+                }
+            }
+        )
     }
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
@@ -122,6 +147,7 @@ class HomeAdapter :
     override fun releaseResource() {
         movieGenreListener = null
         movieNowPlayingListener = null
+        movieTopRatedListener = null
         executeToValidHolders(host) { holder ->
             if (holder is DetachableResource) holder.releaseResource()
         }
@@ -129,10 +155,12 @@ class HomeAdapter :
 
     fun registerListener(
         movieGenreListener: MovieGenreListener?,
-        movieNowPlayingListener: MovieNowPlayingListener?
+        movieNowPlayingListener: MovieNowPlayingListener?,
+        movieTopRatedListener: MovieTopRatedListener?
     ) {
         this.movieGenreListener = movieGenreListener
         this.movieNowPlayingListener = movieNowPlayingListener
+        this.movieTopRatedListener = movieTopRatedListener
     }
 
     companion object {

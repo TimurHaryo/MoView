@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import com.timtam.common_android.abstraction.LifecycleFragment
 import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
-import com.timtam.common_android.extension.e
 import com.timtam.common_android.extension.i
 import com.timtam.common_android.extension.toast
 import com.timtam.common_android.extension.viewLifecycleLazy
@@ -22,6 +21,8 @@ import com.timtam.home.ui.genre.payload.HomeGenrePayload
 import com.timtam.home.ui.home.adapter.HomeAdapter
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
 import com.timtam.home.ui.nowplaying.payload.HomeMovieNowPlayingPayload
+import com.timtam.home.ui.toprated.adapter.MovieTopRatedListener
+import com.timtam.home.ui.toprated.payload.HomeMovieTopRatedPayload
 import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.gone
 import com.timtam.uikit.extension.visible
@@ -62,13 +63,26 @@ class HomeFragment :
         }
     }
 
+    private val movieTopRatedListener by viewLifecycleLazy {
+        object : MovieTopRatedListener {
+            override fun onMoreClick() {
+                toast { "TOP RATED MORE CLICKED" }
+            }
+
+            override fun onMovieClick(movieId: Int) {
+                toast { "TOP RATED ID => $movieId" }
+            }
+        }
+    }
+
     private val recyclerViewInitiator by lazy {
         RecyclerViewInitiator.Builder<HomeAdapter>()
             .withRecyclerView(binding.rvHomeContent.weaken())
             .withListener {
                 registerListener(
                     movieGenreListener = movieGenreListener,
-                    movieNowPlayingListener = movieNowPlayingListener
+                    movieNowPlayingListener = movieNowPlayingListener,
+                    movieTopRatedListener = movieTopRatedListener
                 )
             }
             .withAdapter {
@@ -142,7 +156,10 @@ class HomeFragment :
         }
 
         observeLiveData(viewModel.movieSnipsTopRated) { movies ->
-            i { "TIMUR top rated data: $movies" }
+            homeAdapter?.enqueueAdapterPayload(
+                HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
+                HomeMovieTopRatedPayload.ShowData(movies)
+            )
         }
 
         observeLiveData(viewModel.movieGenres) { genres ->
@@ -173,7 +190,12 @@ class HomeFragment :
                                 HomeMovieNowPlayingPayload.ShowError
                             )
                         }
-                        HomeViewType.TOP_RATED -> e { "SHOW TOP_RATED ERROR UI" }
+                        HomeViewType.TOP_RATED -> {
+                            homeAdapter?.enqueueAdapterPayload(
+                                HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
+                                HomeMovieTopRatedPayload.ShowError
+                            )
+                        }
                         else -> Unit
                     }
                 },
@@ -185,7 +207,12 @@ class HomeFragment :
                                 HomeMovieNowPlayingPayload.ShowEmpty
                             )
                         }
-                        HomeViewType.TOP_RATED -> e { "SHOW TOP_RATED EMPTY UI" }
+                        HomeViewType.TOP_RATED -> {
+                            homeAdapter?.enqueueAdapterPayload(
+                                HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
+                                HomeMovieTopRatedPayload.ShowEmpty
+                            )
+                        }
                         else -> Unit
                     }
                 }
