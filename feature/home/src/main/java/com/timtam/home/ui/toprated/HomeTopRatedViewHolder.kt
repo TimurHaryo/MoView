@@ -10,8 +10,8 @@ import com.timtam.home.databinding.ItemHomeSectionTopRatedBinding
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedAdapter
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedListener
 import com.timtam.uikit.extension.preAttach
-import com.timtam.uikit.recyclerview.resourceful.AttachableResource
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AttachableResource
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 
 class HomeTopRatedViewHolder(
     private val binding: ItemHomeSectionTopRatedBinding

@@ -8,8 +8,8 @@ import com.timtam.home.databinding.ItemHomeGenreBinding
 import com.timtam.home.util.GenreImageGenerator.findDrawableIdByTag
 import com.timtam.uikit.extension.context
 import com.timtam.uikit.extension.loadImage
-import com.timtam.uikit.recyclerview.resourceful.AttachableResource
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AttachableResource
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 
 class GenreItemViewHolder(
     private val binding: ItemHomeGenreBinding

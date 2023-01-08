@@ -11,8 +11,8 @@ import com.timtam.home.ui.genre.adapter.GenreAdapter
 import com.timtam.home.ui.genre.adapter.MovieGenreListener
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.decoration.AdaptiveSpacingItemDecoration
-import com.timtam.uikit.recyclerview.resourceful.AttachableResource
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AttachableResource
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 import com.timtam.uikit.R as uikitR
 
 class HomeGenreViewHolder(

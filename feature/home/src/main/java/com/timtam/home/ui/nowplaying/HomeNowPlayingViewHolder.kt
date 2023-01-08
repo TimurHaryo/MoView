@@ -9,8 +9,8 @@ import com.timtam.home.databinding.ItemHomeSectionPlayingBinding
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingAdapter
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
 import com.timtam.uikit.extension.preAttach
-import com.timtam.uikit.recyclerview.resourceful.AttachableResource
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AttachableResource
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 
 class HomeNowPlayingViewHolder(
     private val binding: ItemHomeSectionPlayingBinding

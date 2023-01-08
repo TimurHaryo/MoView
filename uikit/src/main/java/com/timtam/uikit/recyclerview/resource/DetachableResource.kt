@@ -1,4 +1,4 @@
-package com.timtam.uikit.recyclerview.resourceful
+package com.timtam.uikit.recyclerview.resource
 
 interface DetachableResource {
     fun releaseResource()

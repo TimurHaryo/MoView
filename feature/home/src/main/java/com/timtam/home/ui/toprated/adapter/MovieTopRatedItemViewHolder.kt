@@ -9,8 +9,8 @@ import com.timtam.home.databinding.ItemHomeTopRatedBinding
 import com.timtam.uikit.extension.context
 import com.timtam.uikit.extension.dpToPx
 import com.timtam.uikit.extension.loadImageWithRadius
-import com.timtam.uikit.recyclerview.resourceful.AttachableResource
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AttachableResource
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 import kotlin.math.roundToInt
 
 class MovieTopRatedItemViewHolder(

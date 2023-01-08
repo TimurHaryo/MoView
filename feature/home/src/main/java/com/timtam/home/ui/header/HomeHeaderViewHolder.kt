@@ -7,8 +7,8 @@ import com.timtam.common_android.extension.greeting
 import com.timtam.home.databinding.ItemHomeSectionHeaderBinding
 import com.timtam.home.ui.header.listener.HomeHeaderListener
 import com.timtam.uikit.extension.context
-import com.timtam.uikit.recyclerview.resourceful.AttachableResource
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AttachableResource
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 
 class HomeHeaderViewHolder(
     private val binding: ItemHomeSectionHeaderBinding

@@ -6,8 +6,8 @@ import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.uikit.recyclerview.base.BaseListAdapter
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCacheable
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCaching
-import com.timtam.uikit.recyclerview.resourceful.AttachableResource
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AttachableResource
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 
 class GenreAdapter :
     BaseListAdapter<GenreHomeItem, GenreItemViewHolder>(DIFFER),

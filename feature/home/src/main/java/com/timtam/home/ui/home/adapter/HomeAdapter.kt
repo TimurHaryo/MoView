@@ -27,8 +27,8 @@ import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCacheable
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCaching
 import com.timtam.uikit.recyclerview.payloadcontrol.AdapterPayloadDelegate
 import com.timtam.uikit.recyclerview.payloadcontrol.AdapterPayloadDelegateImpl
-import com.timtam.uikit.recyclerview.resourceful.AdapterArgument
-import com.timtam.uikit.recyclerview.resourceful.DetachableResource
+import com.timtam.uikit.recyclerview.resource.AdapterArgument
+import com.timtam.uikit.recyclerview.resource.DetachableResource
 
 class HomeAdapter :
     BaseListAdapter<HomeViewType, RecyclerView.ViewHolder>(DIFFER),
