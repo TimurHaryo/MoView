@@ -3,9 +3,6 @@ package com.timtam.home.ui.home.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.timtam.feature_item.genre.GenreHomeItem
-import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
-import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
 import com.timtam.home.R
 import com.timtam.home.type.HomeViewType
 import com.timtam.home.ui.genre.HomeGenreViewHolder
@@ -14,6 +11,7 @@ import com.timtam.home.ui.genre.payload.HomeGenrePayload
 import com.timtam.home.ui.header.HomeHeaderViewHolder
 import com.timtam.home.ui.header.listener.HomeHeaderListener
 import com.timtam.home.ui.header.payload.HomeHeaderPayload
+import com.timtam.home.ui.home.adapter.argument.HomeAdapterArg
 import com.timtam.home.ui.home.adapter.payload.HomePayload
 import com.timtam.home.ui.nowplaying.HomeNowPlayingViewHolder
 import com.timtam.home.ui.nowplaying.listener.MovieNowPlayingListener
@@ -32,12 +30,12 @@ import com.timtam.uikit.recyclerview.resource.DetachableResource
 
 class HomeAdapter :
     BaseListAdapter<HomeViewType, RecyclerView.ViewHolder>(DIFFER),
-    AdapterArgument<HomeAdapter.Arg>,
+    AdapterArgument<HomeAdapterArg>,
     DetachableResource,
     AdapterPayloadDelegate<HomePayload> by AdapterPayloadDelegateImpl(),
     RecyclerHolderCacheable by RecyclerHolderCaching() {
 
-    override var argument: Arg = Arg()
+    override var argument: HomeAdapterArg = HomeAdapterArg()
 
     private var homeHeaderListener: HomeHeaderListener? = null
     private var movieGenreListener: MovieGenreListener? = null
@@ -188,12 +186,6 @@ class HomeAdapter :
         this.movieNowPlayingListener = movieNowPlayingListener
         this.movieTopRatedListener = movieTopRatedListener
     }
-
-    data class Arg(
-        var genreArgs: List<GenreHomeItem> = emptyList(),
-        var nowPlayingArgs: List<MovieSnipsNowPlayingItem> = emptyList(),
-        var topRatedArgs: List<MovieSnipsTopRatedItem> = emptyList()
-    )
 
     companion object {
         private val DIFFER = object : DiffUtil.ItemCallback<HomeViewType>() {
