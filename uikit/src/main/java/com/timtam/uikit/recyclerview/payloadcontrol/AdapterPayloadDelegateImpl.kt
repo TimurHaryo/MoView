@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-class AdapterPayloadExecutor<Payload> : AdapterPayloadExecution<Payload> {
+class AdapterPayloadDelegateImpl<Payload> : AdapterPayloadDelegate<Payload> {
     private val pendingPayload: MutableSet<Pair<Int, Payload>> = mutableSetOf()
 
     override var recyclerHost: RecyclerView? = null
@@ -43,8 +43,10 @@ class AdapterPayloadExecutor<Payload> : AdapterPayloadExecution<Payload> {
     override fun enqueueAdapterPayload(
         targetPosition: Int,
         payload: Payload,
-        useMainThread: Boolean
+        useMainThread: Boolean,
+        also: ((Payload) -> Unit)?
     ) {
+        also?.invoke(payload)
         if (targetPosition !in firstVisibleHolder..lastVisibleHolder) {
             pendingPayload.add(targetPosition to payload)
             return

@@ -3,6 +3,9 @@ package com.timtam.home.ui.home.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.timtam.feature_item.genre.GenreHomeItem
+import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
+import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
 import com.timtam.home.R
 import com.timtam.home.type.HomeViewType
 import com.timtam.home.ui.genre.HomeGenreViewHolder
@@ -22,15 +25,19 @@ import com.timtam.uikit.extension.payloadByType
 import com.timtam.uikit.recyclerview.base.BaseListAdapter
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCacheable
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCaching
-import com.timtam.uikit.recyclerview.payloadcontrol.AdapterPayloadExecution
-import com.timtam.uikit.recyclerview.payloadcontrol.AdapterPayloadExecutor
+import com.timtam.uikit.recyclerview.payloadcontrol.AdapterPayloadDelegate
+import com.timtam.uikit.recyclerview.payloadcontrol.AdapterPayloadDelegateImpl
+import com.timtam.uikit.recyclerview.resourceful.AdapterArgument
 import com.timtam.uikit.recyclerview.resourceful.DetachableResource
 
 class HomeAdapter :
     BaseListAdapter<HomeViewType, RecyclerView.ViewHolder>(DIFFER),
+    AdapterArgument<HomeAdapter.Arg>,
     DetachableResource,
-    AdapterPayloadExecution<HomePayload> by AdapterPayloadExecutor(),
+    AdapterPayloadDelegate<HomePayload> by AdapterPayloadDelegateImpl(),
     RecyclerHolderCacheable by RecyclerHolderCaching() {
+
+    override var argument: Arg = Arg()
 
     private var homeHeaderListener: HomeHeaderListener? = null
     private var movieGenreListener: MovieGenreListener? = null
@@ -58,6 +65,7 @@ class HomeAdapter :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        addValidHolderPosition(position)
         when (holder) {
             is HomeHeaderViewHolder -> with(holder) {
                 setListener(homeHeaderListener)
@@ -65,15 +73,15 @@ class HomeAdapter :
             }
             is HomeGenreViewHolder -> with(holder) {
                 setListener(movieGenreListener)
-                bind()
+                bind(argument.genreArgs)
             }
             is HomeNowPlayingViewHolder -> with(holder) {
                 setListener(movieNowPlayingListener)
-                bind()
+                bind(argument.nowPlayingArgs)
             }
             is HomeTopRatedViewHolder -> with(holder) {
                 setListener(movieTopRatedListener)
-                bind()
+                bind(argument.topRatedArgs)
             }
             else -> Unit
         }
@@ -84,13 +92,18 @@ class HomeAdapter :
         position: Int,
         payloads: MutableList<Any>
     ) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+            return
+        }
+
         payloadByType<HomeHeaderPayload>(
             payloads = payloads,
-            emptyPayload = { onBindViewHolder(holder, position) },
             onPayload = { payload ->
-                when (payload) {
-                    is HomeHeaderPayload.ShowMantra -> {
-                        (holder as? HomeHeaderViewHolder)?.showMantra(payload.mantra)
+                (holder as? HomeHeaderViewHolder)?.apply {
+                    setListener(homeHeaderListener)
+                    when (payload) {
+                        is HomeHeaderPayload.ShowMantra -> showMantra(payload.mantra)
                     }
                 }
             }
@@ -98,14 +111,12 @@ class HomeAdapter :
 
         payloadByType<HomeGenrePayload>(
             payloads = payloads,
-            emptyPayload = { onBindViewHolder(holder, position) },
             onPayload = { payload ->
-                when (payload) {
-                    is HomeGenrePayload.ShowData -> {
-                        (holder as? HomeGenreViewHolder)?.showGenre(payload.genres)
-                    }
-                    is HomeGenrePayload.ShowError -> {
-                        (holder as? HomeGenreViewHolder)?.showErrorGenre()
+                (holder as? HomeGenreViewHolder)?.apply {
+                    setListener(movieGenreListener)
+                    when (payload) {
+                        is HomeGenrePayload.ShowData -> showGenre(payload.genres)
+                        is HomeGenrePayload.ShowError -> showErrorGenre()
                     }
                 }
             }
@@ -113,17 +124,13 @@ class HomeAdapter :
 
         payloadByType<HomeMovieNowPlayingPayload>(
             payloads = payloads,
-            emptyPayload = { onBindViewHolder(holder, position) },
             onPayload = { payload ->
-                when (payload) {
-                    is HomeMovieNowPlayingPayload.ShowData -> {
-                        (holder as? HomeNowPlayingViewHolder)?.showMovie(payload.movies)
-                    }
-                    is HomeMovieNowPlayingPayload.ShowEmpty -> {
-                        (holder as? HomeNowPlayingViewHolder)?.showEmptyMovie()
-                    }
-                    is HomeMovieNowPlayingPayload.ShowError -> {
-                        (holder as? HomeNowPlayingViewHolder)?.showErrorMovie()
+                (holder as? HomeNowPlayingViewHolder)?.apply {
+                    setListener(movieNowPlayingListener)
+                    when (payload) {
+                        is HomeMovieNowPlayingPayload.ShowData -> showMovie(payload.movies)
+                        is HomeMovieNowPlayingPayload.ShowEmpty -> showEmptyMovie()
+                        is HomeMovieNowPlayingPayload.ShowError -> showErrorMovie()
                     }
                 }
             }
@@ -131,17 +138,13 @@ class HomeAdapter :
 
         payloadByType<HomeMovieTopRatedPayload>(
             payloads = payloads,
-            emptyPayload = { onBindViewHolder(holder, position) },
             onPayload = { payload ->
-                when (payload) {
-                    is HomeMovieTopRatedPayload.ShowData -> {
-                        (holder as? HomeTopRatedViewHolder)?.showMovie(payload.movies)
-                    }
-                    is HomeMovieTopRatedPayload.ShowEmpty -> {
-                        (holder as? HomeTopRatedViewHolder)?.showEmptyMovie()
-                    }
-                    is HomeMovieTopRatedPayload.ShowError -> {
-                        (holder as? HomeTopRatedViewHolder)?.showErrorMovie()
+                (holder as? HomeTopRatedViewHolder)?.apply {
+                    setListener(movieTopRatedListener)
+                    when (payload) {
+                        is HomeMovieTopRatedPayload.ShowData -> showMovie(payload.movies)
+                        is HomeMovieTopRatedPayload.ShowEmpty -> showEmptyMovie()
+                        is HomeMovieTopRatedPayload.ShowError -> showErrorMovie()
                     }
                 }
             }
@@ -161,6 +164,11 @@ class HomeAdapter :
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
         cleanUp()
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        removeValidHolderPosition(holder.absoluteAdapterPosition)
     }
 
     override fun releaseResource() {
@@ -184,6 +192,12 @@ class HomeAdapter :
         this.movieNowPlayingListener = movieNowPlayingListener
         this.movieTopRatedListener = movieTopRatedListener
     }
+
+    data class Arg(
+        var genreArgs: List<GenreHomeItem> = emptyList(),
+        var nowPlayingArgs: List<MovieSnipsNowPlayingItem> = emptyList(),
+        var topRatedArgs: List<MovieSnipsTopRatedItem> = emptyList()
+    )
 
     companion object {
         private val DIFFER = object : DiffUtil.ItemCallback<HomeViewType>() {

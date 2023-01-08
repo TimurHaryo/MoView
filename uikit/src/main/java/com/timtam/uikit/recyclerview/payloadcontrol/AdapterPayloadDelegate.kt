@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
  *
  * [Payload] is any data which devs want to pass
  * */
-interface AdapterPayloadExecution<Payload> {
+interface AdapterPayloadDelegate<Payload> {
     var recyclerHost: RecyclerView?
 
     fun enqueueAdapterPayload(
         targetPosition: Int,
         payload: Payload,
-        useMainThread: Boolean = true
+        useMainThread: Boolean = true,
+        also: ((Payload) -> Unit)? = null
     )
 
     fun executePendingPayload(position: Int)

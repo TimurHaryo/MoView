@@ -16,12 +16,7 @@ fun RecyclerView.detachFromAdapter() {
 
 inline fun <reified Payload> payloadByType(
     payloads: MutableList<Any>,
-    emptyPayload: () -> Unit,
-    onPayload: (Payload) -> Unit
+    crossinline onPayload: (Payload) -> Unit
 ) {
-    if (payloads.isEmpty()) {
-        emptyPayload()
-        return
-    }
     payloads.filterIsInstance<Payload>().forEach { onPayload(it) }
 }

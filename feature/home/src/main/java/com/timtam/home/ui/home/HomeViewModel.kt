@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.timtam.feature_helper.delegation.DisplayableErrorDelegate
 import com.timtam.feature_helper.delegation.DisplayableErrorDelegateImpl
+import com.timtam.feature_helper.extension.LiveEvent
+import com.timtam.feature_helper.extension.MutableLiveEvent
+import com.timtam.feature_helper.extension.toEvent
 import com.timtam.feature_helper.type.ErrorDisplayType
 import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
@@ -39,25 +42,26 @@ class HomeViewModel @Inject constructor(
     private val _snipsTopRatedLoading = MutableLiveData<Boolean>()
     val snipsTopRatedLoading: LiveData<Boolean> get() = _snipsTopRatedLoading
 
-    private val _movieSnipsNowPlaying = MutableLiveData<List<MovieSnipsNowPlayingItem>>()
-    val movieSnipsNowPlaying: LiveData<List<MovieSnipsNowPlayingItem>> get() = _movieSnipsNowPlaying
+    private val _movieSnipsNowPlaying = MutableLiveEvent<List<MovieSnipsNowPlayingItem>>()
+    val movieSnipsNowPlaying: LiveEvent<List<MovieSnipsNowPlayingItem>> get() = _movieSnipsNowPlaying
 
-    private val _movieSnipsTopRated = MutableLiveData<List<MovieSnipsTopRatedItem>>()
-    val movieSnipsTopRated: LiveData<List<MovieSnipsTopRatedItem>> get() = _movieSnipsTopRated
+    private val _movieSnipsTopRated = MutableLiveEvent<List<MovieSnipsTopRatedItem>>()
+    val movieSnipsTopRated: LiveEvent<List<MovieSnipsTopRatedItem>> get() = _movieSnipsTopRated
 
-    private val _movieGenres = MutableLiveData<List<GenreHomeItem>>()
-    val movieGenres: LiveData<List<GenreHomeItem>> get() = _movieGenres
+    private val _movieGenres = MutableLiveEvent<List<GenreHomeItem>>()
+    val movieGenres: LiveEvent<List<GenreHomeItem>> get() = _movieGenres
 
-    fun fetchMovieGenres(
-        limit: Int,
-        doAfter: (List<GenreHomeItem>) -> Unit
-    ) = viewModelScope.launch {
+    private val isTopRatedEmpty get() = _movieSnipsTopRated.value?.peekContent().isNullOrEmpty()
+    private val isNowPlayingEmpty get() = _movieSnipsNowPlaying.value?.peekContent().isNullOrEmpty()
+    private val isGenreEmpty get() = _movieGenres.value?.peekContent().isNullOrEmpty()
+
+    fun fetchMovieGenres(limit: Int) = viewModelScope.launch {
         getMovieSnipsGenre().collect { state ->
             when (state) {
                 is GenreState.Error -> {
                     _mainLoading.value = false
                     displayError(viewModelScope) {
-                        if (_movieGenres.value.isNullOrEmpty()) {
+                        if (isGenreEmpty) {
                             ErrorDisplayType.ErrorUi(HomeViewType.GENRE)
                         } else {
                             ErrorDisplayType.KeepData(state.error.message)
@@ -69,8 +73,7 @@ class HomeViewModel @Inject constructor(
                 }
                 is GenreState.Success -> {
                     _mainLoading.value = false
-                    _movieGenres.value = state.data.take(limit)
-                    doAfter(state.data)
+                    _movieGenres.value = state.data.take(limit).toEvent()
                 }
             }
         }
@@ -88,7 +91,7 @@ class HomeViewModel @Inject constructor(
                 is MovieSnipsNowPlayingState.Error -> {
                     _snipsNowPlayingLoading.value = false
                     displayError(viewModelScope) {
-                        if (_movieSnipsNowPlaying.value.isNullOrEmpty()) {
+                        if (isNowPlayingEmpty) {
                             ErrorDisplayType.ErrorUi(HomeViewType.NOW_PLAYING)
                         } else {
                             ErrorDisplayType.KeepData(state.error.message)
@@ -100,7 +103,7 @@ class HomeViewModel @Inject constructor(
                 }
                 is MovieSnipsNowPlayingState.Success -> {
                     _snipsNowPlayingLoading.value = false
-                    _movieSnipsNowPlaying.value = state.data
+                    _movieSnipsNowPlaying.value = state.data.toEvent()
                 }
             }
         }
@@ -118,7 +121,7 @@ class HomeViewModel @Inject constructor(
                 is MovieSnipsTopRatedState.Error -> {
                     _snipsTopRatedLoading.value = false
                     displayError(viewModelScope) {
-                        if (_movieSnipsTopRated.value.isNullOrEmpty()) {
+                        if (isTopRatedEmpty) {
                             ErrorDisplayType.ErrorUi(HomeViewType.TOP_RATED)
                         } else {
                             ErrorDisplayType.KeepData(state.error.message)
@@ -130,7 +133,7 @@ class HomeViewModel @Inject constructor(
                 }
                 is MovieSnipsTopRatedState.Success -> {
                     _snipsTopRatedLoading.value = false
-                    _movieSnipsTopRated.value = state.data
+                    _movieSnipsTopRated.value = state.data.toEvent()
                 }
             }
         }

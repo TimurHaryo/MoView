@@ -9,8 +9,6 @@ import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.home.databinding.ItemHomeSectionGenreBinding
 import com.timtam.home.ui.genre.adapter.GenreAdapter
 import com.timtam.home.ui.genre.adapter.MovieGenreListener
-import com.timtam.uikit.extension.detachFromAdapter
-import com.timtam.uikit.extension.hasActiveAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.decoration.AdaptiveSpacingItemDecoration
 import com.timtam.uikit.recyclerview.resourceful.AttachableResource
@@ -26,8 +24,6 @@ class HomeGenreViewHolder(
 
     private var listener: MovieGenreListener? = null
 
-    private val genres: ArrayList<GenreHomeItem> = arrayListOf()
-
     private var genreAdapter: GenreAdapter? = null
 
     override fun setListener(resource: MovieGenreListener?) {
@@ -38,24 +34,18 @@ class HomeGenreViewHolder(
         genreAdapter?.releaseResource()
         genreAdapter = null
         listener = null
-        binding.rvHomeGenre.detachFromAdapter()
     }
 
-    fun bind() = with(binding) {
+    fun bind(data: List<GenreHomeItem>) = with(binding) {
         setupRecyclerView()
+        (rvHomeGenre.adapter as? GenreAdapter)?.submitList(data)
 
         tvHomeGenreSeeAll.setOnClickListener { listener?.onMoreClick() }
     }
 
     fun showGenre(data: List<GenreHomeItem>) = with(binding.rvHomeGenre) {
-        genres.clear()
-        genres.addAll(data)
-
-        if (!hasActiveAdapter) {
-            setupRecyclerView()
-        }
-
-        genreAdapter?.submitList(genres)
+        setupRecyclerView()
+        (adapter as? GenreAdapter)?.submitList(data)
     }
 
     fun showErrorGenre() {

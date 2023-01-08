@@ -138,9 +138,7 @@ class HomeFragment :
 
     override fun onHandleData() {
         super.onHandleData()
-        viewModel.fetchMovieGenres(HOME_MOVIE_GENRE_LIMIT) {
-            viewModel.fetchSnipsNowPlaying(it, HOME_MOVIE_NOW_PLAYING_LIMIT)
-        }
+        viewModel.fetchMovieGenres(HOME_MOVIE_GENRE_LIMIT)
         viewModel.fetchSnipsTopRated(HOME_MOVIE_TOP_RATED_LIMIT)
     }
 
@@ -160,30 +158,35 @@ class HomeFragment :
         observeLiveData(viewModel.snipsTopRatedLoading) { isLoading ->
             i { "TIMUR top rated loading: $isLoading" }
         }
+    }
 
-        observeLiveData(viewModel.movieSnipsNowPlaying) { movies ->
+    private fun setupEventObserver() {
+        observeLiveEvent(viewModel.movieSnipsNowPlaying) { movies ->
+            homeAdapter?.withArgument { nowPlayingArgs = movies }
             homeAdapter?.enqueueAdapterPayload(
                 HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
                 HomeMovieNowPlayingPayload.ShowData(movies)
             )
         }
 
-        observeLiveData(viewModel.movieSnipsTopRated) { movies ->
+        observeLiveEvent(viewModel.movieSnipsTopRated) { movies ->
+            homeAdapter?.withArgument { topRatedArgs = movies }
             homeAdapter?.enqueueAdapterPayload(
                 HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
                 HomeMovieTopRatedPayload.ShowData(movies)
             )
         }
 
-        observeLiveData(viewModel.movieGenres) { genres ->
+        observeLiveEvent(viewModel.movieGenres) { genres ->
+            viewModel.fetchSnipsNowPlaying(genres, HOME_MOVIE_NOW_PLAYING_LIMIT)
+
+            homeAdapter?.withArgument { genreArgs = genres }
             homeAdapter?.enqueueAdapterPayload(
                 HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
                 HomeGenrePayload.ShowData(genres)
             )
         }
-    }
 
-    private fun setupEventObserver() {
         observeLiveEvent(viewModel.errorType) { type ->
             type.inspect(
                 keepData = {

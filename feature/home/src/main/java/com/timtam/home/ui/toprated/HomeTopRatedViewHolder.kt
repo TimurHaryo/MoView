@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_android.extension.e
+import com.timtam.common_android.extension.i
 import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
 import com.timtam.home.databinding.ItemHomeSectionTopRatedBinding
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedAdapter
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedListener
-import com.timtam.uikit.extension.detachFromAdapter
-import com.timtam.uikit.extension.hasActiveAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.resourceful.AttachableResource
 import com.timtam.uikit.recyclerview.resourceful.DetachableResource
@@ -22,8 +21,6 @@ class HomeTopRatedViewHolder(
 
     private var listener: MovieTopRatedListener? = null
 
-    private val movies: ArrayList<MovieSnipsTopRatedItem> = arrayListOf()
-
     private var movieAdapter: MovieTopRatedAdapter? = null
 
     override fun setListener(resource: MovieTopRatedListener?) {
@@ -34,24 +31,20 @@ class HomeTopRatedViewHolder(
         movieAdapter?.releaseResource()
         movieAdapter = null
         listener = null
-        binding.rvHomeTopRated.detachFromAdapter()
     }
 
-    fun bind() = with(binding) {
+    fun bind(data: List<MovieSnipsTopRatedItem>) = with(binding) {
         setupRecyclerView()
+        i { "TIMUR bindTopRated" }
+        (rvHomeTopRated.adapter as? MovieTopRatedAdapter)?.submitList(data)
 
         tvHomeTopRatedSeeAll.setOnClickListener { listener?.onMoreClick() }
     }
 
     fun showMovie(data: List<MovieSnipsTopRatedItem>) = with(binding.rvHomeTopRated) {
-        movies.clear()
-        movies.addAll(data)
-
-        if (!hasActiveAdapter) {
-            setupRecyclerView()
-        }
-
-        movieAdapter?.submitList(movies)
+        setupRecyclerView()
+        i { "TIMUR showTopRated" }
+        (adapter as? MovieTopRatedAdapter)?.submitList(data)
     }
 
     fun showErrorMovie() {

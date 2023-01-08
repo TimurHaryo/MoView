@@ -8,8 +8,6 @@ import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
 import com.timtam.home.databinding.ItemHomeSectionPlayingBinding
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingAdapter
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
-import com.timtam.uikit.extension.detachFromAdapter
-import com.timtam.uikit.extension.hasActiveAdapter
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.resourceful.AttachableResource
 import com.timtam.uikit.recyclerview.resourceful.DetachableResource
@@ -23,8 +21,6 @@ class HomeNowPlayingViewHolder(
 
     private var listener: MovieNowPlayingListener? = null
 
-    private val movies: ArrayList<MovieSnipsNowPlayingItem> = arrayListOf()
-
     private var movieAdapter: MovieNowPlayingAdapter? = null
 
     override fun setListener(resource: MovieNowPlayingListener?) {
@@ -35,24 +31,18 @@ class HomeNowPlayingViewHolder(
         movieAdapter?.releaseResource()
         movieAdapter = null
         listener = null
-        binding.rvHomePlaying.detachFromAdapter()
     }
 
-    fun bind() = with(binding) {
+    fun bind(data: List<MovieSnipsNowPlayingItem>) = with(binding) {
         setupRecyclerView()
+        (rvHomePlaying.adapter as? MovieNowPlayingAdapter)?.submitList(data)
 
         tvHomePlayingSeeAll.setOnClickListener { listener?.onMoreClick() }
     }
 
     fun showMovie(data: List<MovieSnipsNowPlayingItem>) = with(binding.rvHomePlaying) {
-        movies.clear()
-        movies.addAll(data)
-
-        if (!hasActiveAdapter) {
-            setupRecyclerView()
-        }
-
-        movieAdapter?.submitList(movies)
+        setupRecyclerView()
+        (adapter as? MovieNowPlayingAdapter)?.submitList(data)
     }
 
     fun showErrorMovie() {
