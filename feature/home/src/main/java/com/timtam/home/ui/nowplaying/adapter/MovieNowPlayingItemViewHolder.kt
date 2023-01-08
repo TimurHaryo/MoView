@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_kotlin.extension.orZero
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
 import com.timtam.home.databinding.ItemHomeNowPlayingBinding
+import com.timtam.home.ui.nowplaying.listener.MovieNowPlayingListener
 import com.timtam.uikit.extension.context
 import com.timtam.uikit.extension.dpToPx
 import com.timtam.uikit.extension.loadImageWithRadius

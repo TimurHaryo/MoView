@@ -8,7 +8,7 @@ import com.timtam.common_android.extension.i
 import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
 import com.timtam.home.databinding.ItemHomeSectionTopRatedBinding
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedAdapter
-import com.timtam.home.ui.toprated.adapter.MovieTopRatedListener
+import com.timtam.home.ui.toprated.listener.MovieTopRatedListener
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.resource.AttachableResource
 import com.timtam.uikit.recyclerview.resource.DetachableResource

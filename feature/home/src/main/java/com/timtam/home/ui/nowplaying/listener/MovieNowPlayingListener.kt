@@ -1,4 +1,4 @@
-package com.timtam.home.ui.nowplaying.adapter
+package com.timtam.home.ui.nowplaying.listener
 
 interface MovieNowPlayingListener {
     fun onMoreClick()

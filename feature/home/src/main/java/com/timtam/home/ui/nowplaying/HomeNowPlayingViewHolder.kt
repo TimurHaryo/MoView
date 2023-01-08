@@ -7,7 +7,7 @@ import com.timtam.common_android.extension.e
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
 import com.timtam.home.databinding.ItemHomeSectionPlayingBinding
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingAdapter
-import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
+import com.timtam.home.ui.nowplaying.listener.MovieNowPlayingListener
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.resource.AttachableResource
 import com.timtam.uikit.recyclerview.resource.DetachableResource

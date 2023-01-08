@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_kotlin.extension.orZero
 import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
 import com.timtam.home.databinding.ItemHomeTopRatedBinding
+import com.timtam.home.ui.toprated.listener.MovieTopRatedListener
 import com.timtam.uikit.extension.context
 import com.timtam.uikit.extension.dpToPx
 import com.timtam.uikit.extension.loadImageWithRadius

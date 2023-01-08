@@ -8,7 +8,7 @@ import com.timtam.common_android.extension.e
 import com.timtam.feature_item.genre.GenreHomeItem
 import com.timtam.home.databinding.ItemHomeSectionGenreBinding
 import com.timtam.home.ui.genre.adapter.GenreAdapter
-import com.timtam.home.ui.genre.adapter.MovieGenreListener
+import com.timtam.home.ui.genre.listener.MovieGenreListener
 import com.timtam.uikit.extension.preAttach
 import com.timtam.uikit.recyclerview.decoration.AdaptiveSpacingItemDecoration
 import com.timtam.uikit.recyclerview.resource.AttachableResource

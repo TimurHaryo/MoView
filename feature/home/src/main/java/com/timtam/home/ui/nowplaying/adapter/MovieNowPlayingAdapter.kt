@@ -3,6 +3,7 @@ package com.timtam.home.ui.nowplaying.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
+import com.timtam.home.ui.nowplaying.listener.MovieNowPlayingListener
 import com.timtam.uikit.recyclerview.base.BaseListAdapter
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCacheable
 import com.timtam.uikit.recyclerview.cachecontrol.RecyclerHolderCaching

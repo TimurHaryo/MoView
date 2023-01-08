@@ -16,13 +16,13 @@ import com.timtam.feature_helper.extension.observeLiveData
 import com.timtam.feature_helper.extension.observeLiveEvent
 import com.timtam.home.databinding.FragmentHomeBinding
 import com.timtam.home.type.HomeViewType
-import com.timtam.home.ui.genre.adapter.MovieGenreListener
+import com.timtam.home.ui.genre.listener.MovieGenreListener
 import com.timtam.home.ui.genre.payload.HomeGenrePayload
 import com.timtam.home.ui.header.listener.HomeHeaderListener
 import com.timtam.home.ui.home.adapter.HomeAdapter
-import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingListener
+import com.timtam.home.ui.nowplaying.listener.MovieNowPlayingListener
 import com.timtam.home.ui.nowplaying.payload.HomeMovieNowPlayingPayload
-import com.timtam.home.ui.toprated.adapter.MovieTopRatedListener
+import com.timtam.home.ui.toprated.listener.MovieTopRatedListener
 import com.timtam.home.ui.toprated.payload.HomeMovieTopRatedPayload
 import com.timtam.uikit.extension.detachFromAdapter
 import com.timtam.uikit.extension.gone

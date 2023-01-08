@@ -1,4 +1,4 @@
-package com.timtam.home.ui.toprated.adapter
+package com.timtam.home.ui.toprated.listener
 
 interface MovieTopRatedListener {
     fun onMoreClick()
