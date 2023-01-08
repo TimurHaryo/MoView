@@ -101,7 +101,6 @@ class HomeAdapter :
             payloads = payloads,
             onPayload = { payload ->
                 (holder as? HomeHeaderViewHolder)?.apply {
-                    setListener(homeHeaderListener)
                     when (payload) {
                         is HomeHeaderPayload.ShowMantra -> showMantra(payload.mantra)
                     }
@@ -113,7 +112,6 @@ class HomeAdapter :
             payloads = payloads,
             onPayload = { payload ->
                 (holder as? HomeGenreViewHolder)?.apply {
-                    setListener(movieGenreListener)
                     when (payload) {
                         is HomeGenrePayload.ShowData -> showGenre(payload.genres)
                         is HomeGenrePayload.ShowError -> showErrorGenre()
@@ -126,7 +124,6 @@ class HomeAdapter :
             payloads = payloads,
             onPayload = { payload ->
                 (holder as? HomeNowPlayingViewHolder)?.apply {
-                    setListener(movieNowPlayingListener)
                     when (payload) {
                         is HomeMovieNowPlayingPayload.ShowData -> showMovie(payload.movies)
                         is HomeMovieNowPlayingPayload.ShowEmpty -> showEmptyMovie()
@@ -140,7 +137,6 @@ class HomeAdapter :
             payloads = payloads,
             onPayload = { payload ->
                 (holder as? HomeTopRatedViewHolder)?.apply {
-                    setListener(movieTopRatedListener)
                     when (payload) {
                         is HomeMovieTopRatedPayload.ShowData -> showMovie(payload.movies)
                         is HomeMovieTopRatedPayload.ShowEmpty -> showEmptyMovie()
