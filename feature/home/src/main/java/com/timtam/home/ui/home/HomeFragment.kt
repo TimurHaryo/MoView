@@ -73,6 +73,13 @@ class HomeFragment :
             override fun onMovieClick(movieId: Int) {
                 toast { "NOW PLAYING ID => $movieId" }
             }
+
+            override fun onTryAgainClick() {
+                viewModel.fetchSnipsNowPlaying(
+                    viewModel.cachedMovieGenres,
+                    HOME_MOVIE_NOW_PLAYING_LIMIT
+                )
+            }
         }
     }
 
@@ -153,7 +160,12 @@ class HomeFragment :
 
         observeLiveData(viewModel.snipsNowPlayingLoading) { isLoading ->
             homeAdapter?.apply {
-                withArgument { nowPlayingArg.isLoading = isLoading }
+                withArgument {
+                    nowPlayingArg.isLoading = isLoading
+                    if (isLoading) {
+                        nowPlayingArg.isError = false
+                    }
+                }
                 enqueueAdapterPayload(
                     HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
                     HomeMovieNowPlayingPayload.ShowLoading(isLoading),
@@ -214,10 +226,14 @@ class HomeFragment :
                             )
                         }
                         HomeViewType.NOW_PLAYING -> {
-                            homeAdapter?.enqueueAdapterPayload(
-                                HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
-                                HomeMovieNowPlayingPayload.ShowError
-                            )
+                            homeAdapter?.apply {
+                                withArgument { nowPlayingArg.isError = true }
+                                enqueueAdapterPayload(
+                                    HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                                    HomeMovieNowPlayingPayload.ShowError,
+                                    isSequentially = false
+                                )
+                            }
                         }
                         HomeViewType.TOP_RATED -> {
                             homeAdapter?.enqueueAdapterPayload(

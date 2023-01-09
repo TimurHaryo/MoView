@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_android.extension.e
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
+import com.timtam.home.databinding.CompHomeErrorContentBinding
 import com.timtam.home.databinding.ItemHomeSectionPlayingBinding
 import com.timtam.home.databinding.LottieHomeItemLoadingBinding
 import com.timtam.home.ui.nowplaying.adapter.MovieNowPlayingAdapter
@@ -47,6 +48,7 @@ class HomeNowPlayingViewHolder(
 
     fun bind(data: List<MovieSnipsNowPlayingItem>) = with(binding) {
         setLoading(argument.isLoading)
+        setErrorMovie(argument.isError)
         setupRecyclerView()
         (rvHomePlaying.adapter as? MovieNowPlayingAdapter)?.submitList(data)
 
@@ -58,9 +60,14 @@ class HomeNowPlayingViewHolder(
         (adapter as? MovieNowPlayingAdapter)?.submitList(data)
     }
 
-    fun showErrorMovie() {
-        e { "NOW PLAYING ITEM ERROR" }
-    }
+    fun setErrorMovie(isError: Boolean) =
+        binding.vsHomePlayingError.inflateIf(isError && argument.nowPlayingItems.isEmpty()) {
+            if (isError) {
+                showError()
+            } else {
+                hideError()
+            }
+        }
 
     fun showEmptyMovie() {
         e { "NOW PLAYING ITEM EMPTY" }
@@ -84,6 +91,20 @@ class HomeNowPlayingViewHolder(
     private fun stopLoading() =
         bindingStubType<LottieHomeItemLoadingBinding>(binding.vsHomePlayingLoading) {
             lavHomeItemLoading.pauseAnimation()
+            root.gone()
+        }
+
+    private fun showError() =
+        bindingStubType<CompHomeErrorContentBinding>(binding.vsHomePlayingError) {
+            root.visible()
+            tvHomeErrorTryAgain.setOnClickListener {
+                root.gone()
+                listener?.onTryAgainClick()
+            }
+        }
+
+    private fun hideError() =
+        bindingStubType<CompHomeErrorContentBinding>(binding.vsHomePlayingError) {
             root.gone()
         }
 

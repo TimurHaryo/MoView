@@ -33,6 +33,8 @@ class HomeViewModel @Inject constructor(
     ViewModel(),
     DisplayableErrorDelegate<HomeViewType> by DisplayableErrorDelegateImpl() {
 
+    val cachedMovieGenres get() = _movieGenres.value?.peekContent().orEmpty()
+
     private val _mainLoading = MutableLiveData<Boolean>()
     val mainLoading: LiveData<Boolean> get() = _mainLoading
 
