@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_android.extension.e
-import com.timtam.common_android.extension.i
 import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
 import com.timtam.home.databinding.ItemHomeSectionTopRatedBinding
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedAdapter
@@ -35,7 +34,6 @@ class HomeTopRatedViewHolder(
 
     fun bind(data: List<MovieSnipsTopRatedItem>) = with(binding) {
         setupRecyclerView()
-        i { "TIMUR bindTopRated" }
         (rvHomeTopRated.adapter as? MovieTopRatedAdapter)?.submitList(data)
 
         tvHomeTopRatedSeeAll.setOnClickListener { listener?.onMoreClick() }
@@ -43,7 +41,6 @@ class HomeTopRatedViewHolder(
 
     fun showMovie(data: List<MovieSnipsTopRatedItem>) = with(binding.rvHomeTopRated) {
         setupRecyclerView()
-        i { "TIMUR showTopRated" }
         (adapter as? MovieTopRatedAdapter)?.submitList(data)
     }
 

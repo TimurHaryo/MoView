@@ -187,6 +187,26 @@ class HomeAdapter :
         this.movieGenreListener = movieGenreListener
         this.movieNowPlayingListener = movieNowPlayingListener
         this.movieTopRatedListener = movieTopRatedListener
+
+        bindResource()
+    }
+
+    private fun bindResource() = executeToValidHolders(host) { holder ->
+        when (holder) {
+            is HomeHeaderViewHolder -> with(holder) {
+                setListener(homeHeaderListener)
+            }
+            is HomeGenreViewHolder -> with(holder) {
+                setListener(movieGenreListener)
+            }
+            is HomeNowPlayingViewHolder -> with(holder) {
+                setListener(movieNowPlayingListener)
+            }
+            is HomeTopRatedViewHolder -> with(holder) {
+                setListener(movieTopRatedListener)
+            }
+            else -> Unit
+        }
     }
 
     companion object {

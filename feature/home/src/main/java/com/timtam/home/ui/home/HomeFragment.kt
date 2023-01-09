@@ -134,8 +134,8 @@ class HomeFragment :
     }
 
     override fun onDestroyView() {
-        homeAdapter?.releaseResource()
         super.onDestroyView()
+        homeAdapter?.releaseResource()
     }
 
     override fun onDestroy() {
