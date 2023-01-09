@@ -9,6 +9,7 @@ object Versions {
     const val recyclerView = "1.2.1"
     const val glide = "4.14.2"
     const val shimmerView = "0.5.0"
+    const val lottie = "5.2.0"
     const val constraintLayout = "2.1.0"
     const val navigation = "2.5.3"
     const val coroutines = "1.6.3"

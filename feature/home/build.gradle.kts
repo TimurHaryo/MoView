@@ -55,6 +55,7 @@ dependencies {
     implementation(UiDependencies.glide)
     implementation(UiDependencies.recyclerView)
     implementation(UiDependencies.shimmerView)
+    implementation(UiDependencies.lottie)
     implementation(UiDependencies.constraintLayout)
     kapt(CoreDependencies.hiltAndroidCompiler)
     testsImplementation(TestDependencies.testLibraries)
