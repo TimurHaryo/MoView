@@ -66,7 +66,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
 
     private fun customizedItem(data: List<MovieModel>, genres: List<GenreHomeItem>, limit: Int) =
         data.map { it.mapToPresentationItem(genres) }
-            .sortedBy { it.id }
+            .sortedBy { it.rating }
             .take(limit)
 
     companion object {
