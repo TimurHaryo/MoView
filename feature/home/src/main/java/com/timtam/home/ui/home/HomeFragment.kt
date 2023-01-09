@@ -135,6 +135,7 @@ class HomeFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
+        recyclerViewInitiator.clear()
         homeAdapter?.releaseResource()
     }
 

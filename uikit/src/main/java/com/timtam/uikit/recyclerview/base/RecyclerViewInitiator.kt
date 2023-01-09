@@ -12,6 +12,8 @@ class RecyclerViewInitiator<T : RecyclerViewAdapter> private constructor(
     private val activeAdapter: (() -> T)?
     private val setupWithAdapter: ((RecyclerView.() -> Unit))?
 
+    private var cacheAdapter: T? = null
+
     init {
         recyclerView = builder.recyclerView
         activeAdapter = builder.activeAdapter
@@ -19,13 +21,19 @@ class RecyclerViewInitiator<T : RecyclerViewAdapter> private constructor(
         setupWithAdapter = builder.setupWithAdapter
     }
 
-    @Suppress("UNCHECKED_CAST")
-    fun initialize() = recyclerView?.get()?.run {
-        if (adapter == null) {
-            adapter = activeAdapter?.invoke()
-            setupWithAdapter?.invoke(this)
+    fun initialize() {
+        recyclerView?.get()?.apply {
+            if (adapter == null) {
+                cacheAdapter = activeAdapter?.invoke()
+                adapter = cacheAdapter
+                setupWithAdapter?.invoke(this)
+            }
         }
-        onRegisterListener?.invoke(adapter as? T ?: return@run)
+        onRegisterListener?.invoke(cacheAdapter ?: return)
+    }
+
+    fun clear() {
+        recyclerView?.clear()
     }
 
     class Builder<T : RecyclerViewAdapter> {
