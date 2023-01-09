@@ -43,16 +43,14 @@ class AdapterPayloadDelegateImpl<Payload> : AdapterPayloadDelegate<Payload> {
     override fun enqueueAdapterPayload(
         targetPosition: Int,
         payload: Payload,
-        useMainThread: Boolean,
-        also: ((Payload) -> Unit)?
+        isSequentially: Boolean
     ) {
-        also?.invoke(payload)
         if (targetPosition !in firstVisibleHolder..lastVisibleHolder) {
             pendingPayload.add(targetPosition to payload)
             return
         }
 
-        if (useMainThread) {
+        if (isSequentially) {
             recyclerHost?.adapter?.notifyItemChanged(targetPosition, payload)
             return
         }

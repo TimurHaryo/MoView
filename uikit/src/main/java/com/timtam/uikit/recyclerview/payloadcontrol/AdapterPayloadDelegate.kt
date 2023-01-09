@@ -18,8 +18,7 @@ interface AdapterPayloadDelegate<Payload> {
     fun enqueueAdapterPayload(
         targetPosition: Int,
         payload: Payload,
-        useMainThread: Boolean = true,
-        also: ((Payload) -> Unit)? = null
+        isSequentially: Boolean = true
     )
 
     fun executePendingPayload(position: Int)

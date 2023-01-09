@@ -71,15 +71,16 @@ class HomeAdapter :
             }
             is HomeGenreViewHolder -> with(holder) {
                 setListener(movieGenreListener)
-                bind(argument.genreArgs)
+                bind(argument.genreArg.genreItems)
             }
             is HomeNowPlayingViewHolder -> with(holder) {
                 setListener(movieNowPlayingListener)
-                bind(argument.nowPlayingArgs)
+                setArgument(argument.nowPlayingArg)
+                bind(argument.nowPlayingArg.nowPlayingItems)
             }
             is HomeTopRatedViewHolder -> with(holder) {
                 setListener(movieTopRatedListener)
-                bind(argument.topRatedArgs)
+                bind(argument.topRatedArg.topRatedItems)
             }
             else -> Unit
         }
@@ -124,6 +125,7 @@ class HomeAdapter :
                 (holder as? HomeNowPlayingViewHolder)?.apply {
                     when (payload) {
                         is HomeMovieNowPlayingPayload.ShowData -> showMovie(payload.movies)
+                        is HomeMovieNowPlayingPayload.ShowLoading -> setLoading(payload.isLoading)
                         is HomeMovieNowPlayingPayload.ShowEmpty -> showEmptyMovie()
                         is HomeMovieNowPlayingPayload.ShowError -> showErrorMovie()
                     }

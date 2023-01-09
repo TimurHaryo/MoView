@@ -152,7 +152,14 @@ class HomeFragment :
         }
 
         observeLiveData(viewModel.snipsNowPlayingLoading) { isLoading ->
-            i { "TIMUR now playing loading: $isLoading" }
+            homeAdapter?.apply {
+                withArgument { nowPlayingArg.isLoading = isLoading }
+                enqueueAdapterPayload(
+                    HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                    HomeMovieNowPlayingPayload.ShowLoading(isLoading),
+                    isSequentially = false
+                )
+            }
         }
 
         observeLiveData(viewModel.snipsTopRatedLoading) { isLoading ->
@@ -162,29 +169,35 @@ class HomeFragment :
 
     private fun setupEventObserver() {
         observeLiveEvent(viewModel.movieSnipsNowPlaying) { movies ->
-            homeAdapter?.withArgument { nowPlayingArgs = movies }
-            homeAdapter?.enqueueAdapterPayload(
-                HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
-                HomeMovieNowPlayingPayload.ShowData(movies)
-            )
+            homeAdapter?.apply {
+                withArgument { nowPlayingArg.nowPlayingItems = movies }
+                enqueueAdapterPayload(
+                    HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                    HomeMovieNowPlayingPayload.ShowData(movies)
+                )
+            }
         }
 
         observeLiveEvent(viewModel.movieSnipsTopRated) { movies ->
-            homeAdapter?.withArgument { topRatedArgs = movies }
-            homeAdapter?.enqueueAdapterPayload(
-                HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
-                HomeMovieTopRatedPayload.ShowData(movies)
-            )
+            homeAdapter?.apply {
+                withArgument { topRatedArg.topRatedItems = movies }
+                enqueueAdapterPayload(
+                    HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
+                    HomeMovieTopRatedPayload.ShowData(movies)
+                )
+            }
         }
 
         observeLiveEvent(viewModel.movieGenres) { genres ->
             viewModel.fetchSnipsNowPlaying(genres, HOME_MOVIE_NOW_PLAYING_LIMIT)
 
-            homeAdapter?.withArgument { genreArgs = genres }
-            homeAdapter?.enqueueAdapterPayload(
-                HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
-                HomeGenrePayload.ShowData(genres)
-            )
+            homeAdapter?.apply {
+                withArgument { genreArg.genreItems = genres }
+                enqueueAdapterPayload(
+                    HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
+                    HomeGenrePayload.ShowData(genres)
+                )
+            }
         }
 
         observeLiveEvent(viewModel.errorType) { type ->

@@ -47,5 +47,15 @@
             tools:listitem="@layout/item_home_now_playing"
             tools:itemCount="3"/>
 
+        <ViewStub
+            android:id="@+id/vs_home_playing_loading"
+            android:layout_width="@dimen/space_0"
+            android:layout_height="@dimen/space_160"
+            android:layout="@layout/lottie_home_item_loading"
+            android:layout_marginTop="@dimen/space_10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
