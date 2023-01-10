@@ -105,6 +105,7 @@ class HomeNowPlayingViewHolder(
         bindingStubType<CompHomeErrorContentBinding>(binding.vsHomePlayingError) {
             root.visible()
             tvHomeErrorTryAgain.setOnClickListener {
+                setLoading(true)
                 root.gone()
                 listener?.onTryAgainClick()
             }

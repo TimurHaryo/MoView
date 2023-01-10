@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import com.timtam.common_android.abstraction.LifecycleFragment
 import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
-import com.timtam.common_android.extension.i
 import com.timtam.common_android.extension.toast
 import com.timtam.common_android.extension.viewLifecycleLazy
 import com.timtam.feature_helper.extension.inspect
@@ -91,6 +90,10 @@ class HomeFragment :
 
             override fun onMovieClick(movieId: Int) {
                 toast { "TOP RATED ID => $movieId" }
+            }
+
+            override fun onTryAgainClick() {
+                viewModel.fetchSnipsTopRated(HOME_MOVIE_TOP_RATED_LIMIT)
             }
         }
     }
@@ -252,10 +255,13 @@ class HomeFragment :
                             }
                         }
                         HomeViewType.TOP_RATED -> {
-                            homeAdapter?.enqueueAdapterPayload(
-                                HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
-                                HomeMovieTopRatedPayload.ShowError
-                            )
+                            homeAdapter?.apply {
+                                withArgument { topRatedArg.isError = true }
+                                enqueueAdapterPayload(
+                                    HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
+                                    HomeMovieTopRatedPayload.ShowError
+                                )
+                            }
                         }
                         else -> Unit
                     }

@@ -142,7 +142,7 @@ class HomeAdapter :
                         is HomeMovieTopRatedPayload.ShowData -> showMovie(payload.movies)
                         is HomeMovieTopRatedPayload.ShowLoading -> setLoading(payload.isLoading)
                         is HomeMovieTopRatedPayload.ShowEmpty -> showEmptyMovie()
-                        is HomeMovieTopRatedPayload.ShowError -> showErrorMovie()
+                        is HomeMovieTopRatedPayload.ShowError -> setErrorMovie(true)
                     }
                 }
             }

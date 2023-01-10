@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.timtam.common_android.extension.e
 import com.timtam.feature_item.movie.MovieSnipsTopRatedItem
+import com.timtam.home.databinding.CompHomeErrorContentBinding
 import com.timtam.home.databinding.ItemHomeSectionTopRatedBinding
 import com.timtam.home.databinding.LottieHomeItemLoadingBinding
 import com.timtam.home.ui.toprated.adapter.MovieTopRatedAdapter
@@ -46,6 +47,7 @@ class HomeTopRatedViewHolder(
 
     fun bind(data: List<MovieSnipsTopRatedItem>) = with(binding) {
         setLoading(argument.isLoading)
+        setErrorMovie(argument.isError)
         setupRecyclerView()
         (rvHomeTopRated.adapter as? MovieTopRatedAdapter)?.submitList(data)
 
@@ -57,9 +59,14 @@ class HomeTopRatedViewHolder(
         (adapter as? MovieTopRatedAdapter)?.submitList(data)
     }
 
-    fun showErrorMovie() {
-        e { "TOP RATED ITEM ERROR" }
-    }
+    fun setErrorMovie(isError: Boolean) =
+        binding.vsHomeTopRatedError.inflateIf(isError && argument.topRatedItems.isEmpty()) {
+            if (isError) {
+                showError()
+            } else {
+                hideError()
+            }
+        }
 
     fun showEmptyMovie() {
         e { "TOP RATED ITEM EMPTY" }
@@ -92,6 +99,21 @@ class HomeTopRatedViewHolder(
     private fun stopLoading() =
         bindingStubType<LottieHomeItemLoadingBinding>(binding.vsHomeTopRatedLoading) {
             lavHomeItemLoading.pauseAnimation()
+            root.gone()
+        }
+
+    private fun showError() =
+        bindingStubType<CompHomeErrorContentBinding>(binding.vsHomeTopRatedError) {
+            root.visible()
+            tvHomeErrorTryAgain.setOnClickListener {
+                setLoading(true)
+                root.gone()
+                listener?.onTryAgainClick()
+            }
+        }
+
+    private fun hideError() =
+        bindingStubType<CompHomeErrorContentBinding>(binding.vsHomeTopRatedError) {
             root.gone()
         }
 
