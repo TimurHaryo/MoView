@@ -55,6 +55,7 @@ class HomeTopRatedViewHolder(
     }
 
     fun showMovie(data: List<MovieSnipsTopRatedItem>) = with(binding.rvHomeTopRated) {
+        setErrorMovie(false)
         setupRecyclerView()
         (adapter as? MovieTopRatedAdapter)?.submitList(data)
     }
