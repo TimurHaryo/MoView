@@ -18,6 +18,7 @@
     <dimen name="space_64">64dp</dimen>
     <dimen name="space_88">88dp</dimen>
     <dimen name="space_96">96dp</dimen>
+    <dimen name="space_128">128dp</dimen>
     <dimen name="space_160">160dp</dimen>
 
     <!--TEXT SIZE-->

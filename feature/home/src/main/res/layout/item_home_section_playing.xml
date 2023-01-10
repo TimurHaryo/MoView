@@ -68,5 +68,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <ViewStub
+            android:id="@+id/vs_home_playing_empty"
+            android:layout_width="@dimen/space_0"
+            android:layout_height="wrap_content"
+            android:layout="@layout/comp_home_empty_content"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout_marginHorizontal="@dimen/space_16"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

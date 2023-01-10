@@ -20,21 +20,25 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) {
 
-    operator fun invoke(genres: List<GenreHomeItem>, limit: Int): Flow<MovieSnipsNowPlayingState> =
-        merge(
+    operator fun invoke(genres: List<GenreHomeItem>, limit: Int): Flow<MovieSnipsNowPlayingState> {
+        var isTotallyEmpty = false
+        return merge(
             flow { emit(MovieSnipsNowPlayingState.Loading) },
             movieRepository.getNowPlaying(1, limit).map { resource ->
                 when (resource) {
                     is DomainLocalResource.Error -> MovieSnipsNowPlayingState.Error(resource.error)
-                    is DomainLocalResource.Success -> MovieSnipsNowPlayingState.Success(
-                        customizedItem(
-                            resource.data,
-                            genres,
-                            limit
+                    is DomainLocalResource.Success -> {
+                        isTotallyEmpty = resource.data.isEmpty()
+                        MovieSnipsNowPlayingState.Success(
+                            customizedItem(
+                                resource.data,
+                                genres,
+                                limit
+                            )
                         )
-                    )
+                    }
                     is DomainLocalResource.SuccessUpdateData -> {
-                        if (resource.data.isEmpty()) return@map MovieSnipsNowPlayingState.Empty
+                        if (resource.data.isEmpty() && isTotallyEmpty) return@map MovieSnipsNowPlayingState.Empty
 
                         MovieSnipsNowPlayingState.Success(
                             customizedItem(
@@ -47,6 +51,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
                 }
             }
         ).flowOn(dispatcher.io)
+    }
 
     private fun MovieModel.mapToPresentationItem(genres: List<GenreHomeItem>) =
         MovieSnipsNowPlayingItem(
@@ -66,7 +71,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
 
     private fun customizedItem(data: List<MovieModel>, genres: List<GenreHomeItem>, limit: Int) =
         data.map { it.mapToPresentationItem(genres) }
-            .sortedBy { it.rating }
+            .sortedByDescending { it.rating }
             .take(limit)
 
     companion object {

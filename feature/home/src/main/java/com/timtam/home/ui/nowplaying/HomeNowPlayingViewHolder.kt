@@ -3,8 +3,8 @@ package com.timtam.home.ui.nowplaying
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.timtam.common_android.extension.e
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
+import com.timtam.home.databinding.CompHomeEmptyContentBinding
 import com.timtam.home.databinding.CompHomeErrorContentBinding
 import com.timtam.home.databinding.ItemHomeSectionPlayingBinding
 import com.timtam.home.databinding.LottieHomeItemLoadingBinding
@@ -49,6 +49,7 @@ class HomeNowPlayingViewHolder(
     fun bind(data: List<MovieSnipsNowPlayingItem>) = with(binding) {
         setLoading(argument.isLoading)
         setErrorMovie(argument.isError)
+        setEmptyMovie(argument.isEmpty)
         setupRecyclerView()
         (rvHomePlaying.adapter as? MovieNowPlayingAdapter)?.submitList(data)
 
@@ -69,8 +70,14 @@ class HomeNowPlayingViewHolder(
             }
         }
 
-    fun showEmptyMovie() {
-        e { "NOW PLAYING ITEM EMPTY" }
+    fun setEmptyMovie(isEmpty: Boolean) {
+        binding.vsHomePlayingEmpty.inflateIf(isEmpty) {
+            if (isEmpty) {
+                showEmpty()
+            } else {
+                hideEmpty()
+            }
+        }
     }
 
     fun setLoading(isLoading: Boolean) =
@@ -105,6 +112,16 @@ class HomeNowPlayingViewHolder(
 
     private fun hideError() =
         bindingStubType<CompHomeErrorContentBinding>(binding.vsHomePlayingError) {
+            root.gone()
+        }
+
+    private fun showEmpty() =
+        bindingStubType<CompHomeEmptyContentBinding>(binding.vsHomePlayingEmpty) {
+            root.visible()
+        }
+
+    private fun hideEmpty() =
+        bindingStubType<CompHomeEmptyContentBinding>(binding.vsHomePlayingEmpty) {
             root.gone()
         }
 

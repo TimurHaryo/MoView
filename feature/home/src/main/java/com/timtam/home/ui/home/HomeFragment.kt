@@ -165,6 +165,7 @@ class HomeFragment :
                     nowPlayingArg.isLoading = isLoading
                     if (isLoading) {
                         nowPlayingArg.isError = false
+                        nowPlayingArg.isEmpty = false
                     }
                 }
                 enqueueAdapterPayload(
@@ -248,10 +249,14 @@ class HomeFragment :
                 emptyUi = {
                     when (it.key) {
                         HomeViewType.NOW_PLAYING -> {
-                            homeAdapter?.enqueueAdapterPayload(
-                                HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
-                                HomeMovieNowPlayingPayload.ShowEmpty
-                            )
+                            homeAdapter?.apply {
+                                withArgument { nowPlayingArg.isEmpty = true }
+                                enqueueAdapterPayload(
+                                    HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                                    HomeMovieNowPlayingPayload.ShowEmpty,
+                                    isSequentially = false
+                                )
+                            }
                         }
                         HomeViewType.TOP_RATED -> {
                             homeAdapter?.enqueueAdapterPayload(

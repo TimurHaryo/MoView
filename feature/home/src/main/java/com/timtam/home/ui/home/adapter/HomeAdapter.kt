@@ -126,7 +126,7 @@ class HomeAdapter :
                     when (payload) {
                         is HomeMovieNowPlayingPayload.ShowData -> showMovie(payload.movies)
                         is HomeMovieNowPlayingPayload.ShowLoading -> setLoading(payload.isLoading)
-                        is HomeMovieNowPlayingPayload.ShowEmpty -> showEmptyMovie()
+                        is HomeMovieNowPlayingPayload.ShowEmpty -> setEmptyMovie(true)
                         is HomeMovieNowPlayingPayload.ShowError -> setErrorMovie(true)
                     }
                 }
