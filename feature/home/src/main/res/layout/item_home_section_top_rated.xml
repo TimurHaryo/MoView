@@ -48,5 +48,15 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_home_top_rated" />
 
+        <ViewStub
+            android:id="@+id/vs_home_top_rated_loading"
+            android:layout_width="@dimen/space_0"
+            android:layout_height="@dimen/space_160"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout="@layout/lottie_home_item_loading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_top_rated" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -177,7 +177,20 @@ class HomeFragment :
         }
 
         observeLiveData(viewModel.snipsTopRatedLoading) { isLoading ->
-            i { "TIMUR top rated loading: $isLoading" }
+            homeAdapter?.apply {
+                withArgument {
+                    topRatedArg.isLoading = isLoading
+                    if (isLoading) {
+                        topRatedArg.isError = false
+                        topRatedArg.isEmpty = false
+                    }
+                }
+                enqueueAdapterPayload(
+                    HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
+                    HomeMovieTopRatedPayload.ShowLoading(isLoading),
+                    isSequentially = false
+                )
+            }
         }
     }
 

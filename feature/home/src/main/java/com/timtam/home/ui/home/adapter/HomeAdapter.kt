@@ -80,6 +80,7 @@ class HomeAdapter :
             }
             is HomeTopRatedViewHolder -> with(holder) {
                 setListener(movieTopRatedListener)
+                setArgument(argument.topRatedArg)
                 bind(argument.topRatedArg.topRatedItems)
             }
             else -> Unit
@@ -139,6 +140,7 @@ class HomeAdapter :
                 (holder as? HomeTopRatedViewHolder)?.apply {
                     when (payload) {
                         is HomeMovieTopRatedPayload.ShowData -> showMovie(payload.movies)
+                        is HomeMovieTopRatedPayload.ShowLoading -> setLoading(payload.isLoading)
                         is HomeMovieTopRatedPayload.ShowEmpty -> showEmptyMovie()
                         is HomeMovieTopRatedPayload.ShowError -> showErrorMovie()
                     }
