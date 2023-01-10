@@ -6,7 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface CachedMovieDataSource {
 
-    fun getMovieSnips(type: MovieStatusType): Flow<List<MovieDTO>>
+    fun getMovieSnips(
+        type: MovieStatusType,
+        fromPage: Int
+    ): Flow<List<MovieDTO>>
 
     suspend fun insertAll(movies: List<MovieDTO>)
 }

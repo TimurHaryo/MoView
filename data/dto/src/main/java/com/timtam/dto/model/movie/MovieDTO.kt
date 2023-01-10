@@ -51,5 +51,7 @@ data class MovieDTO(
     @SerializedName("vote_count")
     val voteCount: Int? = null,
 
-    var type: MovieStatusType = MovieStatusType.UNKNOWN
+    var type: MovieStatusType = MovieStatusType.UNKNOWN,
+
+    var fromPage: Int = 0
 )

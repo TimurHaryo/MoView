@@ -15,7 +15,7 @@ import com.timtam.local_interactor.dao.MovieDAO
         MovieDTO::class,
         GenreDTO::class
     ],
-    version = 1
+    version = 2
 )
 @TypeConverters(
     MovieConverter::class,

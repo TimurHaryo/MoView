@@ -1,5 +1,6 @@
 package com.timtam.repository_interactor.repository
 
+import com.timtam.common_kotlin.extension.orZero
 import com.timtam.dto.model.genre.GenreListDTO
 import com.timtam.dto.model.movie.MovieListDTO
 import com.timtam.dto.type.movie.MovieStatusType
@@ -30,17 +31,18 @@ class MovieRepositoryImpl @Inject constructor(
         requestDataFromCache(
             remoteRequest = { remoteMovieDataSource.getNowPlaying(page) },
             mapper = movieMapper,
-            localRequest = cachedMovieDataSource.getMovieSnips(MovieStatusType.NOW_PLAYING)
+            localRequest = cachedMovieDataSource.getMovieSnips(MovieStatusType.NOW_PLAYING, page)
                 .map {
                     MovieListDTO(movies = it)
                 },
-            saveToLocal = {
+            saveToLocal = { dto ->
                 cachedMovieDataSource.insertAll(
-                    it.movies
+                    dto.movies
                         .orEmpty()
                         .filterNotNull()
                         .onEach { movie ->
                             movie.type = MovieStatusType.NOW_PLAYING
+                            movie.fromPage = dto.page.orZero()
                         }
                 )
             }
@@ -50,17 +52,18 @@ class MovieRepositoryImpl @Inject constructor(
         requestDataFromCache(
             remoteRequest = { remoteMovieDataSource.getTopRated(page) },
             mapper = movieMapper,
-            localRequest = cachedMovieDataSource.getMovieSnips(MovieStatusType.TOP_RATED)
+            localRequest = cachedMovieDataSource.getMovieSnips(MovieStatusType.TOP_RATED, page)
                 .map {
                     MovieListDTO(movies = it)
                 },
-            saveToLocal = {
+            saveToLocal = { dto ->
                 cachedMovieDataSource.insertAll(
-                    it.movies
+                    dto.movies
                         .orEmpty()
                         .filterNotNull()
                         .onEach { movie ->
                             movie.type = MovieStatusType.TOP_RATED
+                            movie.fromPage = dto.page.orZero()
                         }
                 )
             }
