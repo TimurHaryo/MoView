@@ -226,6 +226,7 @@ class HomeFragment :
                                 HomeViewType.defaultOrder.indexOf(HomeViewType.GENRE),
                                 HomeGenrePayload.ShowError
                             )
+                            showNowPlayingEmptyUi()
                         }
                         HomeViewType.NOW_PLAYING -> {
                             homeAdapter?.apply {
@@ -248,16 +249,7 @@ class HomeFragment :
                 },
                 emptyUi = {
                     when (it.key) {
-                        HomeViewType.NOW_PLAYING -> {
-                            homeAdapter?.apply {
-                                withArgument { nowPlayingArg.isEmpty = true }
-                                enqueueAdapterPayload(
-                                    HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
-                                    HomeMovieNowPlayingPayload.ShowEmpty,
-                                    isSequentially = false
-                                )
-                            }
-                        }
+                        HomeViewType.NOW_PLAYING -> showNowPlayingEmptyUi()
                         HomeViewType.TOP_RATED -> {
                             homeAdapter?.enqueueAdapterPayload(
                                 HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
@@ -285,6 +277,17 @@ class HomeFragment :
         sflHomeMain.gone()
 
         rvHomeContent.visible()
+    }
+
+    private fun showNowPlayingEmptyUi() {
+        homeAdapter?.apply {
+            withArgument { nowPlayingArg.isEmpty = true }
+            enqueueAdapterPayload(
+                HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
+                HomeMovieNowPlayingPayload.ShowEmpty,
+                isSequentially = false
+            )
+        }
     }
 
     companion object {
