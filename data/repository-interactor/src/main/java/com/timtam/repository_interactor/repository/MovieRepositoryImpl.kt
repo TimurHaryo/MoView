@@ -26,11 +26,11 @@ class MovieRepositoryImpl @Inject constructor(
     private val genreMapper: GenreDomainMapper
 ) : MovieRepository {
 
-    override fun getNowPlaying(page: Int, limit: Int): Flow<DomainLocalResource<List<MovieModel>>> =
+    override fun getNowPlayingSnips(page: Int): Flow<DomainLocalResource<List<MovieModel>>> =
         requestDataFromCache(
             remoteRequest = { remoteMovieDataSource.getNowPlaying(page) },
             mapper = movieMapper,
-            localRequest = cachedMovieDataSource.getMovieSnips(limit, MovieStatusType.NOW_PLAYING)
+            localRequest = cachedMovieDataSource.getMovieSnips(MovieStatusType.NOW_PLAYING)
                 .map {
                     MovieListDTO(movies = it)
                 },
@@ -46,11 +46,11 @@ class MovieRepositoryImpl @Inject constructor(
             }
         )
 
-    override fun getTopRated(page: Int, limit: Int): Flow<DomainLocalResource<List<MovieModel>>> =
+    override fun getTopRatedSnips(page: Int): Flow<DomainLocalResource<List<MovieModel>>> =
         requestDataFromCache(
             remoteRequest = { remoteMovieDataSource.getTopRated(page) },
             mapper = movieMapper,
-            localRequest = cachedMovieDataSource.getMovieSnips(limit, MovieStatusType.TOP_RATED)
+            localRequest = cachedMovieDataSource.getMovieSnips(MovieStatusType.TOP_RATED)
                 .map {
                     MovieListDTO(movies = it)
                 },

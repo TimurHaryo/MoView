@@ -35,49 +35,50 @@
             android:id="@+id/rv_home_playing"
             android:layout_width="@dimen/space_0"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/space_10"
+            android:clipToPadding="false"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal"
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/space_16"
-            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_home_playing"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_home_now_playing"
-            tools:itemCount="3"/>
+            tools:itemCount="3"
+            tools:listitem="@layout/item_home_now_playing" />
 
         <ViewStub
             android:id="@+id/vs_home_playing_loading"
             android:layout_width="@dimen/space_0"
             android:layout_height="@dimen/space_160"
-            android:layout="@layout/lottie_home_item_loading"
             android:layout_marginTop="@dimen/space_10"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing"
+            android:layout="@layout/lottie_home_item_loading"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing" />
 
         <ViewStub
             android:id="@+id/vs_home_playing_error"
             android:layout_width="@dimen/space_0"
             android:layout_height="wrap_content"
-            android:layout="@layout/comp_home_error_content"
-            android:layout_marginTop="@dimen/space_10"
             android:layout_marginHorizontal="@dimen/space_16"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout="@layout/comp_home_error_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing" />
 
         <ViewStub
             android:id="@+id/vs_home_playing_empty"
             android:layout_width="@dimen/space_0"
             android:layout_height="wrap_content"
-            android:layout="@layout/comp_home_empty_content"
-            android:layout_marginTop="@dimen/space_10"
             android:layout_marginHorizontal="@dimen/space_16"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout="@layout/comp_home_empty_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_playing" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

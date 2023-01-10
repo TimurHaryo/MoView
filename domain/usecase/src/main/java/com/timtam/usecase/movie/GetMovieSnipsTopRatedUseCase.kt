@@ -21,7 +21,7 @@ class GetMovieSnipsTopRatedUseCase @Inject constructor(
     operator fun invoke(limit: Int): Flow<MovieSnipsTopRatedState> =
         merge(
             flow { emit(MovieSnipsTopRatedState.Loading) },
-            movieRepository.getTopRated(1, limit).map { resource ->
+            movieRepository.getTopRatedSnips(1).map { resource ->
                 when (resource) {
                     is DomainLocalResource.Error -> MovieSnipsTopRatedState.Error(resource.error)
                     is DomainLocalResource.Success -> MovieSnipsTopRatedState.Success(

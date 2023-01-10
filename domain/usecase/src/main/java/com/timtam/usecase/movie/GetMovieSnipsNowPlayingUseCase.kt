@@ -24,7 +24,7 @@ class GetMovieSnipsNowPlayingUseCase @Inject constructor(
         var isTotallyEmpty = false
         return merge(
             flow { emit(MovieSnipsNowPlayingState.Loading) },
-            movieRepository.getNowPlaying(1, limit).map { resource ->
+            movieRepository.getNowPlayingSnips(1).map { resource ->
                 when (resource) {
                     is DomainLocalResource.Error -> MovieSnipsNowPlayingState.Error(resource.error)
                     is DomainLocalResource.Success -> {

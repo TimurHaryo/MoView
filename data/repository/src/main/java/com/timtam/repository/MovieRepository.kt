@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
 
-    fun getNowPlaying(page: Int, limit: Int): Flow<DomainLocalResource<List<MovieModel>>>
+    fun getNowPlayingSnips(page: Int): Flow<DomainLocalResource<List<MovieModel>>>
 
-    fun getTopRated(page: Int, limit: Int): Flow<DomainLocalResource<List<MovieModel>>>
+    fun getTopRatedSnips(page: Int): Flow<DomainLocalResource<List<MovieModel>>>
 
     fun getGenres(): Flow<DomainLocalResource<List<GenreModel>>>
 }

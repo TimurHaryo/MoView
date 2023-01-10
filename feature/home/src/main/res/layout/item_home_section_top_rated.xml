@@ -35,17 +35,18 @@
             android:id="@+id/rv_home_top_rated"
             android:layout_width="@dimen/space_0"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/space_10"
+            android:clipToPadding="false"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal"
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/space_16"
-            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_home_top_rated"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_home_top_rated"
-            tools:itemCount="3"/>
+            tools:itemCount="3"
+            tools:listitem="@layout/item_home_top_rated" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
