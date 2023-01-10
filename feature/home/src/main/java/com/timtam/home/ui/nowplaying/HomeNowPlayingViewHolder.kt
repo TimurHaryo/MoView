@@ -57,8 +57,8 @@ class HomeNowPlayingViewHolder(
     }
 
     fun showMovie(data: List<MovieSnipsNowPlayingItem>) = with(binding.rvHomePlaying) {
-        setErrorMovie(false)
-        setEmptyMovie(false)
+        hideEmpty()
+        hideError()
         setupRecyclerView()
         (adapter as? MovieNowPlayingAdapter)?.submitList(data)
     }
