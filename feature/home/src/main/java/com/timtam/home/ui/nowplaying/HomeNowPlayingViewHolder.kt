@@ -73,7 +73,7 @@ class HomeNowPlayingViewHolder(
         }
 
     fun setEmptyMovie(isEmpty: Boolean) {
-        binding.vsHomePlayingEmpty.inflateIf(isEmpty) {
+        binding.vsHomePlayingEmpty.inflateIf(isEmpty && argument.nowPlayingItems.isEmpty()) {
             if (isEmpty) {
                 showEmpty()
             } else {
