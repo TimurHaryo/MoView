@@ -1,10 +1,8 @@
 package com.timtam.home.ui.nowplaying.argument
 
 import com.timtam.feature_item.movie.MovieSnipsNowPlayingItem
+import com.timtam.home.ui.base.StatefulArg
 
 data class HomeMovieNowPlayingArg(
-    var nowPlayingItems: List<MovieSnipsNowPlayingItem> = emptyList(),
-    var isError: Boolean = false,
-    var isEmpty: Boolean = false,
-    var isLoading: Boolean = false
-)
+    var nowPlayingItems: List<MovieSnipsNowPlayingItem> = emptyList()
+) : StatefulArg()

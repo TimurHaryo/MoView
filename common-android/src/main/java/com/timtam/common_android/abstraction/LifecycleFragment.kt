@@ -23,11 +23,11 @@ abstract class LifecycleFragment<T : ViewDataBinding> : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         uiDataLifecycle.apply {
             setOnFetchData(::onHandleData)
             registerLifecycleAware()
         }
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {

@@ -12,7 +12,7 @@ internal class UiDataLifecycleAware(private val lifecycle: Lifecycle) : Lifecycl
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {
-            Lifecycle.Event.ON_RESUME -> fetchData()
+            Lifecycle.Event.ON_CREATE -> fetchData()
             else -> Unit
         }
     }

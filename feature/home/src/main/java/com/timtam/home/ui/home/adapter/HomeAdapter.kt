@@ -175,7 +175,7 @@ class HomeAdapter :
         movieNowPlayingListener = null
         movieTopRatedListener = null
         executeToValidHolders(host) { holder ->
-            if (holder is DetachableResource) holder.releaseResource()
+            (holder as? DetachableResource)?.releaseResource()
         }
     }
 

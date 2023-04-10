@@ -166,10 +166,6 @@ class HomeFragment :
             homeAdapter?.apply {
                 withArgument {
                     nowPlayingArg.isLoading = isLoading
-                    if (isLoading) {
-                        nowPlayingArg.isError = false
-                        nowPlayingArg.isEmpty = false
-                    }
                 }
                 enqueueAdapterPayload(
                     HomeViewType.defaultOrder.indexOf(HomeViewType.NOW_PLAYING),
@@ -183,10 +179,6 @@ class HomeFragment :
             homeAdapter?.apply {
                 withArgument {
                     topRatedArg.isLoading = isLoading
-                    if (isLoading) {
-                        topRatedArg.isError = false
-                        topRatedArg.isEmpty = false
-                    }
                 }
                 enqueueAdapterPayload(
                     HomeViewType.defaultOrder.indexOf(HomeViewType.TOP_RATED),
