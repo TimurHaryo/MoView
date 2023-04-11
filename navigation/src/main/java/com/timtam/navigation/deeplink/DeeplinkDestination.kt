@@ -1,3 +1,3 @@
-package com.timtam.navigation.direction.deeplink
+package com.timtam.navigation.deeplink
 
 sealed class DeeplinkDestination(val address: String)

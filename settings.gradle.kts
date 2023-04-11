@@ -38,6 +38,7 @@ include(
     ":feature:feature-item",
     ":feature:feature-helper",
     ":feature:initial",
+    ":feature:initial-contract",
     ":feature:home",
     ":feature:review",
     ":feature:collection"

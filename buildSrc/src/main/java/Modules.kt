@@ -18,6 +18,7 @@ object Modules {
 }
 
 object FeaturesModules {
+    const val featureInitialContract = ":feature:initial-contract"
     private const val featureInitial = ":feature:initial"
     private const val featureHome = ":feature:home"
     private const val featureReview = ":feature:review"

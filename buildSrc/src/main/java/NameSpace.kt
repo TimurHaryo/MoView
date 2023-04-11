@@ -8,6 +8,7 @@ object NameSpace {
     const val uikit = "com.timtam.uikit"
     const val featureHelper = "com.timtam.feature_helper"
     const val featureInitial = "com.timtam.initial"
+    const val featureInitialContract = "com.timtam.initial_contract"
     const val featureHome = "com.timtam.home"
     const val featureReview = "com.timtam.review"
     const val featureCollection = "com.timtam.collection"

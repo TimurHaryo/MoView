@@ -4,18 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.timtam.common_android.abstraction.LifecycleFragment
 import com.timtam.common_android.delegation.fragment.FragmentRetainable
 import com.timtam.common_android.delegation.fragment.FragmentRetainer
 import com.timtam.initial.databinding.FragmentOnBoardingBinding
-import com.timtam.navigation.base.NavigableComponent
-import com.timtam.navigation.extension.startNavigation
-import com.timtam.navigation.navigator.MainNavigator
+import com.timtam.navigation.fragment.NavigableFragmentDelegate
+import com.timtam.navigation.fragment.NavigableFragmentDelegateImpl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnBoardingFragment :
     LifecycleFragment<FragmentOnBoardingBinding>(),
     FragmentRetainable by FragmentRetainer(),
-    NavigableComponent by MainNavigator() {
+    NavigableFragmentDelegate by NavigableFragmentDelegateImpl() {
+
+    private val viewModel by viewModels<OnBoardingViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        registerNavigableComponent(viewModel, this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +46,7 @@ class OnBoardingFragment :
                     append(count)
                 }
                 if (count == 2) {
-                    startNavigation(OnBoardingFragmentDirections.actionOnBoardingFragmentToMainFragment())
+                    viewModel.openMainMenu()
                 }
                 count++
             }

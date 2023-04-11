@@ -13,14 +13,11 @@ import com.timtam.feature_helper.extension.observeLiveData
 import com.timtam.initial.R
 import com.timtam.initial.databinding.FragmentMainBinding
 import com.timtam.initial.model.type.MainTabType
-import com.timtam.navigation.base.NavigableComponent
-import com.timtam.navigation.navigator.MainNavigator
 import com.timtam.navigation.util.SafeNavHostFragment
 
 class MainFragment :
     LifecycleFragment<FragmentMainBinding>(),
-    FragmentRetainable by FragmentRetainer(),
-    NavigableComponent by MainNavigator() {
+    FragmentRetainable by FragmentRetainer() {
 
     private val viewModel: MainViewModel by viewModels()
 
